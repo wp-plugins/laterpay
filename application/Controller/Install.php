@@ -1,21 +1,22 @@
 <?php
 
-class LaterPay_Controller_Install extends LaterPay_Controller_Abstract {
+class LaterPay_Controller_Install extends LaterPay_Controller_Abstract
+{
 
-	/**
-	 * Render admin notices if requirements are not fulfilled.
-	 *
-	 * @wp-hook admin_notices
-	 *
-	 * @return  void
-	 */
-	public function render_requirements_notices() {
+    /**
+     * Render admin notices if requirements are not fulfilled.
+     *
+     * @wp-hook admin_notices
+     *
+     * @return  void
+     */
+    public function render_requirements_notices() {
         $notices = $this->check_requirements();
-		if ( count( $notices ) > 0 ) {
-			$out = join( "\n", $notices );
+        if ( count( $notices ) > 0 ) {
+            $out = join( "\n", $notices );
             echo '<div class="error">' . $out . '</div>';
-		}
-	}
+        }
+    }
 
     /**
      * Check plugin requirements. Deactivate plugin and return notices, if requirements are not fulfilled.
@@ -27,53 +28,86 @@ class LaterPay_Controller_Install extends LaterPay_Controller_Abstract {
     public function check_requirements() {
         global $wp_version;
 
-		$installed_php_version          = phpversion();
-		$installed_wp_version           = $wp_version;
-		$required_php_version           = '5.2.4';
-		$required_wp_version            = '3.5.2';
-		$installed_php_is_compatible    = version_compare( $installed_php_version, $required_php_version, '>=' );
-		$installed_wp_is_compatible     = version_compare( $installed_wp_version, $required_wp_version, '>=' );
+        $installed_php_version          = phpversion();
+        $installed_wp_version           = $wp_version;
+        $required_php_version           = '5.2.4';
+        $required_wp_version            = '3.5.2';
+        $installed_php_is_compatible    = version_compare( $installed_php_version, $required_php_version, '>=' );
+        $installed_wp_is_compatible     = version_compare( $installed_wp_version, $required_wp_version, '>=' );
 
-		$notices = array();
-		$template = __( '<p>LaterPay: Your server <strong>does not</strong> meet the minimum requirement of %s version %s or higher. You are running %s version %s.</p>', 'laterpay' );
+        $notices = array();
+        $template = __( '<p>LaterPay: Your server <strong>does not</strong> meet the minimum requirement of %s version %s or higher. You are running %s version %s.</p>', 'laterpay' );
 
-		// check PHP compatibility
-		if ( ! $installed_php_is_compatible ) {
-			$notices[] = sprintf( $template, 'PHP', $required_php_version, 'PHP', $installed_php_version );
-		}
+        // check PHP compatibility
+        if ( ! $installed_php_is_compatible ) {
+            $notices[] = sprintf( $template, 'PHP', $required_php_version, 'PHP', $installed_php_version );
+        }
 
-		// check WordPress compatibility
-		if ( ! $installed_wp_is_compatible ) {
-			$notices[] = sprintf( $template, 'Wordpress', $required_wp_version, 'Wordpress', $installed_wp_version );
-		}
+        // check WordPress compatibility
+        if ( ! $installed_wp_is_compatible ) {
+            $notices[] = sprintf( $template, 'Wordpress', $required_wp_version, 'Wordpress', $installed_wp_version );
+        }
 
         // deactivate plugin if requirements are not fulfilled
-		if ( count( $notices ) > 0 ) {
+        if ( count( $notices ) > 0 ) {
             // suppress 'Plugin activated' notice
             unset( $_GET['activate'] );
-			deactivate_plugins( $this->config->plugin_base_name );
-			$notices[] = __( 'The LaterPay plugin could not be installed. Please fix the reported issues and try again.', 'laterpay' );
+            deactivate_plugins( $this->config->plugin_base_name );
+            $notices[] = __( 'The LaterPay plugin could not be installed. Please fix the reported issues and try again.', 'laterpay' );
         }
 
         return $notices;
     }
 
     /**
-	 * Compare plugin version with latest version and perform an update, if required.
-	 *
-	 * @wp-hook plugins_loaded
+     * Compare plugin version with latest version and perform an update, if required.
      *
-	 * @return void
-	 */
-	public function check_for_updates() {
-		$current_version = get_option('laterpay_version');
-		if ( version_compare( $current_version, $this->config->version, '!=' ) ) {
-			$this->install();
-		}
-	}
+     * @wp-hook plugins_loaded
+     *
+     * @return void
+     */
+    public function check_for_updates() {
+        $current_version = get_option('laterpay_version');
+        if ( version_compare( $current_version, $this->config->version, '!=' ) ) {
+            $this->install();
+        }
+    }
 
     /**
-     * Update the existing postmeta meta_keys when current_version < 0.9.7
+     * Update the existing database-table for "terms_price" and set all prices to "ppu".
+     * @wp-hook admin_notices
+     *
+     * @return void
+     */
+    public function maybe_update_terms_price_table(){
+        global $wpdb;
+
+        $current_version = get_option('laterpay_version');
+        if ( version_compare( $current_version, '0.9.8', '<' ) ) {
+            return;
+        }
+
+        $table = $wpdb->prefix . 'laterpay_terms_price';
+
+        $columns = $wpdb->get_results( 'SHOW COLUMNS FROM ' . $table .';' );
+
+        // before version 0.9.8 we had no "revenue_model"-column
+        $is_update_to_date = false;
+        foreach( $columns as $column ){
+            if( $column->Field === 'revenue_model' ){
+                $is_update_to_date = true;
+            }
+        }
+
+        // if the table needs an update, add the "revenue_model"-column and set the current values to 'ppu'
+        if( !$is_update_to_date ){
+            $wpdb->query( "ALTER TABLE " . $table . "ADD revenue_model CHAR( 3 ) NOT NULL DEFAULT  'ppu';" );
+        }
+
+    }
+
+    /**
+     * Update the existing postmeta meta_keys, if current_version < 0.9.7.
      *
      * @wp-hook admin_notices
      *
@@ -103,7 +137,7 @@ class LaterPay_Controller_Install extends LaterPay_Controller_Abstract {
     }
 
     /**
-     * Migrate old postmeta data to a single postmeta array
+     * Migrate old postmeta data to a single postmeta array.
      *
      * @wp-hook get_post_metadata
      *
@@ -135,7 +169,7 @@ class LaterPay_Controller_Install extends LaterPay_Controller_Abstract {
                 if ( $value !== '' ) {
                     // migrate old data: if post_pricing is '0' or '1', set it to 'individual price'
                     if ( $old_meta_key === 'laterpay_post_pricing_type' && in_array( $value, array( '0', '1' ) ) ) {
-                        $value = 'individual price';
+                        $value = LaterPay_Helper_Pricing::TYPE_INDIVIDUAL_PRICE;
                     }
 
                     // add the meta_value to the new postmeta array
@@ -154,13 +188,13 @@ class LaterPay_Controller_Install extends LaterPay_Controller_Abstract {
         return $return;
     }
 
-	/**
-	 * Create our custom tables and set the required options.
+    /**
+     * Create custom tables and set the required options.
      *
-	 * @return void
-	 */
-	public function install() {
-		global $wpdb;
+     * @return void
+     */
+    public function install() {
+        global $wpdb;
 
         // cancel the installation process, if the requirements check returns errors
         $notices = (array) $this->check_requirements();
@@ -170,30 +204,31 @@ class LaterPay_Controller_Install extends LaterPay_Controller_Abstract {
 
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-		$table_currency     = $wpdb->prefix . 'laterpay_currency';
-		$table_terms_price  = $wpdb->prefix . 'laterpay_terms_price';
-		$table_history      = $wpdb->prefix . 'laterpay_payment_history';
-		$table_post_views   = $wpdb->prefix . 'laterpay_post_views';
+        $table_currency     = $wpdb->prefix . 'laterpay_currency';
+        $table_terms_price  = $wpdb->prefix . 'laterpay_terms_price';
+        $table_history      = $wpdb->prefix . 'laterpay_payment_history';
+        $table_post_views   = $wpdb->prefix . 'laterpay_post_views';
 
-		$sql = "
+        $sql = "
             CREATE TABLE $table_currency (
                 id            INT(10)         NOT NULL AUTO_INCREMENT,
                 short_name    VARCHAR(3)      NOT NULL,
                 full_name     VARCHAR(64)     NOT NULL,
                 PRIMARY KEY  (id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-		dbDelta( $sql );
+        dbDelta( $sql );
 
-		$sql = "
+        $sql = "
             CREATE TABLE $table_terms_price (
                 id                INT(11)         NOT NULL AUTO_INCREMENT,
                 term_id           INT(11)         NOT NULL,
                 price             DOUBLE          NOT NULL DEFAULT '0',
+                revenue_model     ENUM('ppu', 'sis') DEFAULT NULL,
                 PRIMARY KEY  (id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-		dbDelta( $sql );
+        dbDelta( $sql );
 
-		$sql = "
+        $sql = "
             CREATE TABLE $table_history (
                 id                INT(11)         NOT NULL AUTO_INCREMENT,
                 mode              ENUM('test', 'live') NOT NULL DEFAULT 'test',
@@ -205,9 +240,9 @@ class LaterPay_Controller_Install extends LaterPay_Controller_Abstract {
                 hash              VARCHAR(32)     NOT NULL,
                 PRIMARY KEY  (id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-		dbDelta( $sql );
+        dbDelta( $sql );
 
-		$sql = "
+        $sql = "
             CREATE TABLE $table_post_views (
                 post_id           INT(11)         NOT NULL,
                 date              DATETIME        NOT NULL,
@@ -216,52 +251,55 @@ class LaterPay_Controller_Install extends LaterPay_Controller_Abstract {
                 ip                VARBINARY(16)   NOT NULL,
                 UNIQUE KEY  (post_id, user_id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-		dbDelta( $sql );
+        dbDelta( $sql );
 
-		// seed currency table
-		$wpdb->replace(
-			$table_currency,
-			array(
-				'id'            => 1,
-				'short_name'    => 'USD',
-				'full_name'     => 'U.S. dollar',
-			)
-		);
-		$wpdb->replace(
-			$table_currency,
-			array(
-				'id'            => 2,
-				'short_name'    => 'EUR',
-				'full_name'     => 'Euro',
-			)
-		);
+        // seed currency table
+        $wpdb->replace(
+            $table_currency,
+            array(
+                'id'            => 1,
+                'short_name'    => 'USD',
+                'full_name'     => 'U.S. dollar',
+            )
+        );
+        $wpdb->replace(
+            $table_currency,
+            array(
+                'id'            => 2,
+                'short_name'    => 'EUR',
+                'full_name'     => 'Euro',
+            )
+        );
 
-		add_option( 'laterpay_teaser_content_only',      '1' );
-		add_option( 'laterpay_plugin_is_in_live_mode',   '0' );
-		add_option( 'laterpay_sandbox_merchant_id',      '' );
-		add_option( 'laterpay_sandbox_api_key',          '' );
-		add_option( 'laterpay_live_merchant_id',         '' );
-		add_option( 'laterpay_live_api_key',             '' );
-		add_option( 'laterpay_global_price',             $this->config->get( 'currency.default_price' ) );
-		add_option( 'laterpay_currency',                 $this->config->get( 'currency.default' ) );
-		update_option( 'laterpay_version',               $this->config->version );
+        add_option( 'laterpay_teaser_content_only',         '1' );
+        add_option( 'laterpay_plugin_is_in_live_mode',      '0' );
+        add_option( 'laterpay_sandbox_merchant_id',         '' );
+        add_option( 'laterpay_sandbox_api_key',             '' );
+        add_option( 'laterpay_live_merchant_id',            '' );
+        add_option( 'laterpay_live_api_key',                '' );
+        add_option( 'laterpay_global_price',                $this->config->get( 'currency.default_price' ) );
+        add_option( 'laterpay_global_price_revenue_model',  'ppu');
+        add_option( 'laterpay_currency',                    $this->config->get( 'currency.default' ) );
+        add_option( 'laterpay_enabled_post_types',          get_post_types( array( 'public' => true ) ) );
+
+        update_option( 'laterpay_version',                  $this->config->version );
         // option 'laterpay_plugin_is_activated' is set to empty on installation, to be able to tell between a fresh
         // installation and an activated but deactivated installation, to lead the user through the get started process,
         // if it is a fresh installation
-        add_option( 'laterpay_plugin_is_activated',      '' );
+        add_option( 'laterpay_plugin_is_activated',         '' );
 
-		// clear opcode cache
-		LaterPay_Helper_Cache::reset_opcode_cache();
+        // clear opcode cache
+        LaterPay_Helper_Cache::reset_opcode_cache();
 
-		// re-activate deactivated installation
-		$activated = get_option( 'laterpay_plugin_is_activated', '' );
-		if ( $activated == '0' ) {
-			update_option( 'laterpay_plugin_is_activated', '1' );
-		}
+        // re-activate deactivated installation
+        $activated = get_option( 'laterpay_plugin_is_activated', '' );
+        if ( $activated == '0' ) {
+            update_option( 'laterpay_plugin_is_activated', '1' );
+        }
 
         // update capabilities
         $laterpay_capabilities = new LaterPay_Core_Capabilities();
         $laterpay_capabilities->populate_roles();
-	}
+    }
 
 }

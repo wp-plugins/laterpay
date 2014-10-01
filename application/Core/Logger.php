@@ -12,12 +12,12 @@ class LaterPay_Core_Logger
     const ALERT     = 550;
     const EMERGENCY = 600;
 
-	/**
-	 * contains all debugging levels
+    /**
+     * contains all debugging levels.
      *
-	 * @var array
-	 */
-	protected static $levels = array(
+     * @var array
+     */
+    protected static $levels = array(
         100 => 'DEBUG',
         200 => 'INFO',
         250 => 'NOTICE',
@@ -33,20 +33,20 @@ class LaterPay_Core_Logger
      */
     protected static $_instance;
 
-	/**
-	 * @var null|string
-	 */
-	protected static $_uniqid = null;
+    /**
+     * @var null|string
+     */
+    protected static $_uniqid = null;
 
     /**
      * @var array
      */
     protected static $_options = array();
 
-	/**
-	 * @var string
-	 */
-	protected static $_name = 'default';
+    /**
+     * @var string
+     */
+    protected static $_name = 'default';
 
     public static function init( $name, array $params ) {
         self::$_name = $name;
@@ -57,37 +57,40 @@ class LaterPay_Core_Logger
         }
     }
 
-	/**
-	 *
-	 * @param   LaterPay_Core_Logger $instance
+    /**
      *
-	 * @return  void
-	 */
-	public static function set_instance( $instance ) {
+     * @param LaterPay_Core_Logger $instance
+     *
+     * @return void
+     */
+    public static function set_instance( $instance ) {
         self::$_instance = $instance;
     }
 
-	/**
-	 *
-	 * @return LaterPay_Core_Logger|LaterPay_Core_Logger_Handler_Null|LaterPay_Core_Logger_Handler_Stream
-	 */
-	public static function get_instance() {
-
-		/**
-		 * Contains the full path with filename to logfile
-		 * @var     string $log_file
-		 * @return  string $log_file
-		 */
-		$log_file = apply_filters(
-			'laterpay_log_file',
-			'/var/log/laterpay_api.log'
-		);
+    /**
+     *
+     * @return LaterPay_Core_Logger|LaterPay_Core_Logger_Handler_Null|LaterPay_Core_Logger_Handler_Stream
+     */
+    public static function get_instance() {
+        /**
+         * Contains the full path with filename to logfile.
+         *
+         * @var string $log_file
+         *
+         * @return string $log_file
+         */
+        $log_file = apply_filters(
+            'laterpay_log_file',
+            '/var/log/laterpay_api.log'
+        );
 
         if ( empty( self::$_instance ) ) {
             try {
                 if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                    // log to stream, if WordPress debug mode is activated (WP_DEBUG == true)
                     self::$_instance = new LaterPay_Core_Logger_Handler_Stream( $log_file );
                 } else {
+                    // do nothing with log data otherwise
                     self::$_instance = new LaterPay_Core_Logger_Handler_Null();
                 }
             } catch ( Exception $e ) {
@@ -99,12 +102,12 @@ class LaterPay_Core_Logger
     }
 
     /**
-     * Adds a log record at the DEBUG level.
+     * Add a log record at the DEBUG level.
      *
-     * @param   string $message The log message
-     * @param   array  $context The log context
+     * @param string $message The log message
+     * @param array  $context The log context
      *
-     * @return  boolean Whether the record has been processed
+     * @return boolean Whether the record has been processed
      */
     public static function debug( $message, array $context = array() ) {
         return self::log( self::DEBUG, $message, $context );
@@ -116,20 +119,21 @@ class LaterPay_Core_Logger
      * @param string $message The log message
      * @param array  $context The log context
      *
-     * @return Boolean Whether the record has been processed
+     * @return boolean Whether the record has been processed
      */
     public static function error( $message, array $context = array() ) {
         return self::log( self::ERROR, $message, $context );
     }
 
-	/**
-	 *
-	 * @param   integer $level
-	 * @param   string  $message
-	 * @param   array $context
+    /**
+     * Add a record to the log.
      *
-	 * @return  bool
-	 */
+     * @param integer $level
+     * @param string  $message
+     * @param array   $context
+     *
+     * @return boolean
+     */
     public static function log( $level, $message, array $context = array() ) {
         if ( ! self::$_uniqid ) {
             self::$_uniqid = uniqid( getmypid() . '_' );
@@ -157,9 +161,9 @@ class LaterPay_Core_Logger
     /**
      * Get the name of the logging level.
      *
-     * @param   integer $level
+     * @param integer $level
      *
-     * @return  string  $level_name
+     * @return string $level_name
      */
     public static function get_level_name( $level ) {
         return self::$levels[$level];
