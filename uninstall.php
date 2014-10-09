@@ -6,8 +6,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 global $wpdb;
-
-$table_currency     = $wpdb->prefix . 'laterpay_currency';
 $table_terms_price  = $wpdb->prefix . 'laterpay_terms_price';
 $table_history      = $wpdb->prefix . 'laterpay_payment_history';
 $table_post_views   = $wpdb->prefix . 'laterpay_post_views';
@@ -16,7 +14,6 @@ $table_usermeta     = $wpdb->usermeta;
 
 // remove custom tables
 $sql = "DROP TABLE IF EXISTS
-            $table_currency,
             $table_terms_price,
             $table_history,
             $table_post_views;
@@ -40,7 +37,6 @@ $sql = "DELETE FROM
 $wpdb->query( $sql );
 
 // remove global settings from wp_options table
-delete_option( 'laterpay_plugin_is_activated' );
 delete_option( 'laterpay_teaser_content_only' );
 delete_option( 'laterpay_plugin_is_in_live_mode' );
 delete_option( 'laterpay_sandbox_merchant_id' );

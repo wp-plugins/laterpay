@@ -47,6 +47,7 @@ class LaterPay_Core_Bootstrap
                 add_action( 'admin_notices',                        array( $install_controller, 'check_for_updates' ) );
                 add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_meta_keys' ) );
                 add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_terms_price_table' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_currency_to_euro' ) );
             }
 
             // add the plugin, if it is active and all checks are ok
@@ -61,10 +62,6 @@ class LaterPay_Core_Bootstrap
                 add_action( 'load-post-new.php',                    array( $admin_controller, 'help_wp_add_post' ) );
                 add_action( 'admin_enqueue_scripts',                array( $admin_controller, 'add_plugin_admin_assets' ) );
                 add_action( 'admin_enqueue_scripts',                array( $admin_controller, 'add_admin_pointers_script' ) );
-
-                // add Ajax hooks for tabs in plugin backend
-                $admin_get_started_controller = new LaterPay_Controller_Admin_GetStarted( $this->config );
-                add_action( 'wp_ajax_laterpay_getstarted',          array( $admin_get_started_controller, 'process_ajax_requests' ) );
 
                 $admin_pricing_controller = new LaterPay_Controller_Admin_Pricing( $this->config );
                 add_action( 'wp_ajax_laterpay_pricing',             array( $admin_pricing_controller, 'process_ajax_requests' ) );
@@ -96,8 +93,11 @@ class LaterPay_Core_Bootstrap
 
             // save the teaser
             add_action( 'save_post',                        array( $post_metabox_controller, 'save_teaser_content_box' ) );
+            add_action( 'edit_attachment',                  array( $post_metabox_controller, 'save_teaser_content_box' ) );
+
             // save the pricing
             add_action( 'save_post',                        array( $post_metabox_controller, 'save_post_pricing_form') );
+            add_action( 'edit_attachment',                  array( $post_metabox_controller, 'save_post_pricing_form') );
 
             // load scripts for the admin pages
             add_action( 'admin_print_styles-post.php',      array( $post_metabox_controller, 'load_assets' ) );
@@ -137,6 +137,8 @@ class LaterPay_Core_Bootstrap
         add_action( 'wp_ajax_laterpay_post_statistic_render',           array( $statistics_controller, 'ajax_render_tab' ) );
         add_action( 'wp_ajax_laterpay_post_statistic_visibility',       array( $statistics_controller, 'ajax_toggle_visibility' ) );
         add_action( 'wp_ajax_laterpay_post_statistic_toggle_preview',   array( $statistics_controller, 'ajax_toggle_preview' ) );
+        add_action( 'wp_ajax_laterpay_post_track_views',                array( $statistics_controller, 'ajax_track_views' ) );
+        add_action( 'wp_ajax_nopriv_laterpay_post_track_views',         array( $statistics_controller, 'ajax_track_views' ) );
 
         // frontend actions
         if ( ! is_admin() ) {
@@ -179,17 +181,12 @@ class LaterPay_Core_Bootstrap
 
     /**
      * Callback to deactivate the plugin.
-     * Sets option 'laterpay_plugin_is_activated' to false, if the installation was successfully activated at that time.
      *
      * @wp-hook register_deactivation_hook
      *
      * @return void
      */
     public function deactivate() {
-        $activated = get_option( 'laterpay_plugin_is_activated', '' );
-        if ( $activated == '1' ) {
-            update_option( 'laterpay_plugin_is_activated', '0' );
-        }
     }
 
 }
