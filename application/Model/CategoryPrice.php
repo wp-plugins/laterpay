@@ -39,6 +39,7 @@ class LaterPay_Model_CategoryPrice
         global $wpdb;
         $sql = "
             SELECT
+                tp.id AS id,
                 tm.name AS category_name,
                 tm.term_id AS category_id,
                 tp.price AS category_price,
@@ -101,12 +102,13 @@ class LaterPay_Model_CategoryPrice
      * Get categories without defined category default prices by search term.
      *
      * @param array $args       query args for get_categories
+     *
      * @return array $categories
      */
     public function get_categories_without_price_by_term( $args ) {
         $default_args = array(
             'hide_empty'    => false,
-            'number'        => 10
+            'number'        => 10,
         );
 
         $args = wp_parse_args(
@@ -122,16 +124,18 @@ class LaterPay_Model_CategoryPrice
     }
 
     /**
-     * Filter for get_categories_without_price_by_term() to load all categories without a price
+     * Filter for get_categories_without_price_by_term(), to load all categories without a price.
      *
      * @wp-hook terms_clauses
      *
-     * @param   array $clauses
-     * @return  array $clauses
+     * @param array $clauses
+     *
+     * @return array $clauses
      */
-    public function filter_terms_clauses_for_categories_without_price( $clauses ){
-        $clauses[ 'join' ]      .= " LEFT JOIN " . $this->term_table_prices . " AS tp ON tp.term_id = t.term_id ";
-        $clauses[ 'where' ]     .= " AND tp.term_id IS NULL ";
+    public function filter_terms_clauses_for_categories_without_price( $clauses ) {
+        $clauses[ 'join' ]  .= ' LEFT JOIN ' . $this->term_table_prices . ' AS tp ON tp.term_id = t.term_id ';
+        $clauses[ 'where' ] .= ' AND tp.term_id IS NULL ';
+
         return $clauses;
     }
 
@@ -142,15 +146,16 @@ class LaterPay_Model_CategoryPrice
      * @param int    $limit limit categories
      *
      * @deprecated please use get_terms( 'category', array( 'name__like' => '$term', 'number' => $limit, 'fields' => 'id=>name' ) );
+     *
      * @return array categories
      */
     public function get_categories_by_term( $term, $limit ) {
         global $wpdb, $wp_version;
 
-        if ( version_compare( $wp_version, '4.0', '>=') ) {
+        if ( version_compare( $wp_version, '4.0', '>=' ) ) {
             $term = $wpdb->esc_like( $term );
         } else {
-            $term = like_escape($term);
+            $term = like_escape( $term );
         }
 
         $term = esc_sql( $term ) . '%';
@@ -175,6 +180,7 @@ class LaterPay_Model_CategoryPrice
             ;
         ";
         $categories = $wpdb->get_results( $wpdb->prepare( $sql, $term, $limit ) );
+
         return $categories;
     }
 
@@ -192,7 +198,7 @@ class LaterPay_Model_CategoryPrice
         global $wpdb;
 
         if ( ! empty( $id ) ) {
-            return $wpdb->update(
+            $success = $wpdb->update(
                 $this->term_table_prices,
                 array(
                     'term_id'       => $id_category,
@@ -208,7 +214,7 @@ class LaterPay_Model_CategoryPrice
                 array( '%d' )
             );
         } else {
-            return $wpdb->insert(
+            $success = $wpdb->insert(
                 $this->term_table_prices,
                 array(
                     'term_id'       => $id_category,
@@ -218,10 +224,13 @@ class LaterPay_Model_CategoryPrice
                 array(
                     '%d',
                     '%f',
-                    '%s'
+                    '%s',
                 )
             );
         }
+
+        LaterPay_Helper_Cache::purge_cache();
+        return $success;
     }
 
     /**
@@ -351,10 +360,24 @@ class LaterPay_Model_CategoryPrice
         global $wpdb;
 
         $where = array(
-            'term_id' => (int) $id
+            'term_id' => (int) $id,
         );
 
-        return $wpdb->delete( $this->term_table_prices, $where, '%d' );
+        $success = $wpdb->delete( $this->term_table_prices, $where, '%d' );
+        LaterPay_Helper_Cache::purge_cache();
+        return $success;
     }
 
+    /**
+     * Delete all category prices from table.
+     *
+     * @return int|false the number of rows updated, or false on error
+     */
+    public function delete_all_category_prices() {
+        global $wpdb;
+
+        $success = $wpdb->query( "TRUNCATE TABLE " . $this->term_table_prices );
+
+        return $success;
+    }
 }

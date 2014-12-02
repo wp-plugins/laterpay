@@ -33,7 +33,7 @@ class LaterPay_Core_Logger_Handler_WordPress extends LaterPay_Core_Logger_Handle
         global $wp_admin_bar;
 
         $args = array(
-            'id'        => 'lp_js_debugger-admin-bar-menu',
+            'id'        => 'lp_js_toggleDebuggerVisibility',
             'parent'    => 'top-secondary',
             'title'     => __( 'LaterPay Debugger', 'laterpay' )
         );
@@ -54,6 +54,35 @@ class LaterPay_Core_Logger_Handler_WordPress extends LaterPay_Core_Logger_Handle
         return true;
     }
 
+
+    /**
+     * Load CSS and JS for debug pane.
+     *
+     * @wp-hook wp_enqueue_scripts
+     *
+     * @return void
+     */
+    public function load_assets() {
+        wp_register_style(
+            'laterpay-debugger',
+            $this->config->get( 'css_url' ) . 'laterpay-debugger.css',
+            array(),
+            $this->config->version
+        );
+
+        wp_register_script(
+            'laterpay-debugger',
+            $this->config->get( 'js_url' ) . 'laterpay-debugger.js',
+            array( 'jquery' ),
+            $this->config->version
+        );
+
+        if ( $this->config->get( 'debug_mode' ) ) {
+            wp_enqueue_style( 'laterpay-debugger' );
+            wp_enqueue_script( 'laterpay-debugger' );
+        }
+    }
+
     /**
      * Callback to render all records to footer.
      *
@@ -63,15 +92,15 @@ class LaterPay_Core_Logger_Handler_WordPress extends LaterPay_Core_Logger_Handle
      */
     public function render_records() {
         ?>
-            <div class="lp_debugger lp_is_hidden">
+            <div class="lp_debugger lp_is-hidden">
                 <header>
-                    <a href="#" class="lp_js_close-debugger lp_close-link lp_fl-right" data-icon="l"></a>
-                    <div class="lp_fl-right"><?php echo sprintf( __( '%s Memory Usage', 'laterpay' ), number_format( memory_get_peak_usage() / pow( 1024, 2 ), 1 ) . ' MB' ); ?></div>
+                    <a href="#" class="lp_js_closeDebugger lp_closeLink lp_u_right" data-icon="l"></a>
+                    <div class="lp_u_right"><?php echo sprintf( __( '%s Memory Usage', 'laterpay' ), number_format( memory_get_peak_usage() / pow( 1024, 2 ), 1 ) . ' MB' ); ?></div>
                     <h2 data-icon="a"><?php _e( 'Debugger', 'laterpay' ); ?></h2>
                 </header>
 
-                <ul class="lp_debugger-tabs lp_fl-clearfix">
-                    <li class="lp_is_selected">
+                <ul class="lp_debugger_tabs lp_u_clearfix">
+                    <li class="lp_is-selected">
                         <a href="#"><?php echo sprintf( __( 'Messages<span>%s</span>', 'laterpay' ), count( $this->records ) ); ?></a>
                     </li>
                     <?php
@@ -86,8 +115,8 @@ class LaterPay_Core_Logger_Handler_WordPress extends LaterPay_Core_Logger_Handle
                     <?php } ?>
                 </ul>
 
-                <ul class="lp_debugger-content-list">
-                    <li class="lp_debugger-content">
+                <ul class="lp_debugger_contentList">
+                    <li class="lp_debugger_content">
                         <ul>
                             <?php echo $this->get_formatter()->format_batch( $this->records ); ?>
                         </ul>
@@ -98,14 +127,14 @@ class LaterPay_Core_Logger_Handler_WordPress extends LaterPay_Core_Logger_Handle
                                 continue;
                             }
                     ?>
-                        <li class="lp_debugger-content lp_is_hidden">
+                        <li class="lp_debugger_content lp_is-hidden">
                             <table>
-                                <?php foreach ( $tab[ 'content' ] as $key => $value  ) { ?>
+                                <?php foreach ( $tab[ 'content' ] as $key => $value  ): ?>
                                     <tr>
                                         <th><?php echo $key; ?></th>
                                         <td><?php print_r( $value ); ?></td>
                                     </tr>
-                                <?php } ?>
+                                <?php endforeach; ?>
                             </table>
                         </li>
                     <?php } ?>
@@ -195,12 +224,10 @@ class LaterPay_Core_Logger_Handler_WordPress extends LaterPay_Core_Logger_Handle
         return $system_info;
     }
 
-
-
     /**
      * Convert sizes.
      *
-     * @param  unknown $v
+     * @param unknown $v
      *
      * @return int|string
      */
@@ -222,33 +249,4 @@ class LaterPay_Core_Logger_Handler_WordPress extends LaterPay_Core_Logger_Handle
 
         return $ret;
     }
-
-    /**
-     * Load CSS and JS for debug pane.
-     *
-     * @wp-hook wp_enqueue_scripts
-     *
-     * @return void
-     */
-    public function load_assets() {
-        wp_register_style(
-            'laterpay-debugger',
-            $this->config->get( 'css_url' ) . 'laterpay-debugger.css',
-            array(),
-            $this->config->version
-        );
-
-        wp_register_script(
-            'laterpay-debugger',
-            $this->config->get( 'js_url' ) . 'laterpay-debugger.js',
-            array( 'jquery' ),
-            $this->config->version
-        );
-
-        if ( $this->config->get( 'debug_mode' ) ) {
-            wp_enqueue_style( 'laterpay-debugger' );
-            wp_enqueue_script( 'laterpay-debugger' );
-        }
-    }
-
 }

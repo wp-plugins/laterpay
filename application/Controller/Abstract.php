@@ -11,7 +11,7 @@ class LaterPay_Controller_Abstract
     public $variables = array();
 
     /**
-     * Contains all settings for our plugin.
+     * Contains all settings for the plugin.
      *
      * @var LaterPay_Model_Config
      */
@@ -24,22 +24,31 @@ class LaterPay_Controller_Abstract
      */
     protected $logger;
     /**
-     * @param   LaterPay_Model_Config $config
+     * @param LaterPay_Model_Config $config
      *
-     * @return  LaterPay_Controller_Abstract
+     * @return LaterPay_Controller_Abstract
      */
     public function __construct( LaterPay_Model_Config $config ) {
         $this->config = $config;
         $this->logger = laterpay_get_logger();
 
-        // assigning the config to our view
+        // assign the config to the views
         $this->assign( 'config', $this->config );
+
+        $this->initialize();
+
     }
+
+    /**
+     * Function which will be called on constructor and can be overwritten by child-class.
+     * @return void
+     */
+    protected function initialize(){}
 
     /**
      * Load all assets on boot-up.
      *
-     * @return  void
+     * @return void
      */
     public function load_assets() {}
 
@@ -142,22 +151,22 @@ class LaterPay_Controller_Abstract
         if ( empty( $file ) ) {
             $file = 'backend/partials/navigation';
         }
-        
+
         $current_page   = isset( $_GET['page'] ) ? $_GET['page'] : LaterPay_Helper_View::$pluginPage;
         $menu           = LaterPay_Helper_View::get_admin_menu();
         $plugin_page    = LaterPay_Helper_View::$pluginPage;
 
-        $this->assign( 'menu',         $menu );
-        $this->assign( 'current_page', $current_page );
-        $this->assign( 'plugin_page',  $plugin_page );
+        $view_args      = array(
+            'menu'         => $menu,
+            'current_page' => $current_page,
+            'plugin_page'  => $plugin_page,
+        );
+
+        $this->assign( 'laterpay', $view_args );
 
         $this->logger->info(
             __METHOD__ . ' - ' . $file,
-            array(
-                'current_page' => $current_page,
-                'menu'          => $menu,
-                'plugin_page'   => $plugin_page
-            )
+            $view_args
         );
 
         return $this->get_text_view( $file );
