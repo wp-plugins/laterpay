@@ -18,7 +18,7 @@
 
     <div class="lp_wrap">
 
-        <h1><?php echo sprintf( __( '%s Dashboard of %s Sales between%s%s%s', 'laterpay' ),
+        <h1><?php echo sprintf( __( '%s Dashboard of %s Sales from%s%s%s', 'laterpay' ),
             '<div class="lp_dropdown">' .
                 '<span class="lp_dropdown_currentItem">' . __( '8 Day', 'laterpay' ) . '</span>' .
                 '<div class="lp_dropdown_list">' .
@@ -54,17 +54,17 @@
                 '</div>' .
             '</div>',
 
-            '<a href="#" id="lp_js_loadPreviousInterval" class="lp_prevNextLink lp_tooltip" data-tooltip="Show week before">' .
+            '<a href="#" id="lp_js_loadPreviousInterval" class="lp_prevNextLink lp_tooltip" data-tooltip="Show previous day">' .
                 '<div class="lp_triangle lp_triangle--left"></div>' .
             '</a>',
 
-            '<span id="lp_js_displayedInterval">' .
-                date( 'j.n.', strtotime( '-8 days' ) ) .
+            '<span id="lp_js_displayedInterval" data-start-timestamp="' . strtotime( 'yesterday GMT' ) . '">' .
+                date( 'd.m.Y.', strtotime( '-8 days' ) ) .
                 ' &ndash; ' .
-                date( 'j.n.', strtotime( '-1 days' ) ) .
+                date( 'd.m.Y', strtotime( '-1 days' ) ) .
             '</span>',
 
-            '<a href="#" id="lp_js_loadNextInterval" class="lp_prevNextLink lp_tooltip" data-tooltip="Show week after">' .
+            '<a href="#" id="lp_js_loadNextInterval" class="lp_prevNextLink lp_tooltip" data-tooltip="Show next day">' .
                 '<div class="lp_triangle lp_triangle--right"></div>' .
             '</a>'
         ); ?>
@@ -118,7 +118,7 @@
                         </li>
                         <li class="lp_tooltip" data-tooltip="<?php _e( 'Total value of items sold in selected interval', 'laterpay' ); ?>">
                             <big><span id="lp_js_totalRevenue">0.00</span><small><?php echo $laterpay['currency']; ?></small></big>
-                            <?php _e( 'Revenue', 'laterpay' ); ?>
+                            <?php _e( 'Committed Revenue', 'laterpay' ); ?>
                         </li>
                     </ul>
                 </div>

@@ -48,6 +48,12 @@ class LaterPay_Core_Bootstrap
                 add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_meta_keys' ) );
                 add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_terms_price_table' ) );
                 add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_currency_to_euro' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_time_passes_table' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_payment_history_add_revenue_model' ) );
+            }
+
+            if ( ! function_exists( 'is_plugin_active' ) ) {
+                include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
             }
 
             // add the plugin, if it is active and all checks are ok
@@ -62,10 +68,15 @@ class LaterPay_Core_Bootstrap
                 add_action( 'load-post-new.php',                    array( $admin_controller, 'help_wp_add_post' ) );
                 add_action( 'admin_enqueue_scripts',                array( $admin_controller, 'add_plugin_admin_assets' ) );
                 add_action( 'admin_enqueue_scripts',                array( $admin_controller, 'add_admin_pointers_script' ) );
+                add_action( 'delete_term_taxonomy',                 array( $admin_controller, 'actualize_post_prices_after_category_delete' ) );
+
+                $settings_controller = new LaterPay_Controller_Settings( $this->config );
+                add_action( 'admin_menu',                           array( $settings_controller, 'add_laterpay_advanced_settings_page' ) );
+                add_action( 'admin_init',                           array( $settings_controller, 'init_laterpay_advanced_settings' ) );
 
                 $admin_pricing_controller = new LaterPay_Controller_Admin_Pricing( $this->config );
-                add_action( 'wp_ajax_laterpay_pricing',                  array( $admin_pricing_controller, 'process_ajax_requests' ) );
-                add_action( 'wp_ajax_laterpay_get_category_prices',      array( $admin_pricing_controller, 'process_ajax_requests' ) );
+                add_action( 'wp_ajax_laterpay_pricing',             array( $admin_pricing_controller, 'process_ajax_requests' ) );
+                add_action( 'wp_ajax_laterpay_get_category_prices', array( $admin_pricing_controller, 'process_ajax_requests' ) );
 
                 $admin_appearance_controller = new LaterPay_Controller_Admin_Appearance( $this->config );
                 add_action( 'wp_ajax_laterpay_appearance',          array( $admin_appearance_controller, 'process_ajax_requests' ) );
@@ -81,10 +92,23 @@ class LaterPay_Core_Bootstrap
 
         // add the shortcodes
         $shortcode_controller = new LaterPay_Controller_Shortcode( $this->config );
-        add_shortcode( 'laterpay_premium_download',             array( $shortcode_controller, 'render_premium_download_box' ) );
-        add_shortcode( 'laterpay_box_wrapper',                  array( $shortcode_controller, 'render_premium_download_box_wrapper' ) );
+        add_shortcode( 'laterpay_premium_download', array( $shortcode_controller, 'render_premium_download_box' ) );
+        add_shortcode( 'laterpay_box_wrapper',      array( $shortcode_controller, 'render_premium_download_box_wrapper' ) );
         // add shortcode 'laterpay' as alias for shortcode 'laterpay_premium_download':
-        add_shortcode( 'laterpay',                              array( $shortcode_controller, 'render_premium_download_box' ) );
+        add_shortcode( 'laterpay',                  array( $shortcode_controller, 'render_premium_download_box' ) );
+
+        // add time passes shortcode (as alternative to action 'laterpay_time_passes')
+        add_shortcode( 'laterpay_time_passes',      array( $shortcode_controller, 'render_time_passes_widget' ) );
+
+        // add gift cards shortcodes
+        add_shortcode( 'laterpay_gift_card',        array( $shortcode_controller, 'render_gift_card' ) );
+        add_shortcode( 'laterpay_redeem_voucher',   array( $shortcode_controller, 'render_redeem_gift_code' ) );
+
+        // add account links shortcode
+        add_shortcode( 'laterpay_account_links',    array( $shortcode_controller, 'render_account_links' ) );
+
+        add_action( 'wp_ajax_laterpay_get_gift_card_actions',        array( $shortcode_controller, 'ajax_load_gift_action' ) );
+        add_action( 'wp_ajax_nopriv_laterpay_get_gift_card_actions', array( $shortcode_controller, 'ajax_load_gift_action' ) );
 
         // check if the plugin is correctly configured and working
         if ( ! LaterPay_Helper_View::plugin_is_working() ) {
@@ -121,27 +145,27 @@ class LaterPay_Core_Bootstrap
         }
 
         $dashboard_controller = new LaterPay_Controller_Admin_Dashboard( $this->config );
-        add_action( 'laterpay_refresh_dashboard_data',          array( $dashboard_controller, 'refresh_dashboard_data' ), 10, 3 );
-        add_action( 'wp_ajax_laterpay_get_dashboard_data',      array( $dashboard_controller, 'ajax_get_dashboard_data' ) );
+        add_action( 'laterpay_refresh_dashboard_data',                      array( $dashboard_controller, 'refresh_dashboard_data' ), 10, 3 );
+        add_action( 'wp_ajax_laterpay_get_dashboard_data',                  array( $dashboard_controller, 'ajax_get_dashboard_data' ) );
 
         $post_controller = new LaterPay_Controller_Post( $this->config );
         // Ajax hooks for frontend
-        add_action( 'wp_ajax_laterpay_post_load_purchased_content',          array( $post_controller, 'ajax_load_purchased_content' ) );
-        add_action( 'wp_ajax_nopriv_laterpay_post_load_purchased_content',   array( $post_controller, 'ajax_load_purchased_content' ) );
+        add_action( 'wp_ajax_laterpay_post_load_purchased_content',         array( $post_controller, 'ajax_load_purchased_content' ) );
+        add_action( 'wp_ajax_nopriv_laterpay_post_load_purchased_content',  array( $post_controller, 'ajax_load_purchased_content' ) );
 
-        add_action( 'wp_ajax_laterpay_post_rate_purchased_content',          array( $post_controller, 'ajax_rate_purchased_content' ) );
-        add_action( 'wp_ajax_nopriv_laterpay_post_rate_purchased_content',   array( $post_controller, 'ajax_rate_purchased_content' ) );
+        add_action( 'wp_ajax_laterpay_post_rate_purchased_content',         array( $post_controller, 'ajax_rate_purchased_content' ) );
+        add_action( 'wp_ajax_nopriv_laterpay_post_rate_purchased_content',  array( $post_controller, 'ajax_rate_purchased_content' ) );
 
-        add_action( 'wp_ajax_laterpay_post_rating_summary',                  array( $post_controller, 'ajax_load_rating_summary' ) );
-        add_action( 'wp_ajax_nopriv_laterpay_post_rating_summary',           array( $post_controller, 'ajax_load_rating_summary' ) );
+        add_action( 'wp_ajax_laterpay_post_rating_summary',                 array( $post_controller, 'ajax_load_rating_summary' ) );
+        add_action( 'wp_ajax_nopriv_laterpay_post_rating_summary',          array( $post_controller, 'ajax_load_rating_summary' ) );
 
-        add_action( 'wp_ajax_laterpay_redeem_voucher_code',                  array( $post_controller, 'ajax_redeem_voucher_code' ) );
-        add_action( 'wp_ajax_nopriv_laterpay_redeem_voucher_code',           array( $post_controller, 'ajax_redeem_voucher_code' ) );
+        add_action( 'wp_ajax_laterpay_redeem_voucher_code',                 array( $post_controller, 'ajax_redeem_voucher_code' ) );
+        add_action( 'wp_ajax_nopriv_laterpay_redeem_voucher_code',          array( $post_controller, 'ajax_redeem_voucher_code' ) );
 
         // Ajax hooks for post resources
         $file_helper = new LaterPay_Helper_File();
-        add_action( 'wp_ajax_laterpay_load_files',              array( $file_helper, 'load_file' ) );
-        add_action( 'wp_ajax_nopriv_laterpay_load_files',       array( $file_helper, 'load_file' ) );
+        add_action( 'wp_ajax_laterpay_load_files',                          array( $file_helper, 'load_file' ) );
+        add_action( 'wp_ajax_nopriv_laterpay_load_files',                   array( $file_helper, 'load_file' ) );
 
         // cache helper to purge the cache on update_option()
         $cache_helper = new LaterPay_Helper_Cache();
@@ -175,10 +199,15 @@ class LaterPay_Core_Bootstrap
 
         // frontend actions
         if ( ! is_admin() ) {
-
+            // add custom action to echo the LaterPay invoice indicator
             $invoice_controller = new LaterPay_Controller_Invoice( $this->config );
             add_action( 'laterpay_invoice_indicator',   array( $invoice_controller, 'the_invoice_indicator' ) );
             add_action( 'wp_enqueue_scripts',           array( $invoice_controller, 'add_frontend_scripts' ) );
+
+            // add account links action
+            $account_controller = new LaterPay_Controller_Account( $this->config );
+            add_action( 'laterpay_account_links',       array( $account_controller, 'render_account_links' ), 10, 4 );
+            add_action( 'wp_enqueue_scripts',           array( $account_controller, 'add_frontend_scripts' ) );
 
             add_action( 'template_redirect',            array( $post_controller, 'buy_post' ) );
             add_action( 'template_redirect',            array( $post_controller, 'buy_time_pass' ) );
@@ -193,14 +222,13 @@ class LaterPay_Core_Bootstrap
             // prefetch the post_access for loops
             add_filter( 'the_posts',                    array( $post_controller, 'prefetch_post_access' ) );
 
-            // register the frontend scripts
+            // enqueue the frontend assets
             add_action( 'wp_enqueue_scripts',           array( $post_controller, 'add_frontend_stylesheets' ) );
             add_action( 'wp_enqueue_scripts',           array( $post_controller, 'add_frontend_scripts' ) );
 
             // setup unique visitors tracking
             add_action( 'template_redirect',            array( $statistics_controller, 'add_unique_visitors_tracking' ) );
             add_action( 'wp_footer',                    array( $statistics_controller, 'modify_footer' ) );
-
         }
     }
 
@@ -215,10 +243,8 @@ class LaterPay_Core_Bootstrap
         $install_controller = new LaterPay_Controller_Install( $this->config );
         $install_controller->install();
 
-
-        // registering the dashboard refresh cron-job
+        // register the refresh dashboard cron job
         wp_schedule_event( time(), 'hourly', 'laterpay_refresh_dashboard_data' );
-
     }
 
     /**
@@ -229,10 +255,8 @@ class LaterPay_Core_Bootstrap
      * @return void
      */
     public function deactivate() {
-
-        // un-registering the dashboard cron-job
+        // de-register the refresh dashboard cron job
         wp_clear_scheduled_hook( 'laterpay_refresh_dashboard_data' );
-
     }
 
 }
