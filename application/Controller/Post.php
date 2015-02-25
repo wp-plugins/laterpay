@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * LaterPay post controller.
+ *
+ * Plugin Name: LaterPay
+ * Plugin URI: https://github.com/laterpay/laterpay-wordpress-plugin
+ * Author URI: https://laterpay.net/
+ */
 class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
 {
 
@@ -11,6 +18,13 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
     protected $access = array();
 
     /**
+     * Determine, if current post was called with excerpt function.
+     *
+     * @var bool
+     */
+    protected $is_excerpt = false;
+
+    /**
      * Ajax method to get the cached article.
      * Required, because there could be a price change in LaterPay and we always need the current article price.
      *
@@ -19,19 +33,21 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
      * @return void
      */
     public function ajax_load_purchased_content() {
-        if ( ! isset( $_GET[ 'action' ] ) || $_GET[ 'action' ] !== 'laterpay_post_load_purchased_content' ) {
+        if ( ! isset( $_GET['action'] ) || $_GET['action'] !== 'laterpay_post_load_purchased_content' ) {
             exit;
         }
 
-        if ( ! isset( $_GET[ 'nonce' ] ) || ! wp_verify_nonce( $_GET[ 'nonce' ], $_GET[ 'action' ] ) ) {
+        if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], $_GET['action'] ) ) {
             exit;
         }
 
-        if ( ! isset( $_GET[ 'post_id' ] ) ) {
+        if ( ! isset( $_GET['post_id'] ) ) {
             return;
         }
 
-        $post_id    = absint( $_GET[ 'post_id' ] );
+        global $post;
+
+        $post_id    = absint( $_GET['post_id'] );
         $post       = get_post( $post_id );
 
         if ( $post === null ) {
@@ -124,19 +140,19 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
      * @return void
      */
     public function ajax_load_rating_summary() {
-        if ( ! isset( $_GET[ 'action' ] ) || $_GET[ 'action' ] !== 'laterpay_post_rating_summary' ) {
+        if ( ! isset( $_GET['action'] ) || $_GET['action'] !== 'laterpay_post_rating_summary' ) {
             exit;
         }
 
-        if ( ! isset( $_GET[ 'nonce' ] ) || ! wp_verify_nonce( $_GET[ 'nonce' ], $_GET[ 'action' ] ) ) {
+        if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], $_GET['action'] ) ) {
             exit;
         }
 
-        if ( ! isset( $_GET[ 'post_id' ] ) ) {
+        if ( ! isset( $_GET['post_id'] ) ) {
             return;
         }
 
-        $post_id = absint( $_GET[ 'post_id' ] );
+        $post_id = absint( $_GET['post_id'] );
         $post    = get_post( $post_id );
 
         if ( $post === null ) {
@@ -171,49 +187,44 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
      * @return void
      */
     public function ajax_redeem_voucher_code() {
-        if ( ! isset( $_GET[ 'action' ] ) || $_GET[ 'action' ] !== 'laterpay_redeem_voucher_code' ) {
+        if ( ! isset( $_GET['action'] ) || $_GET['action'] !== 'laterpay_redeem_voucher_code' ) {
             exit;
         }
 
-        if ( ! isset( $_GET[ 'nonce' ] ) || ! wp_verify_nonce( $_GET[ 'nonce' ], $_GET[ 'action' ] ) ) {
+        if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], $_GET['action'] ) ) {
             exit;
         }
 
-        if ( ! isset( $_GET[ 'code' ] ) ) {
+        if ( ! isset( $_GET['code'] ) ) {
             return;
         }
 
-        if ( ! isset( $_GET[ 'link' ] ) || ! isset( $_GET[ 'is_gift'] ) ) {
+        if ( ! isset( $_GET['link'] ) || ! isset( $_GET['is_gift'] ) ) {
             return;
         }
 
-        // check if voucher code exists and pass is available for purchase
-        $code_data = LaterPay_Helper_Vouchers::check_voucher_code( $_GET[ 'code' ], (bool) $_GET[ 'is_gift'] );
+        // check, if voucher code exists and time pass is available for purchase
+        $code_data = LaterPay_Helper_Voucher::check_voucher_code( $_GET['code'], (bool) $_GET['is_gift'] );
         if ( $code_data ) {
-            if ( LaterPay_Helper_Vouchers::check_gift_code_usages_limit( $_GET[ 'code' ] ) || ! $_GET[ 'is_gift'] ) {
-                if ( $_GET[ 'is_gift'] ) {
-                    LaterPay_Helper_Vouchers::update_gift_code_usages( $_GET[ 'code' ] );
+            if ( LaterPay_Helper_Voucher::check_gift_code_usages_limit( $_GET['code'] ) || ! $_GET['is_gift'] ) {
+                if ( $_GET['is_gift'] ) {
+                    LaterPay_Helper_Voucher::update_gift_code_usages( $_GET['code'] );
                 }
-                // get new URL for this pass
-                $pass_id    = $code_data[ 'pass_id' ];
+                // get new URL for this time pass
+                $pass_id    = $code_data['pass_id'];
                 // get price, delocalize it, and format it
-                $price      = $code_data[ 'price' ];
+                $price      = $code_data['price'];
                 $price      = str_replace( ',', '.', $price );
                 $price      = number_format( (float) $price, 2 );
-                // prepare url before usage
-                $url        = $_GET[ 'is_gift'] ? home_url() : $_GET[ 'link' ];
-                $url_params = array(
-                    'pass_id' => LaterPay_Helper_Passes::get_tokenized_pass( $pass_id ),
-                    'voucher' => $_GET[ 'code' ],
-                    'is_gift' => false,
-                    'next'    => $url
+                // prepare URL before use
+                $data       = array(
+                    'is_gift' => $_GET['is_gift'],
+                    'link'    => $_GET['is_gift'] ? home_url() : $_GET['link'],
+                    'price'   => $price,
                 );
-                $url        = add_query_arg( $url_params, $url );
-                $hash       = LaterPay_Helper_Pricing::get_hash_by_url( $url );
-                $url        = $url .'&hash=' . $hash;
 
                 // get new purchase URL
-                $url = LaterPay_Helper_Passes::get_laterpay_purchase_link( $pass_id, $price, $url );
+                $url = LaterPay_Helper_TimePass::get_laterpay_purchase_link( $pass_id, $data );
 
                 wp_send_json(
                     array(
@@ -234,42 +245,52 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
     }
 
     /**
-     * Save pass info after purchase.
+     * Save time pass info after purchase.
      *
      * @wp-hook template_reditect
      *
      * @return  void
      */
     public function buy_time_pass() {
-        if ( ! isset( $_GET[ 'pass_id' ] ) && ! isset( $_GET[ 'voucher' ] ) &&
-             ! isset( $_GET[ 'is_gift' ] ) && ! isset( $_GET[ 'next' ] ) ) {
+        if ( ! isset( $_GET['pass_id'] ) && ! isset( $_GET['link'] ) ) {
             return;
         }
 
-        $pass_id = $_GET[ 'pass_id' ];
-        $voucher = $_GET[ 'voucher' ];
-        $is_gift = $_GET[ 'is_gift' ];
-        $link    = $_GET[ 'next' ];
-
         // data to create and hash-check the URL
         $url_data = array(
-            'pass_id' => $pass_id,
-            'voucher' => $voucher,
-            'is_gift' => $is_gift,
-            'next'    => $link,
+            'pass_id'       => $_GET['pass_id'],
+            'id_currency'   => $_GET['id_currency'],
+            'price'         => $_GET['price'],
+            'date'          => $_GET['date'],
+            'ip'            => $_GET['ip'],
+            'revenue_model' => $_GET['revenue_model'],
+            'link'          => $_GET['link'],
         );
 
+        // additional fields
+        if ( isset( $_GET['voucher'] ) ) {
+            $url_data['voucher'] = $_GET['voucher'];
+        }
+
+        if ( isset( $_GET['is_gift'] ) ) {
+            $url_data['is_gift'] = $_GET['is_gift'];
+        }
+
+        $link    = $url_data['link'];
         $url     = add_query_arg( $url_data, $link );
         $hash    = LaterPay_Helper_Pricing::get_hash_by_url( $url );
-        $pass_id = LaterPay_Helper_Passes::get_untokenized_pass_id( $pass_id );
 
-        if ( $hash === $_GET[ 'hash' ] ) {
-            if ( ! LaterPay_Helper_Vouchers::check_voucher_code( $voucher ) ) {
-                if ( ! LaterPay_Helper_Vouchers::check_voucher_code( $voucher, true ) ) {
+        $pass_id = LaterPay_Helper_TimePass::get_untokenized_time_pass_id( $url_data['pass_id'] );
+        $voucher = $url_data['voucher'];
+
+        if ( $hash === $_GET['hash'] ) {
+            // process vouchers
+            if ( ! LaterPay_Helper_Voucher::check_voucher_code( $voucher ) ) {
+                if ( ! LaterPay_Helper_Voucher::check_voucher_code( $voucher, true ) ) {
                     // save the pre-generated gift code as valid voucher code now that the purchase is complete
-                    $gift_cards = LaterPay_Helper_Vouchers::get_time_pass_vouchers( $pass_id, true );
+                    $gift_cards = LaterPay_Helper_Voucher::get_time_pass_vouchers( $pass_id, true );
                     $gift_cards[$voucher] = 0;
-                    LaterPay_Helper_Vouchers::save_pass_vouchers( $pass_id, $gift_cards, true, true );
+                    LaterPay_Helper_Voucher::save_pass_vouchers( $pass_id, $gift_cards, true, true );
                     // set cookie to store information that gift card was purchased
                     setcookie(
                         'laterpay_purchased_gift_card',
@@ -279,12 +300,32 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
                     );
                 } else {
                     // update gift code statistics
-                    LaterPay_Helper_Vouchers::update_voucher_statistic( $pass_id, $voucher, true );
+                    LaterPay_Helper_Voucher::update_voucher_statistic( $pass_id, $voucher, true );
                 }
             } else {
                 // update voucher statistics
-                LaterPay_Helper_Vouchers::update_voucher_statistic( $pass_id, $voucher );
+                LaterPay_Helper_Voucher::update_voucher_statistic( $pass_id, $voucher );
             }
+
+            // save payment history
+            $data = array(
+                'id_currency'   => $_GET['id_currency'],
+                'price'         => $_GET['price'],
+                'date'          => $_GET['date'],
+                'ip'            => $_GET['ip'],
+                'hash'          => $_GET['hash'],
+                'revenue_model' => $_GET['revenue_model'],
+                'pass_id'       => $pass_id,
+                'code'          => isset( $_GET['voucher'] ) ? $_GET['voucher'] : null,
+            );
+
+            $this->logger->info(
+                __METHOD__ . ' - set payment history',
+                $data
+            );
+
+            $payment_history_model = new LaterPay_Model_Payment_History();
+            $payment_history_model->set_payment_history( $data );
         }
 
         wp_redirect( $link );
@@ -298,27 +339,27 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
      * @return  void
      */
     public function buy_post() {
-        if ( ! isset( $_GET[ 'buy' ] ) ) {
+        if ( ! isset( $_GET['buy'] ) ) {
             return;
         }
 
         // data to create and hash-check the URL
         $url_data = array(
-            'post_id'     => $_GET[ 'post_id' ],
-            'id_currency' => $_GET[ 'id_currency' ],
-            'price'       => $_GET[ 'price' ],
-            'date'        => $_GET[ 'date' ],
-            'buy'         => $_GET[ 'buy' ],
-            'ip'          => $_GET[ 'ip' ],
+            'post_id'       => $_GET['post_id'],
+            'id_currency'   => $_GET['id_currency'],
+            'price'         => $_GET['price'],
+            'date'          => $_GET['date'],
+            'buy'           => $_GET['buy'],
+            'ip'            => $_GET['ip'],
+            'revenue_model' => $_GET['revenue_model'],
         );
 
-        if ( isset( $_GET[ 'download_attached'] ) ) {
-            $url_data['download_attached'] = $_GET[ 'download_attached'];
+        if ( isset( $_GET['download_attached'] ) ) {
+            $url_data['download_attached'] = $_GET['download_attached'];
         }
-
-        $url    = $this->get_after_purchase_redirect_url( $url_data );
-        $hash   = LaterPay_Helper_Pricing::get_hash_by_url( $url );
-        // update lptoken if we got it
+        $url = $this->get_after_purchase_redirect_url( $url_data );
+        $hash = LaterPay_Helper_Pricing::get_hash_by_url( $url );
+        // update lptoken, if we got it
         if ( isset( $_GET['lptoken'] ) ) {
             $client_options = LaterPay_Helper_Config::get_php_client_options();
             $client = new LaterPay_Client(
@@ -331,18 +372,21 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
             $client->set_token( $_GET['lptoken'] );
         }
 
-        $post_id        = absint( $_GET[ 'post_id' ] );
+        $post_id = absint( $_GET['post_id'] );
+        if ( isset( $_GET['download_attached'] ) ) {
+            $post_id = absint( $_GET['download_attached'] );
+        }
 
         // check, if the parameters of $_GET are valid and not manipulated
-        if ( $hash === $_GET[ 'hash' ] ) {
+        if ( $hash === $_GET['hash'] ) {
             $data = array(
-                'post_id'       => $_GET[ 'post_id' ],
-                'id_currency'   => $_GET[ 'id_currency' ],
-                'price'         => $_GET[ 'price' ],
-                'date'          => $_GET[ 'date' ],
-                'ip'            => $_GET[ 'ip' ],
-                'hash'          => $_GET[ 'hash' ],
-                'revenue_model' => LaterPay_Helper_Pricing::get_post_revenue_model( $post_id ),
+                'post_id'       => $post_id,
+                'id_currency'   => $_GET['id_currency'],
+                'price'         => $_GET['price'],
+                'date'          => $_GET['date'],
+                'ip'            => $_GET['ip'],
+                'hash'          => $_GET['hash'],
+                'revenue_model' => $_GET['revenue_model'],
             );
 
             $this->logger->info(
@@ -350,15 +394,15 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
                 $data
             );
 
-            $payment_history_model = new LaterPay_Model_Payments_History();
+            $payment_history_model = new LaterPay_Model_Payment_History();
             $payment_history_model->set_payment_history( $data );
         }
 
-        $redirect_url   = get_permalink( $post_id );
+        $redirect_url = get_permalink( $_GET['post_id'] );
 
-        // prepare attachment url for download
-        if ( isset( $_GET[ 'download_attached' ] ) ) {
-            $post_id = $_GET[ 'download_attached' ];
+        // prepare attachment URL for download
+        if ( isset( $_GET['download_attached'] ) ) {
+            $post_id = $_GET['download_attached'];
             $post    = get_post( $post_id );
             $access  = LaterPay_Helper_Post::has_access_to_post( $post );
 
@@ -403,6 +447,7 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
             $context
         );
 
+        // don't assign tokens to crawlers and other user agents that can't handle cookies
         if ( ! $browser_supports_cookies || $browser_is_crawler ) {
             return;
         }
@@ -415,7 +460,7 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
                 $client_options['web_root'],
                 $client_options['token_name']
         );
-        if ( isset( $_GET[ 'lptoken' ] ) ) {
+        if ( isset( $_GET['lptoken'] ) ) {
             $laterpay_client->set_token( $_GET['lptoken'], true );
         }
 
@@ -447,12 +492,13 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
             }
         }
 
-        // check time limited passes
-        $passes = LaterPay_Helper_Passes::get_tokenized_passes();
-        foreach ( $passes as $pass ) {
-            // add a tokenized pass id to the array of posts to be queried for access, if it's not loaded already
-            if ( ! array_key_exists( $pass, $this->access ) ) {
-                $post_ids[] = $pass;
+        // check access for time passes
+        $time_passes = LaterPay_Helper_TimePass::get_tokenized_time_pass_ids();
+
+        foreach ( $time_passes as $time_pass ) {
+            // add a tokenized time pass id to the array of posts to be queried for access, if it's not loaded already
+            if ( ! array_key_exists( $time_pass, $this->access ) ) {
+                $post_ids[] = $time_pass;
             }
         }
 
@@ -479,8 +525,8 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
             return $posts;
         }
 
-        foreach ( $access_result[ 'articles' ] as $post_id => $state ) {
-            $this->access[ $post_id ] = (bool) $state[ 'access' ];
+        foreach ( $access_result['articles'] as $post_id => $state ) {
+            $this->access[$post_id] = (bool) $state['access'];
         }
 
         return $posts;
@@ -503,18 +549,19 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
             )
         );
 
-        // check access with passes
-        $passes_list = LaterPay_Helper_Passes::get_time_passes_list_for_the_post( $post_id );
-        $passes = LaterPay_Helper_Passes::get_tokenized_passes( $passes_list );
-        foreach ( $passes as $pass ) {
-            if ( array_key_exists( $pass, $this->access ) && $this->access[ $pass ] ) {
+        // check access with time passes
+        $time_passes_list   = LaterPay_Helper_TimePass::get_time_passes_list_by_post_id( $post_id );
+        $time_passes        = LaterPay_Helper_TimePass::get_tokenized_time_pass_ids( $time_passes_list );
+
+        foreach ( $time_passes as $time_pass ) {
+            if ( array_key_exists( $time_pass, $this->access ) && $this->access[$time_pass] ) {
                 return true;
             }
         }
 
         // check access for the particular post
         if ( array_key_exists( $post_id, $this->access ) ) {
-            return (bool) $this->access[ $post_id ];
+            return (bool) $this->access[$post_id];
         }
 
         $price = LaterPay_Helper_Pricing::get_post_price( $post->ID );
@@ -528,8 +575,8 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
                     $client_options['web_root'],
                     $client_options['token_name']
             );
-            // merge passes and post id arrays before check
-            $result = $laterpay_client->get_access( array_merge( array( $post_id ), $passes ) );
+            // merge time passes and post id arrays before check
+            $result = $laterpay_client->get_access( array_merge( array( $post_id ), $time_passes ) );
 
             if ( empty( $result ) || ! array_key_exists( 'articles', $result ) ) {
                 $this->logger->warning(
@@ -544,9 +591,9 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
 
             $has_access = false;
 
-            foreach ( $result[ 'articles' ] as $article_key => $article_access ) {
-                $access = (bool) $article_access[ 'access' ];
-                $this->access[ $article_key ] = $access;
+            foreach ( $result['articles'] as $article_key => $article_access ) {
+                $access = (bool) $article_access['access'];
+                $this->access[$article_key] = $access;
                 if ( $access ) {
                     $has_access = true;
                 }
@@ -599,12 +646,13 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
 
         // data to register purchase after redirect from LaterPay
         $url_params = array(
-            'post_id'     => $post_id,
-            'id_currency' => $currency_model->get_currency_id_by_iso4217_code( $currency ),
-            'price'       => $price,
-            'date'        => time(),
-            'buy'         => 'true',
-            'ip'          => ip2long( $_SERVER['REMOTE_ADDR'] ),
+            'post_id'       => $post_id,
+            'id_currency'   => $currency_model->get_currency_id_by_iso4217_code( $currency ),
+            'price'         => $price,
+            'date'          => time(),
+            'buy'           => 'true',
+            'ip'            => ip2long( $_SERVER['REMOTE_ADDR'] ),
+            'revenue_model' => LaterPay_Helper_Pricing::get_post_revenue_model( $post_id ),
         );
         $url    = $this->get_after_purchase_redirect_url( $url_params );
         $hash   = LaterPay_Helper_Pricing::get_hash_by_url( $url );
@@ -640,7 +688,7 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
      * @return string $url
      */
     protected function get_after_purchase_redirect_url( array $data ) {
-        $url = get_permalink( $data[ 'post_id' ] );
+        $url = isset( $data['post_id'] ) ? get_permalink( $data['post_id'] ) : get_permalink();
 
         if ( ! $url ) {
             $this->logger->error(
@@ -666,11 +714,12 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
         if ( ! in_array( $post_type, $this->config->get( 'content.enabled_post_types' ) ) ) {
             return false;
         }
+
         return true;
     }
 
     /**
-     * Check, if current page is login page.
+     * Check, if the current page is a login page.
      *
      * @return boolean
      */
@@ -679,7 +728,7 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
     }
 
     /**
-     * Check, if current page is cron page.
+     * Check, if the current page is the cron page.
      *
      * @return boolean
      */
@@ -704,18 +753,30 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
         }
 
         $post = get_post();
+        $preview_post_as_visitor   = LaterPay_Helper_User::preview_post_as_visitor( $post );
+        $user_has_unlimited_access = LaterPay_Helper_User::can( 'laterpay_has_full_access_to_content', $post );
 
-        // check, if the current post was already purchased
-        if ( $this->has_access_to_post( $post ) ) {
+        // check, if we on preview post as admin
+        if ( $user_has_unlimited_access && ! $preview_post_as_visitor ) {
             return;
         }
+
+        // check, if the current post was already purchased and current user is not an admin
+        if ( $this->has_access_to_post( $post ) && ! $preview_post_as_visitor ) {
+            return;
+        }
+
+        $is_in_visible_test_mode = get_option( 'laterpay_is_in_visible_test_mode' )
+                                    && ! $this->config->get( 'is_in_live_mode' );
 
         $view_args = array(
             'post_id'                         => $post->ID,
             'link'                            => $this->get_laterpay_purchase_link( $post->ID ),
             'currency'                        => get_option( 'laterpay_currency' ),
             'price'                           => LaterPay_Helper_Pricing::get_post_price( $post->ID ),
-            'preview_post_as_visitor'         => LaterPay_Helper_User::preview_post_as_visitor( $post ),
+            'preview_post_as_visitor'         => $preview_post_as_visitor,
+            'purchase_button_is_hidden'       => LaterPay_Helper_View::purchase_button_is_hidden(),
+            'is_in_visible_test_mode'        => $is_in_visible_test_mode,
         );
 
         $this->logger->info(
@@ -745,8 +806,8 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
         $show_widget_on_free_posts       = get_option( 'laterpay_show_time_passes_widget_on_free_posts' );
         $time_passes_positioned_manually = get_option( 'laterpay_time_passes_positioned_manually' );
 
-        // prevent execution if post not given post and we are not on the homepage
-        // or action called second time
+        // prevent execution, if the current post is not the given post and we are not on the homepage,
+        // or the action was called a second time,
         // or post is free and we can't show time pass widget on free posts
         if ( LaterPay_Helper_Pricing::is_purchasable() === false && ! $is_homepage ||
              did_action( 'laterpay_time_passes' ) > 1 ||
@@ -760,23 +821,29 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
             return;
         }
 
-        // get passes list
-        $passes_with_access = $this->get_passes_with_access();
+        // get time passes list
+        $time_passes_with_access = $this->get_time_passes_with_access();
 
         // check, if we are on the homepage or on a post / page page
         if ( $is_homepage ) {
-            $passes_list = LaterPay_Helper_Passes::get_time_passes_list_for_the_post( null, $passes_with_access );
+            $time_passes_list = LaterPay_Helper_TimePass::get_time_passes_list_by_post_id(
+                                    null,
+                                    $time_passes_with_access
+                                );
         } else {
-            $passes_list = LaterPay_Helper_Passes::get_time_passes_list_for_the_post( get_the_ID(), $passes_with_access );
+            $time_passes_list = LaterPay_Helper_TimePass::get_time_passes_list_by_post_id(
+                                    get_the_ID(),
+                                    $time_passes_with_access
+                                );
         }
 
         // don't render the widget, if there are no time passes
-        if ( count( $passes_list ) == 0 ) {
+        if ( count( $time_passes_list ) == 0 ) {
             return;
         }
 
         // check if post has vouchers
-        $has_vouchers = LaterPay_Helper_Vouchers::passes_have_vouchers( $passes_list );
+        $has_vouchers = LaterPay_Helper_Voucher::passes_have_vouchers( $time_passes_list );
 
         // get the associated CSS class to be applied for the specified variant
         switch ( $variant ) {
@@ -789,7 +856,7 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
         }
 
         $view_args = array(
-           'passes_list'                    => $passes_list,
+           'passes_list'                    => $time_passes_list,
            'time_pass_widget_class'         => $class,
            'has_vouchers'                   => $has_vouchers,
            'time_pass_introductory_text'    => $introductory_text,
@@ -804,6 +871,20 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
         $this->assign( 'laterpay_widget', $view_args );
 
         echo $this->get_text_view( 'frontend/partials/widget/time_passes' );
+    }
+
+    /**
+     * Modify the post excerpt and set is_excerpt variable if excerpt was called.
+     *
+     * @param $excerpt
+     *
+     * @return mixed
+     */
+    public function modify_post_excerpt( $excerpt ) {
+        // set excerpt variable to true
+        $this->is_excerpt = true;
+
+        return $excerpt;
     }
 
     /**
@@ -827,14 +908,25 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
         global $wp_embed;
 
         $post = get_post();
-        if ( $post === null ) {
+        if ( $post === null || $this->is_excerpt ) {
+            // disable excerpt
+            $this->is_excerpt = false;
             return $content;
         }
 
-        $user_has_unlimited_access = LaterPay_Helper_User::can( 'laterpay_has_full_access_to_content', $post );
-        $preview_post_as_visitor   = LaterPay_Helper_User::preview_post_as_visitor( $post );
+        $user_has_unlimited_access      = LaterPay_Helper_User::can( 'laterpay_has_full_access_to_content', $post );
+        $preview_post_as_visitor        = LaterPay_Helper_User::preview_post_as_visitor( $post );
+        $timepasses_positioned_manually = get_option( 'laterpay_time_passes_positioned_manually' );
+
+        // assign variables for time passes partial
+        $view_args = array(
+            'time_passes_positioned_manually' => $timepasses_positioned_manually,
+        );
+
+        $this->assign( 'laterpay', $view_args );
 
         if ( $user_has_unlimited_access && ! $preview_post_as_visitor ) {
+            $content .= LaterPay_Helper_View::remove_extra_spaces( $this->get_text_view( 'frontend/partials/post/time_passes' ) );
             return $content;
         }
 
@@ -871,15 +963,7 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
                 $context
             );
 
-            // assign variables for time passes partial
-            $view_args = array(
-                'time_passes_positioned_manually' => get_option( 'laterpay_time_passes_positioned_manually' ),
-            );
-
-            $this->assign( 'laterpay', $view_args );
-
             $content .= LaterPay_Helper_View::remove_extra_spaces( $this->get_text_view( 'frontend/partials/post/time_passes' ) );
-
             return $content;
         }
 
@@ -901,6 +985,13 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
 
         // check, if user has access to content (because he already bought it)
         $access = $this->has_access_to_post( $post );
+
+        // purchase mode
+        $only_time_passes_allowed = get_option( 'laterpay_only_time_pass_purchases_allowed' );
+
+        // test mode
+        $is_in_visible_test_mode = get_option( 'laterpay_is_in_visible_test_mode' )
+                                        && ! $this->config->get( 'is_in_live_mode' );
 
         // switch to 'admin' mode and load the correct content, if user can read post statistics
         if ( $user_can_read_statistics ) {
@@ -924,8 +1015,11 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
             'preview_post_as_visitor'               => $preview_post_as_visitor,
             'user_has_already_voted'                => $user_has_already_voted,
             'show_post_ratings'                     => $show_post_ratings,
-            'time_passes_positioned_manually'       => get_option( 'laterpay_time_passes_positioned_manually' ),
+            'purchase_link_is_hidden'               => LaterPay_Helper_View::purchase_link_is_hidden(),
+            'time_passes_positioned_manually'       => $timepasses_positioned_manually,
             'purchase_button_positioned_manually'   => get_option( 'laterpay_purchase_button_positioned_manually' ),
+            'only_time_pass_purchases_allowed'      => $only_time_passes_allowed,
+            'is_in_visible_test_mode'              => $is_in_visible_test_mode,
         );
         $this->assign( 'laterpay', $view_args );
 
@@ -933,7 +1027,7 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
         $html = '';
 
         // return the teaser content on non-singular pages (archive, feed, tax, author, search, ...)
-        if ( ! is_singular() ) {
+        if ( ! is_singular() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
             // prepend hint to feed items that reading the full content requires purchasing the post
             if ( is_feed() ) {
                 $html .= sprintf(
@@ -963,7 +1057,6 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
                 'preview_post_as_visitor'       => $preview_post_as_visitor,
                 'caching_is_active'             => $caching_is_active,
                 'is_ajax_and_caching_is_active' => $is_ajax_and_caching_is_active,
-
             );
 
             $this->logger->info(
@@ -990,6 +1083,10 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
 
         // add the teaser content
         $html .= LaterPay_Helper_View::remove_extra_spaces( $this->get_text_view( 'frontend/partials/post/teaser' ) );
+
+        if ( $only_time_passes_allowed ) {
+            $html .= LaterPay_Helper_View::remove_extra_spaces( $this->get_text_view( 'frontend/partials/post/after_teaser' ) );
+        }
 
         if ( $teaser_content_only ) {
             // add teaser content plus a purchase link after the teaser content
@@ -1051,25 +1148,25 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
     /**
      * Get time passes that have access to the current posts.
      *
-     * @return array of pass ids with access
+     * @return array of time pass ids with access
      */
-    protected function get_passes_with_access() {
-        $access = $this->access;
-        $passes = array();
+    protected function get_time_passes_with_access() {
+        $access                     = $this->access;
+        $time_passes_with_access    = array();
 
-        // get passes with access
+        // get time passes with access
         foreach ( $access as $access_key => $access_value ) {
-            // if access granted
+            // if access was purchased
             if ( $access_value === true ) {
                 $access_key_exploded = explode( '_', $access_key );
-                // if this is pass key - store pass id
-                if ( $access_key_exploded[0] === LaterPay_Helper_Passes::PASS_TOKEN ) {
-                    $passes[] = $access_key_exploded[1];
+                // if this is time pass key - store time pass id
+                if ( $access_key_exploded[0] === LaterPay_Helper_TimePass::PASS_TOKEN ) {
+                    $time_passes_with_access[] = $access_key_exploded[1];
                 }
             }
         }
 
-        return $passes;
+        return $time_passes_with_access;
     }
 
     /**
@@ -1079,23 +1176,26 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
      *
      * @return string
      */
-    public function render_pass( $pass = array() ) {
+    public function render_time_pass( $pass = array() ) {
+        $is_in_visible_test_mode = get_option( 'laterpay_is_in_visible_test_mode' ) && ! $this->config->get( 'is_in_live_mode' );
+
         $defaults = array(
             'pass_id'     => 0,
-            'title'       => LaterPay_Helper_Passes::get_default_options( 'title' ),
-            'description' => LaterPay_Helper_Passes::get_description(),
-            'price'       => LaterPay_Helper_Passes::get_access_options( 'price' ),
+            'title'       => LaterPay_Helper_TimePass::get_default_options( 'title' ),
+            'description' => LaterPay_Helper_TimePass::get_description(),
+            'price'       => LaterPay_Helper_TimePass::get_default_options( 'price' ),
             'url'         => '',
         );
 
         $laterpay_pass = array_merge( $defaults, $pass );
         if ( ! empty( $laterpay_pass['pass_id'] ) ) {
-            $laterpay_pass['url'] = LaterPay_Helper_Passes::get_laterpay_purchase_link( $laterpay_pass['pass_id'] );
+            $laterpay_pass['url'] = LaterPay_Helper_TimePass::get_laterpay_purchase_link( $laterpay_pass['pass_id'] );
         }
 
         $args = array(
-            'standard_currency'       => get_option( 'laterpay_currency' ),
-            'preview_post_as_visitor' => LaterPay_Helper_User::preview_post_as_visitor( get_post() ),
+            'standard_currency'         => get_option( 'laterpay_currency' ),
+            'preview_post_as_visitor'   => LaterPay_Helper_User::preview_post_as_visitor( get_post() ),
+            'is_in_visible_test_mode'  => $is_in_visible_test_mode,
         );
         $this->assign( 'laterpay',      $args );
         $this->assign( 'laterpay_pass', $laterpay_pass );
@@ -1150,7 +1250,6 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
             $this->config->get( 'version' ),
             true
         );
-
         wp_register_script(
             'laterpay-post-view',
             $this->config->get( 'js_url' ) . 'laterpay-post-view.js',
@@ -1199,5 +1298,4 @@ class LaterPay_Controller_Post extends LaterPay_Controller_Abstract
         wp_enqueue_script( 'laterpay-peity' );
         wp_enqueue_script( 'laterpay-post-view' );
     }
-
 }

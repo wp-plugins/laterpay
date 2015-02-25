@@ -1,6 +1,14 @@
 <?php
 
-class LaterPay_Helper_Post {
+/**
+ * LaterPay post helper.
+ *
+ * Plugin Name: LaterPay
+ * Plugin URI: https://github.com/laterpay/laterpay-wordpress-plugin
+ * Author URI: https://laterpay.net/
+ */
+class LaterPay_Helper_Post
+{
 
     /**
      * Contains the access state for all loaded posts.
@@ -13,10 +21,11 @@ class LaterPay_Helper_Post {
      * Check, if user has access to a post.
      *
      * @param WP_Post $post
+     * @param bool    $is_attachment
      *
      * @return boolean success
      */
-    public static function has_access_to_post( WP_Post $post ) {
+    public static function has_access_to_post( WP_Post $post, $is_attachment = false ) {
         $post_id = $post->ID;
 
         laterpay_get_logger()->info(
@@ -27,6 +36,16 @@ class LaterPay_Helper_Post {
         if ( array_key_exists( $post_id, self::$access ) ) {
             // access was already checked
             return (bool) self::$access[$post_id];
+        }
+
+        // check, if parent post has access with time passes
+        $parent_post        = $is_attachment ? get_the_ID() : $post_id;
+        $time_passes_list   = LaterPay_Helper_TimePass::get_time_passes_list_by_post_id( $parent_post );
+        $time_passes        = LaterPay_Helper_TimePass::get_tokenized_time_pass_ids( $time_passes_list );
+        foreach ( $time_passes as $time_pass ) {
+            if ( array_key_exists( $time_pass, self::$access ) && self::$access[$time_pass] ) {
+                return true;
+            }
         }
 
         $price = LaterPay_Helper_Pricing::get_post_price( $post->ID );
@@ -40,7 +59,7 @@ class LaterPay_Helper_Post {
                                     $client_options['web_root'],
                                     $client_options['token_name']
                                 );
-            $result          = $laterpay_client->get_access( array( $post_id ) );
+            $result          = $laterpay_client->get_access( array_merge( array( $post_id ), $time_passes ) );
 
             if ( empty( $result ) || ! array_key_exists( 'articles', $result ) ) {
                 laterpay_get_logger()->warning(
@@ -51,16 +70,23 @@ class LaterPay_Helper_Post {
                 return false;
             }
 
-            if ( array_key_exists( $post_id, $result['articles'] ) ) {
-                $access = (bool) $result['articles'][$post_id]['access'];
-                self::$access[$post_id] = $access;
+            $has_access = false;
 
+            foreach ( $result['articles'] as $article_key => $article_access ) {
+                $access = (bool) $article_access['access'];
+                self::$access[$article_key] = $access;
+                if ( $access ) {
+                    $has_access = true;
+                }
+            }
+
+            if ( $has_access ) {
                 laterpay_get_logger()->info(
                     __METHOD__ . ' - post has access.',
                     array( 'result' => $result )
                 );
 
-                return $access;
+                return true;
             }
         }
 
@@ -68,18 +94,18 @@ class LaterPay_Helper_Post {
     }
 
     /**
-     * FIXME: [has_purchased_gift_card description]
+     * Check, if gift code was purchased successfully and user has access.
      *
-     * @return boolean [description]
+     * @return mixed return false if gift card is incorrect or doesn't exist, access data otherwise
      */
     public static function has_purchased_gift_card() {
         if ( isset( $_COOKIE['laterpay_purchased_gift_card'] ) ) {
             // get gift code and unset session variable
-            list( $code, $pass_id ) = explode( '|', $_COOKIE['laterpay_purchased_gift_card'] );
+            list( $code, $time_pass_id ) = explode( '|', $_COOKIE['laterpay_purchased_gift_card'] );
             // create gift code token
             $code_key = '[#' . $code . ']';
 
-            // check if gift code was purchased successfully and we has access
+            // check, if gift code was purchased successfully and user has access
             $client_options  = LaterPay_Helper_Config::get_php_client_options();
             $laterpay_client = new LaterPay_Client(
                 $client_options['cp_key'],
@@ -99,7 +125,7 @@ class LaterPay_Helper_Post {
                 return false;
             }
 
-            // return access data if all ok
+            // return access data, if all is ok
             if ( array_key_exists( $code_key, $result['articles'] ) ) {
                 $access = (bool) $result['articles'][$code_key]['access'];
                 self::$access[$code_key] = $access;
@@ -112,7 +138,7 @@ class LaterPay_Helper_Post {
                 return array(
                     'access'  => $access,
                     'code'    => $code,
-                    'pass_id' => $pass_id,
+                    'pass_id' => $time_pass_id,
                 );
             }
         }
@@ -241,22 +267,27 @@ class LaterPay_Helper_Post {
             return;
         };
 
-        // don't render the purchase button, if the current post was already purchased
-        if ( LaterPay_Helper_Post::has_access_to_post( $post ) ) {
-            return;
-        };
-
         // render purchase button for administrator always in preview mode, too prevent accidental purchase by admin.
         $preview_mode = LaterPay_Helper_User::preview_post_as_visitor( $post );
         if ( current_user_can( 'administrator' ) ) {
             $preview_mode = true;
         }
+
+        $is_in_visible_test_mode = get_option( 'laterpay_is_in_visible_test_mode' ) && ! get_option( 'laterpay_plugin_is_in_live_mode' );
+
+        // don't render the purchase button, if the current post was already purchased
+        // also even if item was purchased in visible test mode by admin it must be displayed
+        if ( LaterPay_Helper_Post::has_access_to_post( $post ) && ! $preview_mode ) {
+            return;
+        };
+
         $view_args = array(
-            'post_id'                 => $post->ID,
-            'link'                    => LaterPay_Helper_Post::get_laterpay_purchase_link( $post->ID ),
-            'currency'                => get_option( 'laterpay_currency' ),
-            'price'                   => LaterPay_Helper_Pricing::get_post_price( $post->ID ),
-            'preview_post_as_visitor' => $preview_mode,
+            'post_id'                   => $post->ID,
+            'link'                      => LaterPay_Helper_Post::get_laterpay_purchase_link( $post->ID ),
+            'currency'                  => get_option( 'laterpay_currency' ),
+            'price'                     => LaterPay_Helper_Pricing::get_post_price( $post->ID ),
+            'preview_post_as_visitor'   => $preview_mode,
+            'is_in_visible_test_mode'   => $is_in_visible_test_mode,
         );
 
         laterpay_get_logger()->info(

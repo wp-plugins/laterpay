@@ -9,6 +9,11 @@
                 revenueModelInput                       : '.lp_js_revenueModel_input',
                 priceInput                              : '.lp_js_priceInput',
 
+                // enabled revenue models
+                purchaseModeForm                        : $('#lp_js_changePurchaseModeForm'),
+                purchaseModeInput                       : $('.lp_js_onlyTimePassPurchaseModeInput'),
+                timePassOnlyHideElements                : $('.lp_js_hideInTimePassOnlyMode'),
+
                 // global default price
                 globalDefaultPriceForm                  : $('#lp_js_globalDefaultPrice_form'),
                 globalDefaultPriceInput                 : $('#lp_js_globalDefaultPrice'),
@@ -18,7 +23,7 @@
                 cancelEditingGlobalDefaultPrice         : $('#lp_js_cancelEditingGlobalDefaultPrice'),
                 saveGlobalDefaultPrice                  : $('#lp_js_saveGlobalDefaultPrice'),
                 globalDefaultPriceShowElements          : $('#lp_js_globalDefaultPrice_text,' +
-                                                            ' #lp_js_editGlobalDefaultPrice,' +
+                                                            '#lp_js_editGlobalDefaultPrice,' +
                                                             '#lp_js_globalDefaultPrice_revenueModelLabel'),
                 globalDefaultPriceEditElements          : $('#lp_js_globalDefaultPrice,' +
                                                             '#lp_js_globalDefaultPrice_revenueModel,' +
@@ -144,6 +149,13 @@
                         validatePrice($(this).parents('form'));
                     }, 800)
                 );
+
+                // enabled revenue models events -----------------------------------------------------------------------
+                // change
+                $o.purchaseModeInput
+                .on('change', function() {
+                    changePurchaseMode($o.purchaseModeForm);
+                });
 
                 // global default price events -------------------------------------------------------------------------
                 // edit
@@ -551,7 +563,12 @@
                 $($o.categoryDefaultPriceShowElements, $form).hide();
                 $o.addCategory.fadeOut(250);
                 $($o.categoryDefaultPriceEditElements, $form).show();
-                renderCategorySelect($form, $o.selectCategory, 'laterpay_get_categories_with_price', formatSelect2Selection);
+                renderCategorySelect(
+                    $form,
+                    $o.selectCategory,
+                    'laterpay_get_categories_with_price',
+                    formatSelect2Selection
+                );
             },
 
             saveCategoryDefaultPrice = function($form) {
@@ -839,7 +856,7 @@
                 } else if ($input.hasClass($o.timePassPriceClass)) {
                     // update pass price in pass preview
                     $('.lp_purchaseLink', $timePass).html(text + '<small>' + lpVars.defaultCurrency + '</small>');
-                    $($o.timePassPreviewPrice).text(text + ' ' + lpVars.defaultCurrency);
+                    $($o.timePassPreviewPrice, $timePass).text(text + ' ' + lpVars.defaultCurrency);
                 } else if ($input.hasClass($o.timePassTitleClass)) {
                     // update pass title in pass preview
                     $($o.timePassPreviewTitle, $timePass).text(text);
@@ -1259,6 +1276,27 @@
                             $item.fadeIn(250);
                         }
                         setMessage(r.message, r.success);
+                    },
+                    'json'
+                );
+            },
+
+            changePurchaseMode = function($form) {
+                var onlyTimePassModeChecked = $o.purchaseModeInput.is(':checked');
+                $.post(
+                    ajaxurl,
+                    $form.serialize(),
+                    function(data) {
+                        if (data.success) {
+                            if (onlyTimePassModeChecked) {
+                                $o.timePassOnlyHideElements.slideUp();
+                            } else {
+                                $o.timePassOnlyHideElements.slideDown();
+                            }
+                        } else {
+                            setMessage(data.message, data.success);
+                            $o.purchaseModeInput.attr('checked', false);
+                        }
                     },
                     'json'
                 );
