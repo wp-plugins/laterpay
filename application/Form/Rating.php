@@ -1,9 +1,13 @@
 <?php
 
 /**
- * LaterPay time passes position form class
+ * LaterPay rating feature form class.
+ *
+ * Plugin Name: LaterPay
+ * Plugin URI: https://github.com/laterpay/laterpay-wordpress-plugin
+ * Author URI: https://laterpay.net/
  */
-class LaterPay_Form_TimePassesPosition extends LaterPay_Form_Abstract
+class LaterPay_Form_Rating extends LaterPay_Form_Abstract
 {
 
     /**
@@ -19,7 +23,7 @@ class LaterPay_Form_TimePassesPosition extends LaterPay_Form_Abstract
                     'is_string',
                     'cmp' => array(
                         array(
-                            'eq' => 'time_passes_position',
+                            'eq' => 'ratings',
                         ),
                     ),
                 )
@@ -55,17 +59,18 @@ class LaterPay_Form_TimePassesPosition extends LaterPay_Form_Abstract
         );
 
         $this->set_field(
-            'time_passes_positioned_manually',
+            'enable_ratings',
             array(
                 'validators' => array(
-                    'is_int',
-                    'in_array' => array( 1 ),
+                    'is_string',
+                    'in_array' => array( 'on' ),
                 ),
                 'filters' => array(
-                    'to_int',
+                    'to_string',
                 ),
                 'can_be_null' => true,
             )
         );
     }
 }
+

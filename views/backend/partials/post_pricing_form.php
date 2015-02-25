@@ -52,7 +52,7 @@
 
 <div id="lp_js_priceType" class="lp_priceType<?php if ( in_array( $laterpay['post_price_type'], array( LaterPay_Helper_Pricing::TYPE_INDIVIDUAL_DYNAMIC_PRICE, LaterPay_Helper_Pricing::TYPE_CATEGORY_DEFAULT_PRICE ) ) ) { echo ' lp_is-expanded'; } ?>">
      <ul id="lp_js_priceType_buttonGroup" class="lp_buttonGroup lp_u_clearfix">
-        <li class="<?php if ( in_array( $laterpay['post_price_type'], array( LaterPay_Helper_Pricing::TYPE_INDIVIDUAL_PRICE, LaterPay_Helper_Pricing::TYPE_INDIVIDUAL_DYNAMIC_PRICE ))  ) { echo 'lp_is-selected'; } ?>">
+        <li class="<?php if ( in_array( $laterpay['post_price_type'], array( LaterPay_Helper_Pricing::TYPE_INDIVIDUAL_PRICE, LaterPay_Helper_Pricing::TYPE_INDIVIDUAL_DYNAMIC_PRICE ) ) ) { echo 'lp_is-selected'; } ?>">
             <a href="#"
                 id="lp_js_useIndividualPrice"
                 class="lp_js_priceType_button lp_use-individual-price"><?php _e( 'Individual Price', 'laterpay' ); ?></a>
@@ -77,18 +77,18 @@
             <input type="hidden" name="change_start_price_after_days">
             <input type="hidden" name="transitional_period_end_after_days">
             <input type="hidden" name="reach_end_price_after_days">
-            <div id="lp_js_dynamicPricing_widgetContainer" class="lp_dynamicPricing"></div>
+            <div id="lp_js_dynamicPricing_widgetContainer" class="lp_dynamic-pricing"></div>
         </div>
         <div id="lp_js_priceTypeDetails_categoryDefaultPrice" class="lp_js_useCategoryDefaultPrice lp_useCategoryDefaultPrice lp_js_priceTypeDetails_section"<?php if ( $laterpay['post_price_type'] !== LaterPay_Helper_Pricing::TYPE_CATEGORY_DEFAULT_PRICE ) { echo ' style="display:none;"'; } ?>>
              <input type="hidden" name="post_default_category" id="lp_js_postDefaultCategoryInput" value="<?php echo $laterpay['post_default_category']; ?>">
              <ul>
                 <?php if ( is_array( $laterpay['category_prices'] ) ): ?>
-                    <?php foreach ( $laterpay['category_prices'] as $c ): ?>
-                        <li data-category="<?php echo $c->category_id; ?>"<?php if ( $c->category_id == $laterpay['post_default_category'] ): ?> class="lp_is-selectedCategory"<?php endif; ?>>
+                    <?php foreach ( $laterpay['category_prices'] as $category ): ?>
+                        <li data-category="<?php echo $category['category_id']; ?>"<?php if ( $category['category_id'] == $laterpay['post_default_category'] ): ?> class="lp_is-selectedCategory"<?php endif; ?>>
                             <a href="#"
-                                data-price="<?php echo LaterPay_Helper_View::format_number( $c->category_price ); ?>"
-                                data-revenue-model="<?php echo $c->revenue_model; ?>">
-                                <span><?php echo LaterPay_Helper_View::format_number( $c->category_price ); ?> <?php echo $laterpay['currency']; ?></span><?php echo $c->category_name; ?>
+                                data-price="<?php echo LaterPay_Helper_View::format_number( $category['category_price'] ); ?>"
+                                data-revenue-model="<?php echo $category['revenue_model']; ?>">
+                                <span><?php echo LaterPay_Helper_View::format_number( $category['category_price'] ); ?> <?php echo $laterpay['currency']; ?></span><?php echo $category['category_name']; ?>
                             </a>
                         </li>
                     <?php endforeach; ?>

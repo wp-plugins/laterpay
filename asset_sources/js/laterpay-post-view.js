@@ -386,9 +386,10 @@ YUI().use('node', 'node-event-simulate', function(Y) {
                 $.get(
                     lpVars.ajaxUrl,
                     {
-                        action  : 'laterpay_post_load_purchased_content',
-                        post_id : lpVars.post_id,
-                        nonce   : lpVars.nonces.content
+                        action   : 'laterpay_post_load_purchased_content',
+                        post_id  : lpVars.post_id,
+                        is_front : true,
+                        nonce    : lpVars.nonces.content
                     },
                     function(postContent) {
                         if (postContent) {
@@ -413,7 +414,7 @@ YUI().use('node', 'node-event-simulate', function(Y) {
             },
 
             handlePurchaseInTestMode = function(trigger) {
-                if ($(trigger).data('preview-as-visitor')) {
+                if ($(trigger).data('preview-as-visitor') && !$(trigger).data('is-in-visible-test-mode')) {
                     // show alert instead of loading LaterPay purchase dialogs
                     alert(lpVars.i18n.alert);
                 }
@@ -473,7 +474,6 @@ laterPayPostView();
 
 // render LaterPay purchase dialogs using the LaterPay YUI dialog manager library
 YUI().use('node', 'laterpay-dialog', 'laterpay-iframe', 'laterpay-easyxdm', function(Y) {
-
     var ppuContext      = {
                             showCloseBtn        : true,
                             canSkipAddToInvoice : false,
@@ -485,7 +485,10 @@ YUI().use('node', 'laterpay-dialog', 'laterpay-iframe', 'laterpay-easyxdm', func
         'click',
         function(event) {
             event.preventDefault();
-            if (event.currentTarget.getData('preview-as-visitor')) {
+            if (
+                event.currentTarget.getData('preview-as-visitor') &&
+                !event.currentTarget.getData('is-in-visible-test-mode')
+            ) {
                 alert(lpVars.i18n.alert);
             } else {
                 var url = event.currentTarget.getAttribute('href');
@@ -498,4 +501,3 @@ YUI().use('node', 'laterpay-dialog', 'laterpay-iframe', 'laterpay-easyxdm', func
         '.lp_js_doPurchase'
     );
 });
-

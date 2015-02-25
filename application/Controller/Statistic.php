@@ -1,6 +1,13 @@
 <?php
 
-class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
+/**
+ * LaterPay statistics controller.
+ *
+ * Plugin Name: LaterPay
+ * Plugin URI: https://github.com/laterpay/laterpay-wordpress-plugin
+ * Author URI: https://laterpay.net/
+ */
+class LaterPay_Controller_Statistic extends LaterPay_Controller_Abstract
 {
 
     /**
@@ -27,6 +34,7 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
                 return false;
             }
         }
+
         // check, if the current post_type is an allowed post_type
         $allowed_post_types = $this->config->get( 'content.enabled_post_types' );
         if ( ! in_array( $post->post_type, $allowed_post_types ) ) {
@@ -41,7 +49,7 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
         }
 
         // check, if the current post is purchasable
-        if ( ! LaterPay_Helper_Pricing::is_purchasable( $post ) ){
+        if ( ! LaterPay_Helper_Pricing::is_purchasable( $post ) ) {
             $this->logger->warning(
                 __METHOD__. ' - post is not purchasable',
                 array(
@@ -81,7 +89,7 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
             )
         );
 
-        LaterPay_Helper_Statistics::track( $post_id );
+        LaterPay_Helper_Statistic::track( $post_id );
     }
 
     /**
@@ -92,14 +100,14 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
      * @return void
      */
     public function ajax_track_views() {
-        $statistic_form = new LaterPay_Form_Statistics();
+        $statistic_form = new LaterPay_Form_Statistic();
 
         if ( $statistic_form->is_valid( $_POST ) ) {
             $post_id    = $statistic_form->get_field_value( 'post_id' );
             $post       = get_post( $post_id );
 
             if ( $this->check_requirements( $post ) ) {
-                LaterPay_Helper_Statistics::track( $post_id );
+                LaterPay_Helper_Statistic::track( $post_id );
             }
         }
 
@@ -143,7 +151,7 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
      * @return void
      */
     public function ajax_toggle_preview() {
-        $statistics_preview_form = new LaterPay_Form_StatisticsPreview( $_POST );
+        $statistics_preview_form = new LaterPay_Form_StatisticPreview( $_POST );
         $preview_post = $statistics_preview_form->get_field_value( 'preview_post' );
 
         $error = array(
@@ -153,25 +161,25 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
 
         // check the admin referer
         if ( ! check_admin_referer( 'laterpay_form' ) ) {
-            $error[ 'code' ] = 1;
+            $error['code'] = 1;
             wp_send_json( $error );
         }
 
         if ( $preview_post === null ) {
-            $error[ 'code' ] = 2;
+            $error['code'] = 2;
             wp_send_json( $error );
         }
 
-        // check if we have a valid user
+        // check, if we have a valid user
         $current_user = wp_get_current_user();
         if ( ! is_a( $current_user, 'WP_User' ) ) {
-            $error[ 'code' ] = 3;
+            $error['code'] = 3;
             wp_send_json( $error );
         }
 
         // check for required capabilities to perform action
         if ( ! LaterPay_Helper_User::can( 'laterpay_read_post_statistics', null, false ) ) {
-            $error[ 'code' ] = 4;
+            $error['code'] = 4;
             wp_send_json( $error );
         }
 
@@ -182,7 +190,7 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
         );
 
         if ( ! $result ) {
-            $error[ 'code' ] = 5;
+            $error['code'] = 5;
             wp_send_json( $error );
         }
 
@@ -202,7 +210,7 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
      * @return void
      */
     public function ajax_toggle_visibility() {
-        $statistics_visibility_form = new LaterPay_Form_StatisticsVisibility();
+        $statistics_visibility_form = new LaterPay_Form_StatisticVisibility();
 
         $current_user = wp_get_current_user();
         $error = array(
@@ -245,7 +253,7 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
      * @return void
      */
     public function ajax_render_tab() {
-        $statistic_form = new LaterPay_Form_Statistics( $_GET );
+        $statistic_form = new LaterPay_Form_Statistic( $_GET );
 
         $condition = array(
             'verify_nonce' => array(
@@ -281,6 +289,44 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
     }
 
     /**
+     * Ajax callback to render the statistics pane.
+     *
+     * @wp-hook wp_ajax_laterpay_post_statistic_render
+     *
+     * @return void
+     */
+    public function ajax_render_tab_without_statistics() {
+        $statistic_form = new LaterPay_Form_Statistic( $_GET );
+
+        $condition = array(
+            'verify_nonce' => array(
+                'action' => $statistic_form->get_field_value( 'action' ),
+            )
+        );
+        $statistic_form->add_validation( 'nonce', $condition );
+
+        if ( $statistic_form->is_valid() ) {
+            $post_id = $statistic_form->get_field_value( 'post_id' );
+            $post = get_post( $post_id );
+
+            if ( ! LaterPay_Helper_User::can( 'laterpay_read_post_statistics', $post_id ) ) {
+                exit;
+            }
+
+            // assign variables
+            $view_args = array(
+                'preview_post_as_visitor'   => LaterPay_Helper_User::preview_post_as_visitor( $post ),
+                'hide_statistics_pane'      => LaterPay_Helper_User::statistics_pane_is_hidden(),
+            );
+            $this->assign( 'laterpay', $view_args );
+
+            wp_send_json( $this->get_text_view( 'frontend/partials/post/select_preview_mode_tab' ) );
+        }
+
+        exit;
+    }
+
+    /**
      * Generate performance data statistics for post.
      *
      * @param WP_Post $post
@@ -292,8 +338,8 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
         $currency = get_option( 'laterpay_currency' );
 
         // get historical performance data for post
-        $payments_history_model = new LaterPay_Model_Payments_History();
-        $post_views_model       = new LaterPay_Model_Post_Views();
+        $payments_history_model = new LaterPay_Model_Payment_History();
+        $post_views_model       = new LaterPay_Model_Post_View();
         $currency_model         = new LaterPay_Model_Currency();
 
         // get total revenue and total sales
@@ -370,5 +416,4 @@ class LaterPay_Controller_Statistics extends LaterPay_Controller_Abstract
 
         return $statistic_args;
     }
-
 }

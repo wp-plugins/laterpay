@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * LaterPay file helper.
+ *
+ * Plugin Name: LaterPay
+ * Plugin URI: https://github.com/laterpay/laterpay-wordpress-plugin
+ * Author URI: https://laterpay.net/
+ */
 class LaterPay_Helper_File
 {
 
@@ -391,4 +398,29 @@ class LaterPay_Helper_File
         return $content;
     }
 
+    /**
+     * Remove directory and all included files.
+     *
+     * @param $path
+     */
+    public static function delete_directory( $path ) {
+        if ( ! @is_dir( $path ) ) {
+            return;
+        }
+
+        if ( substr( $path, strlen( $path ) - 1, 1 ) != '/' ) {
+            $path .= '/';
+        }
+        $files = glob( $path . '*', GLOB_MARK );
+        foreach ( $files as $file ) {
+            if ( @is_dir( $file ) ) {
+                self::delete_directory( $file );
+            } else {
+                unlink( $file );
+            }
+        }
+        @rmdir( $path );
+
+        return;
+    }
 }

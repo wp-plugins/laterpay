@@ -1,6 +1,13 @@
 <?php
 
-class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
+/**
+ * LaterPay post views model.
+ *
+ * Plugin Name: LaterPay
+ * Plugin URI: https://github.com/laterpay/laterpay-wordpress-plugin
+ * Author URI: https://laterpay.net/
+ */
+class LaterPay_Model_Post_View extends LaterPay_Helper_Query
 {
 
     /**
@@ -78,7 +85,8 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
      * @return array views
      */
     public function get_post_view_data( $post_id ) {
-        $where = array( 'post_id' => (int) $post_id );
+        $mode  = LaterPay_Helper_View::get_plugin_mode();
+        $where = array( 'post_id' => (int) $post_id, 'mode' => $mode );
 
         return $this->get_results( $where );
     }
@@ -93,11 +101,12 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
     public function update_post_views( $data ) {
         global $wpdb;
 
-        $sql = "
+        $mode = LaterPay_Helper_View::get_plugin_mode();
+        $sql  = "
             INSERT INTO
-                {$this->table} (post_id, user_id, date, ip)
+                {$this->table} (post_id, mode, user_id, date, ip)
             VALUES
-                ('%d', '%s', '%s', '%s')
+                ('%d', '%s', '%s', '%s', '%s')
             ON DUPLICATE KEY UPDATE
                 count = count + 1
             ;
@@ -105,6 +114,7 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
         $sql = $wpdb->prepare(
             $sql,
             (int) $data['post_id'],
+            $mode,
             $data['user_id'],
             date( 'Y-m-d H:i:s', $data['date'] ),
             $data['ip']
@@ -128,11 +138,11 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
                 'DATE(date)     AS date',
                 'DAY(date)      AS day',
                 'MONTH(date)    AS month',
-                'DAYNAME(date)  AS day_name',
                 'HOUR(date)     AS hour',
             ),
         );
         $args = wp_parse_args( $args, $default_args );
+
         return $this->get_results( $args );
     }
 
@@ -144,12 +154,14 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
      * @return array $results
      */
     public function get_last_30_days_history( $post_id ) {
-        $today = strtotime( 'today GMT' );
+        $today     = strtotime( 'today GMT' );
         $month_ago = strtotime( '-1 month' );
+        $mode      = LaterPay_Helper_View::get_plugin_mode();
 
         $args = array(
             'where' => array(
                 'post_id'   => (int) $post_id,
+                'mode'      => $mode,
                 'date'      => array(
                     array(
                         'before'    => LaterPay_Helper_Date::get_date_query_before_end_of_day( $today ), // end of today
@@ -214,7 +226,7 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
         }
 
         // fetch the total count of post views
-        $total_quantity = $this->get_total_post_impression( array( 'where' => $args[ 'where' ] ) );
+        $total_quantity = $this->get_total_post_impression( array( 'where' => $args['where'] ) );
         $total_quantity = $total_quantity->quantity;
 
         laterpay_get_logger()->info( __METHOD__, array( 'total_quantity' => $total_quantity ) );
@@ -227,15 +239,15 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
             // % amount
             $data->amount       = $data->quantity / $total_quantity * 100;
 
-            $results[ $key ]    = $data;
+            $results[$key]      = $data;
         }
 
         return $results;
     }
 
     /**
-     * Get least viewed posts x days back. By default with maximum of 10 posts.
-     * Leave end- and start-timestamp empty to fetch the results without sparkline.
+     * Get least viewed posts x days back. By default a maximum of 10 posts.
+     * Leave end and start timestamp empty to fetch the results without sparkline.
      *
      * @param array     $args
      * @param int       $start_timestamp
@@ -264,7 +276,7 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
             return $results;
         }
 
-        $total_quantity = $this->get_total_post_impression( array( 'where' => $args[ 'where' ] ) );
+        $total_quantity = $this->get_total_post_impression( array( 'where' => $args['where'] ) );
         $total_quantity = $total_quantity->quantity;
 
         laterpay_get_logger()->info( __METHOD__, array( 'total_quantity' => $total_quantity ) );
@@ -277,7 +289,7 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
             // % amount
             $data->amount       = $data->quantity / $total_quantity * 100;
 
-            $results[ $key ]    = $data;
+            $results[$key]      = $data;
         }
 
         return $results;
@@ -292,10 +304,12 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
      */
     public function get_todays_history( $post_id ) {
         $today  = strtotime( 'today GMT' );
+        $mode   = LaterPay_Helper_View::get_plugin_mode();
         $args   = array(
             'fields'=> array( 'SUM(count) AS quantity' ),
             'where' => array(
                 'post_id'   => (int) $post_id,
+                'mode'      => $mode,
                 'date'      => array(
                     array(
                         'before'    => LaterPay_Helper_Date::get_date_query_before_end_of_day( $today ), // end of today
@@ -305,6 +319,7 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
             ),
             'join'  => $this->post_join,
         );
+
         return $this->get_results( $args );
     }
 
@@ -318,8 +333,8 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
      * @return array $sparkline
      */
     public function get_sparkline( $post_id, $start_timestamp, $interval = 'week' ) {
-
         $end_timestamp = LaterPay_Helper_Dashboard::get_end_timestamp( $start_timestamp, $interval );
+        $mode          = LaterPay_Helper_View::get_plugin_mode();
 
         $args = array(
             'fields' => array(
@@ -337,17 +352,18 @@ class LaterPay_Model_Post_Views extends LaterPay_Helper_Query
                     )
                 ),
                 'post_id' => (int) $post_id,
+                'mode'    => $mode,
             ),
             'group_by' => 'DAY(date)',
             'order_by' => 'DATE(date)',
         );
 
         if ( $interval === 'day' ) {
-            $args[ 'group_by' ] = 'HOUR(date)';
-            $args[ 'order_by' ] = 'HOUR(date)';
-        } else if ( $interval === 'month' ){
-            $args[ 'group_by' ] = 'WEEK(date)';
-            $args[ 'order_by' ] = 'WEEK(date)';
+            $args['group_by'] = 'HOUR(date)';
+            $args['order_by'] = 'HOUR(date)';
+        } else if ( $interval === 'month' ) {
+            $args['group_by'] = 'WEEK(date)';
+            $args['order_by'] = 'WEEK(date)';
         }
 
         $results = $this->get_results( $args );

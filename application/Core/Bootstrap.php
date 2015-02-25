@@ -1,8 +1,11 @@
 <?php
 
 /**
- *  LaterPay bootstrap class
+ * LaterPay bootstrap class.
  *
+ * Plugin Name: LaterPay
+ * Plugin URI: https://github.com/laterpay/laterpay-wordpress-plugin
+ * Author URI: https://laterpay.net/
  */
 class LaterPay_Core_Bootstrap
 {
@@ -41,7 +44,7 @@ class LaterPay_Core_Bootstrap
         // backend actions part 1
         if ( is_admin() ) {
             // perform requirements check on plugins.php page only
-            if ( ! empty ( $GLOBALS[ 'pagenow' ] ) && $GLOBALS[ 'pagenow' ] === 'plugins.php' ) {
+            if ( ! empty ( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] === 'plugins.php' ) {
                 $install_controller->check_requirements();
                 add_action( 'admin_notices',                        array( $install_controller, 'render_requirements_notices' ) );
                 add_action( 'admin_notices',                        array( $install_controller, 'check_for_updates' ) );
@@ -50,6 +53,14 @@ class LaterPay_Core_Bootstrap
                 add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_currency_to_euro' ) );
                 add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_time_passes_table' ) );
                 add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_payment_history_add_revenue_model' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_add_only_time_pass_purchase_option' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_api_urls_options_names' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_add_only_time_pass_purchase_option' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_add_is_in_visible_test_mode_option' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_clean_api_key_options' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_unlimited_access' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_update_post_views' ) );
+                add_action( 'admin_notices',                        array( $install_controller, 'maybe_clear_dashboard_cache' ) );
             }
 
             if ( ! function_exists( 'is_plugin_active' ) ) {
@@ -68,9 +79,9 @@ class LaterPay_Core_Bootstrap
                 add_action( 'load-post-new.php',                    array( $admin_controller, 'help_wp_add_post' ) );
                 add_action( 'admin_enqueue_scripts',                array( $admin_controller, 'add_plugin_admin_assets' ) );
                 add_action( 'admin_enqueue_scripts',                array( $admin_controller, 'add_admin_pointers_script' ) );
-                add_action( 'delete_term_taxonomy',                 array( $admin_controller, 'actualize_post_prices_after_category_delete' ) );
+                add_action( 'delete_term_taxonomy',                 array( $admin_controller, 'update_post_prices_after_category_delete' ) );
 
-                $settings_controller = new LaterPay_Controller_Settings( $this->config );
+                $settings_controller = new LaterPay_Controller_Setting( $this->config );
                 add_action( 'admin_menu',                           array( $settings_controller, 'add_laterpay_advanced_settings_page' ) );
                 add_action( 'admin_init',                           array( $settings_controller, 'init_laterpay_advanced_settings' ) );
 
@@ -122,9 +133,16 @@ class LaterPay_Core_Bootstrap
             // add the metaboxes
             add_action( 'add_meta_boxes',                   array( $post_metabox_controller, 'add_meta_boxes' ) );
 
-            // save LaterPay post data
-            add_action( 'save_post',                        array( $post_metabox_controller, 'save_laterpay_post_data' ) );
-            add_action( 'edit_attachment',                  array( $post_metabox_controller, 'save_laterpay_post_data' ) );
+            // save LaterPay post data. If only time pass purchases are allowed than pricing information need not be saved.
+            if ( get_option( 'laterpay_only_time_pass_purchases_allowed' ) == true ) {
+                add_action( 'save_post',                    array( $post_metabox_controller, 'save_laterpay_post_data_without_pricing' ) );
+                add_action( 'edit_attachment',              array( $post_metabox_controller, 'save_laterpay_post_data_without_pricing' ) );
+
+            } else {
+                add_action( 'save_post',                    array( $post_metabox_controller, 'save_laterpay_post_data' ) );
+                add_action( 'edit_attachment',              array( $post_metabox_controller, 'save_laterpay_post_data' ) );
+            }
+
             add_action( 'transition_post_status',           array( $post_metabox_controller, 'update_post_publication_date' ), 10, 3 );
 
             // load scripts for the admin pages
@@ -136,11 +154,13 @@ class LaterPay_Core_Bootstrap
             add_action( 'wp_ajax_laterpay_get_dynamic_pricing_data',    array( $post_metabox_controller, 'get_dynamic_pricing_data' ) );
             add_action( 'wp_ajax_laterpay_remove_post_dynamic_pricing', array( $post_metabox_controller, 'remove_dynamic_pricing_data' ) );
 
-            // setup custom columns for each allowed post_type
-            $column_controller = new LaterPay_Controller_Admin_Post_Column( $this->config );
-            foreach ( $this->config->get( 'content.enabled_post_types' ) as $post_type ) {
-                add_filter( 'manage_' . $post_type . '_posts_columns',         array( $column_controller, 'add_columns_to_posts_table' ) );
-                add_action( 'manage_' . $post_type . '_posts_custom_column',   array( $column_controller, 'add_data_to_posts_table' ), 10, 2 );
+            // setup custom columns for each allowed post_type, if allowed purchases aren't restricted to time passes
+            if ( get_option( 'laterpay_only_time_pass_purchases_allowed' ) == false ) {
+                $column_controller = new LaterPay_Controller_Admin_Post_Column( $this->config );
+                foreach ( $this->config->get( 'content.enabled_post_types' ) as $post_type ) {
+                    add_filter( 'manage_' . $post_type . '_posts_columns',         array( $column_controller, 'add_columns_to_posts_table' ) );
+                    add_action( 'manage_' . $post_type . '_posts_custom_column',   array( $column_controller, 'add_data_to_posts_table' ), 10, 2 );
+                }
             }
         }
 
@@ -188,17 +208,30 @@ class LaterPay_Core_Bootstrap
          *      to fetch and manipulate content first and before other filters are triggered (wp_embed, wpautop, external plugins / themes, ...)
          */
         add_filter( 'the_content',                                      array( $post_controller, 'modify_post_content' ), 1 );
+        add_filter( 'get_the_excerpt',                                  array( $post_controller, 'modify_post_excerpt' ), 1 );
         add_filter( 'wp_footer',                                        array( $post_controller, 'modify_footer' ) );
 
-        $statistics_controller = new LaterPay_Controller_Statistics( $this->config );
-        add_action( 'wp_ajax_laterpay_post_statistic_render',           array( $statistics_controller, 'ajax_render_tab' ) );
+        $statistics_controller = new LaterPay_Controller_Statistic( $this->config );
+
+        /**
+         * Posts statistics are irrelevant, if only time pass purchases are allowed, but we still need to have the
+         * option to switch the preview mode for the given post, so we only render that switch in this case.
+         */
+        if ( get_option( 'laterpay_only_time_pass_purchases_allowed' ) == true ) {
+            add_action( 'wp_ajax_laterpay_post_statistic_render',       array( $statistics_controller, 'ajax_render_tab_without_statistics' ) );
+        } else {
+            add_action( 'wp_ajax_laterpay_post_statistic_render',       array( $statistics_controller, 'ajax_render_tab' ) );
+        }
+
         add_action( 'wp_ajax_laterpay_post_statistic_visibility',       array( $statistics_controller, 'ajax_toggle_visibility' ) );
         add_action( 'wp_ajax_laterpay_post_statistic_toggle_preview',   array( $statistics_controller, 'ajax_toggle_preview' ) );
         add_action( 'wp_ajax_laterpay_post_track_views',                array( $statistics_controller, 'ajax_track_views' ) );
         add_action( 'wp_ajax_nopriv_laterpay_post_track_views',         array( $statistics_controller, 'ajax_track_views' ) );
 
+        $is_front = isset( $_REQUEST['is_front'] ) ? $_REQUEST['is_front'] : false;
+
         // frontend actions
-        if ( ! is_admin() ) {
+        if ( ! is_admin() || $is_front ) {
             // add custom action to echo the LaterPay invoice indicator
             $invoice_controller = new LaterPay_Controller_Invoice( $this->config );
             add_action( 'laterpay_invoice_indicator',   array( $invoice_controller, 'the_invoice_indicator' ) );
