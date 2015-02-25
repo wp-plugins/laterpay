@@ -1,9 +1,9 @@
 <?php
 
 /**
- * LaterPay plugin mode form class
+ * LaterPay purchase button position form class
  */
-class LaterPay_Form_EnabledPostTypes extends LaterPay_Form_Abstract
+class LaterPay_Form_PurchaseButtonPosition extends LaterPay_Form_Abstract
 {
 
     /**
@@ -19,10 +19,10 @@ class LaterPay_Form_EnabledPostTypes extends LaterPay_Form_Abstract
                     'is_string',
                     'cmp' => array(
                         array(
-                            'eq' => 'enabled_post_types',
+                            'eq' => 'purchase_button_position',
                         ),
                     ),
-                ),
+                )
             )
         );
 
@@ -36,7 +36,7 @@ class LaterPay_Form_EnabledPostTypes extends LaterPay_Form_Abstract
                             'eq' => 'laterpay_appearance',
                         ),
                     ),
-                ),
+                )
             )
         );
 
@@ -50,16 +50,21 @@ class LaterPay_Form_EnabledPostTypes extends LaterPay_Form_Abstract
                             'ne' => null,
                         ),
                     ),
-                ),
+                )
             )
         );
 
         $this->set_field(
-            'enabled_post_types',
+            'purchase_button_positioned_manually',
             array(
                 'validators' => array(
-                    'is_array',
+                    'is_int',
+                    'in_array' => array( 1 ),
                 ),
+                'filters' => array(
+                    'to_int',
+                ),
+                'can_be_null' => true,
             )
         );
     }

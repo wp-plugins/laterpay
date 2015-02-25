@@ -273,7 +273,7 @@ abstract class LaterPay_Form_Abstract
         return empty($this->errors);
     }
     
-    public function getErrors() {
+    public function get_errors() {
         $aux = $this->errors;
         $this->errors = array();
         return $aux;
@@ -429,6 +429,10 @@ abstract class LaterPay_Form_Abstract
                 if ( $validator_params && ! is_array( $validator_params ) ) {
                     $is_valid = preg_match( $validator_params, $value );
                 }
+                break;
+
+            case 'match_url':
+                $is_valid = preg_match_all( '/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?/i', $value );
                 break;
 
             case 'depends':

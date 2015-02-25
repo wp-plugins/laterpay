@@ -68,6 +68,8 @@
                 timePassScopeClass                      : 'lp_js_switchTimePassScope',
                 timePassScopeCategory                   : '.lp_js_switchTimePassScopeCategory',
                 timePassScopeCategoryClass              : 'lp_js_switchTimePassScopeCategory',
+                timePassCategoryId                      : '.lp_js_timePassCategoryId',
+                timePassCategoryWrapper                 : '.lp_js_timePassCategoryWrapper',
                 timePassTitle                           : '.lp_js_timePassTitleInput',
                 timePassTitleClass                      : 'lp_js_timePassTitleInput',
                 timePassPrice                           : '.lp_js_timePassPriceInput',
@@ -80,6 +82,10 @@
                 timePassPreviewValidity                 : '.lp_js_timePassPreviewValidity',
                 timePassPreviewAccess                   : '.lp_js_timePassPreviewAccess',
                 timePassPreviewPrice                    : '.lp_js_timePassPreviewPrice',
+                timePassId                              : '.lp_js_timePassId',
+                landingPageInput                        : '.lp_js_landingPageInput',
+                landingPageSave                         : '#lp_js_landingPageSave',
+                landingPageForm                         : $('#lp_js_landingPageForm'),
 
                 // vouchers
                 voucherPriceInput                       : '.lp_js_voucherPriceInput',
@@ -236,6 +242,7 @@
                     changeTimePassScope($(this));
                     updateTimePassPreview($(this).parents($o.timePassWrapper), $(this));
                 });
+
                 $o.timePassEditor
                 .on('change', $o.timePassScopeCategory, function() {
                     updateTimePassPreview($(this).parents($o.timePassWrapper), $(this));
@@ -303,6 +310,12 @@
                 $o.timePassEditor
                 .on('click', $o.voucherDeleteLink, function(e) {
                     deleteVoucher($(this).parent());
+                    e.preventDefault();
+                });
+
+                $o.landingPageForm
+                .on('click', $o.landingPageSave, function(e) {
+                    saveLandingPage($o.landingPageForm);
                     e.preventDefault();
                 });
 
@@ -538,7 +551,7 @@
                 $($o.categoryDefaultPriceShowElements, $form).hide();
                 $o.addCategory.fadeOut(250);
                 $($o.categoryDefaultPriceEditElements, $form).show();
-                renderCategorySelect($form);
+                renderCategorySelect($form, $o.selectCategory, 'laterpay_get_categories_with_price', formatSelect2Selection);
             },
 
             saveCategoryDefaultPrice = function($form) {
@@ -627,31 +640,44 @@
                 return data.text;
             },
 
-            renderCategorySelect = function($form) {
-                $($o.selectCategory, $form).select2({
+            formatSelect2TimePass = function(data, container) {
+                var $form = $(container).parents('form');
+
+                if (data.id) {
+                    $($o.timePassCategoryId, $form).val(data.id);
+                }
+                $($o.timePassScopeCategory, $form).val(data.text);
+
+                return data.text;
+            },
+
+            renderCategorySelect = function($form, selector, form, format_func) {
+                $(selector, $form).select2({
                     allowClear      : true,
                     ajax            : {
                                         url         : ajaxurl,
                                         data        : function(term) {
                                                         return {
+                                                            form    : form,
                                                             term    : term,
                                                             action  : 'laterpay_pricing'
                                                         };
                                                     },
                                         results     : function(data) {
-                                                            var return_data = [];
+                                                        var return_data = [];
 
-                                                            $.each(data, function(index) {
-                                                                var term = data[ index ];
-                                                                return_data.push({
-                                                                    id     : term.term_id,
-                                                                    text   : term.name
-                                                                });
+                                                        $.each(data, function(index) {
+                                                            var term = data[ index ];
+                                                            return_data.push({
+                                                                id     : term.term_id,
+                                                                text   : term.name
                                                             });
+                                                        });
 
-                                                            return {results: return_data};
-                                                        },
-                                                        dataType    : 'json'
+                                                        return {results: return_data};
+                                                    },
+                                        dataType    : 'json',
+                                        type: 'POST'
                                     },
                     initSelection   : function(element, callback) {
                                         var id = $(element).val();
@@ -659,23 +685,24 @@
                                             var data = {text: id};
                                             callback(data);
                                         } else {
-                                            $.get(
+                                            $.post(
                                                 ajaxurl,
                                                 {
+                                                    form    : form,
                                                     term    : '',
                                                     action  : 'laterpay_pricing'
                                                 },
                                                 function(data) {
                                                     if (data && data[0] !== undefined) {
                                                         var term = data[0];
-                                                        callback({text: term.name});
+                                                        callback({id: term.term_id, text: term.name});
                                                     }
                                                 }
                                             );
                                         }
                                     },
                     formatResult    : function(data) {return data.text;},
-                    formatSelection : formatSelect2Selection,
+                    formatSelection : format_func,
                     escapeMarkup    : function(m) {return m;}
                 });
             },
@@ -747,9 +774,9 @@
                 // apply passData to inputs
                 $('input, select, textarea', $timePass)
                 .each(function(i, v) {
-                    name = $(v).attr('name');
+                    name = $(v, $timePass).attr('name');
                     if (name !== '' && passData[name] !== undefined && name !== 'revenue_model') {
-                        $(v).val(passData[name]);
+                        $(v, $timePass).val(passData[name]);
                     }
                 });
 
@@ -763,11 +790,20 @@
                     $toggle.prop('checked', true);
                 }
 
+                $($o.timePassCategoryWrapper, $timePass).hide();
+                // render category select
+                renderCategorySelect(
+                    $timePass,
+                    $o.timePassScopeCategory,
+                    'laterpay_get_categories',
+                    formatSelect2TimePass
+                );
+
                 // show category select, if required
                 var $currentScope = $($o.timePassScope, $timePass).find('option:selected');
                 if ($currentScope.val() !== '0') {
                     // show category select, because scope is restricted to or excludes a specific category
-                    $($o.timePassScopeCategory, $timePass).show();
+                    $($o.timePassCategoryWrapper, $timePass).show();
                 }
 
                 // re-generate vouchers list
@@ -796,7 +832,7 @@
                     text = currentScope.text();
                     if (currentScope.val() !== '0') {
                         // append selected category, because scope is restricted to or excludes a specific category
-                        text += ' ' + $($o.timePassScopeCategory, $timePass).find('option:selected').text();
+                        text += ' ' + $($o.timePassScopeCategory, $timePass).val();
                     }
                     // update pass access in pass preview
                     $($o.timePassPreviewAccess, $timePass).text(text);
@@ -882,6 +918,12 @@
                                 lpVars.time_passes_list[passId] = r.data;
                                 var $newTimePass = $o.timePassTemplate.clone().removeAttr('id').data('pass-id', passId);
 
+                                // show assigned pass id
+                                $($o.timePassId, $newTimePass)
+                                .text(passId)
+                                    .parent()
+                                    .show(250);
+
                                 $('.lp_js_timePassPreview', $newTimePass).html(r.html);
                                 $($o.timePassForm, $timePass).remove();
 
@@ -952,10 +994,10 @@
                 var o = $('option:selected', $trigger).val();
                 if (o === '0') {
                     // option 'all content'
-                    $($o.timePassScopeCategory).hide();
+                    $($o.timePassCategoryWrapper).hide();
                 } else {
                     // option restricts access to or excludes access from specific category
-                    $($o.timePassScopeCategory).show();
+                    $($o.timePassCategoryWrapper).show();
                 }
             },
 
@@ -1023,6 +1065,16 @@
                 .slideUp(250, function() {
                     $(this).remove();
                 });
+            },
+
+            saveLandingPage = function($form) {
+                $.post(
+                    ajaxurl,
+                    $form.serializeArray(),
+                    function(data) {
+                        setMessage(data);
+                    }
+                );
             },
 
             applyBulkOperation = function(data) {

@@ -14,7 +14,7 @@
         <ul>
             <li>
                 <big><?php if ( isset( $laterpay['statistic']['total'][$currency] ) ) { $aux = $laterpay['statistic']['total'][$currency]['sum']; } else { $aux = 0; }; echo LaterPay_Helper_View::format_number( (float) $aux ); ?><small><?php echo $laterpay['currency']; ?></small></big>
-                <small><?php _e( 'Total Revenue', 'laterpay' ); ?></small>
+                <small><?php _e( 'Total Committed Revenue', 'laterpay' ); ?></small>
             </li>
             <li>
                 <big><?php if ( isset( $laterpay['statistic']['total'][$currency] ) ) { $aux = $laterpay['statistic']['total'][$currency]['quantity']; } else { $aux = 0; }; echo LaterPay_Helper_View::format_number( (float) $aux, false ); ?></big>
@@ -35,7 +35,7 @@
             </li>
             <li>
                 <big><?php if ( isset( $laterpay['statistic']['todayRevenue'][$currency] ) ) { $aux = $laterpay['statistic']['todayRevenue'][$currency]['sum']; } else { $aux = 0; }; echo LaterPay_Helper_View::format_number( (float) $aux ); ?><small><?php echo $laterpay['currency']; ?></small></big>
-                <small><?php _e( 'Revenue', 'laterpay' ); ?></small>
+                <small><?php _e( 'Committed Revenue', 'laterpay' ); ?></small>
             </li>
         </ul>
     </div>
@@ -47,7 +47,7 @@
             </li>
             <li>
                 <big><?php echo $laterpay['statistic']['todayBuyers']; ?><small>%</small></big>
-                <small><?php _e( 'Buyers', 'laterpay' ); ?></small>
+                <small><?php _e( 'Conversion', 'laterpay' ); ?></small>
             </li>
         </ul>
     </div>
@@ -58,7 +58,7 @@
             </li>
             <li>
                 <big><?php echo LaterPay_Helper_View::format_number( $laterpay['statistic']['todayVisitors'], false ); ?></big>
-                <small><?php _e( 'Visitors', 'laterpay' ); ?></small>
+                <small><?php _e( 'Views', 'laterpay' ); ?></small>
             </li>
         </ul>
     </div>
