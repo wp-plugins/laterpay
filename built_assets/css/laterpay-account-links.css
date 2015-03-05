@@ -1,3 +1,2 @@
 @charset "UTF-8";
 .container{display:inline-block;}.actionlink{color:$clickable;padding:$fs-05 $fs-1;text-decoration:none;}.actionlink:hover,.actionlink:focus,.actionlink:active{color:$clickable-highlight;text-decoration:none}
-/*# sourceMappingURL=maps/laterpay-account-links.css.map */
