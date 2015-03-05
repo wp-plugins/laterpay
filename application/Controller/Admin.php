@@ -24,7 +24,7 @@ class LaterPay_Controller_Admin extends LaterPay_Controller_Abstract
         add_menu_page(
             __( 'LaterPay Plugin Settings', 'laterpay' ),
             'LaterPay',
-            'activate_plugins',
+            'moderate_comments', // allow Super Admin, Admin, and Editor to view the settings page
             $plugin_page,
             array( $this, 'run' ),
             'dashicons-laterpay-logo',
@@ -34,15 +34,26 @@ class LaterPay_Controller_Admin extends LaterPay_Controller_Abstract
         $page_number    = 0;
         $menu           = LaterPay_Helper_View::get_admin_menu();
         foreach ( $menu as $name => $page ) {
-            $slug = ! $page_number ? $plugin_page : $page['url'];
+            $slug   = ! $page_number ? $plugin_page : $page['url'];
             $page_id = add_submenu_page(
                 $plugin_page,
                 $page['title'] . ' | ' . __( 'LaterPay Plugin Settings', 'laterpay' ),
                 $page['title'],
-                'activate_plugins',
+                $page['cap'],
                 $slug,
                 array( $this, 'run_' . $name )
             );
+            if ( isset( $page['submenu'] ) ) {
+                $sub_page   = $page['submenu'];
+                add_submenu_page(
+                    $sub_page['name'],
+                    $sub_page['title'] . ' | ' . __( 'LaterPay Plugin Settings', 'laterpay' ),
+                    $sub_page['title'],
+                    $page['cap'],
+                    $sub_page['url'],
+                    array( $this, 'run_' . $sub_page['name'] )
+                );
+            }
             add_action( 'load-' . $page_id, array( $this, 'help_' . $name ) );
             $page_number++;
         }
@@ -131,8 +142,14 @@ class LaterPay_Controller_Admin extends LaterPay_Controller_Abstract
         }
 
         switch ( $tab ) {
-            default:
 
+            // render time_passes tab
+            case 'time_passes':
+                $time_passes_controller = new LaterPay_Controller_Admin_TimePass( $this->config );
+                $time_passes_controller->render_page();
+                break;
+
+            default:
             // render dashboard tab
             case 'dashboard':
                 $dashboard_controller = new LaterPay_Controller_Admin_Dashboard( $this->config );
