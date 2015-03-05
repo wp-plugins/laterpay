@@ -116,10 +116,10 @@ var DynamicPricingWidget = function(container) {
         .attr({
             class   : 'lp_dynamic-pricing__start-price-input-wrapper',
             // foreign objects do not render without a width and height, so we have to provide those
-            width   : '52px',
+            width   : '56px',
             height  : '30px',
         })
-        .html('<input type="text" class="lp_dynamic-pricing__start-price-input">');
+        .html('<input type="text" class="lp_dynamic-pricing__start-price-input" maxlength="6">');
     svg.append('text')
         .attr('class', 'lp_dynamic-pricing__start-price-value lp_dynamic-pricing__handle-text')
         .attr('text-anchor', 'end');
@@ -133,23 +133,23 @@ var DynamicPricingWidget = function(container) {
 
     // draw end price handle with text and input and everything
     svg.append('rect')
-            .attr({
-                class   : 'lp_dynamic-pricing__end-price-handle',
-                width   : 32,
-                rx      : 3,
-                height  : 29,
-                ry      : 3,
-            });
+        .attr({
+            class   : 'lp_dynamic-pricing__end-price-handle',
+            width   : 32,
+            rx      : 3,
+            height  : 29,
+            ry      : 3,
+        });
     svg.append('path')
         .attr('class', 'lp_dynamic-pricing__end-price-handle-triangle');
     svg.insert('foreignObject')
         .attr({
             class   : 'lp_dynamic-pricing__end-price-input-wrapper',
             // foreign objects do not render without a width and height, so we have to provide those
-            width   : '52px',
+            width   : '56px',
             height  : '30px',
         })
-        .html('<input type="text" class="lp_dynamic-pricing__end-price-input">');
+        .html('<input type="text" class="lp_dynamic-pricing__end-price-input" maxlength="6">');
     svg.append('text')
         .attr('class', 'lp_dynamic-pricing__end-price-value lp_dynamic-pricing__handle-text')
         .attr('text-anchor', 'end');
@@ -600,7 +600,7 @@ DynamicPricingWidget.prototype._plotEndPriceHandle = function() {
         .call(this.dragBehavior.y)
         .transition().duration(this.dragging ? 0 : 250)
         .attr({
-            x: function()  { return self.dimensions.width - 4; },
+            x: function()  { return self.dimensions.width - 8; },
             y: function(d) { return self.scale.y(d.y) - 15; }
         });
 
@@ -803,7 +803,7 @@ DynamicPricingWidget.prototype._plotPriceMarker = function() {
                 x2: function() { return self.scale.x(dynamicPricingWidget.pubDays); },
                 y2: function() { return self.scale.y(dynamicPricingWidget.maxPrice); }
             });
-        // TODO: commented our for now, because it needs a) to be properly added and b) to have drag behavior
+        // #657: add label properly added and attach drag behavior
         // this.svg.append('text')
         //     .attr('class', 'lp_dynamic-pricing__current-price-label')
         //     .attr('text-anchor', 'middle')
