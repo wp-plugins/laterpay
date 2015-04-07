@@ -22,10 +22,11 @@ class LaterPay_Helper_Post
      *
      * @param WP_Post $post
      * @param bool    $is_attachment
+     * @param null    $main_post_id
      *
      * @return boolean success
      */
-    public static function has_access_to_post( WP_Post $post, $is_attachment = false ) {
+    public static function has_access_to_post( WP_Post $post, $is_attachment = false, $main_post_id = null ) {
         $post_id = $post->ID;
 
         laterpay_get_logger()->info(
@@ -39,7 +40,7 @@ class LaterPay_Helper_Post
         }
 
         // check, if parent post has access with time passes
-        $parent_post        = $is_attachment ? get_the_ID() : $post_id;
+        $parent_post        = $is_attachment ? $main_post_id : $post_id;
         $time_passes_list   = LaterPay_Helper_TimePass::get_time_passes_list_by_post_id( $parent_post );
         $time_passes        = LaterPay_Helper_TimePass::get_tokenized_time_pass_ids( $time_passes_list );
         foreach ( $time_passes as $time_pass ) {
@@ -150,10 +151,11 @@ class LaterPay_Helper_Post
      * Get the LaterPay purchase link for a post.
      *
      * @param int $post_id
+     * @param int $current_post_id optional for attachments
      *
      * @return string url || empty string, if something went wrong
      */
-    public static function get_laterpay_purchase_link( $post_id ) {
+    public static function get_laterpay_purchase_link( $post_id, $current_post_id = null ) {
         $post = get_post( $post_id );
         if ( $post === null ) {
             return '';
@@ -188,7 +190,7 @@ class LaterPay_Helper_Post
         );
 
         if ( $post->post_type == 'attachment' ) {
-            $url_params['post_id']           = get_the_ID();
+            $url_params['post_id']           = $current_post_id;
             $url_params['download_attached'] = $post_id;
         }
 
@@ -256,11 +258,12 @@ class LaterPay_Helper_Post
      *
      * @wp-hook laterpay_purchase_button
      *
-     * @param WP_Post $post
+     * @param WP_Post  $post
+     * @param null|int $current_post_id optional for attachments
      *
-     * @return void
+     * @return array
      */
-    public static function the_purchase_button_args( WP_Post $post ) {
+    public static function the_purchase_button_args( WP_Post $post, $current_post_id = null ) {
         // don't render the purchase button, if the current post is not purchasable
         if ( ! LaterPay_Helper_Pricing::is_purchasable( $post->ID ) ) {
             return;
@@ -282,7 +285,7 @@ class LaterPay_Helper_Post
 
         $view_args = array(
             'post_id'                   => $post->ID,
-            'link'                      => LaterPay_Helper_Post::get_laterpay_purchase_link( $post->ID ),
+            'link'                      => LaterPay_Helper_Post::get_laterpay_purchase_link( $post->ID, $current_post_id ),
             'currency'                  => get_option( 'laterpay_currency' ),
             'price'                     => LaterPay_Helper_Pricing::get_post_price( $post->ID ),
             'preview_post_as_visitor'   => $preview_mode,

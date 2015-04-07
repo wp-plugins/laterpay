@@ -16,15 +16,6 @@ class LaterPay_Controller_Admin_Pricing extends LaterPay_Controller_Abstract
     public function load_assets() {
         parent::load_assets();
 
-        // load page-specific CSS
-        wp_register_style(
-            'laterpay-select2',
-            $this->config->get( 'css_url' ) . 'vendor/select2.min.css',
-            array(),
-            $this->config->get( 'version' )
-        );
-        wp_enqueue_style( 'laterpay-select2' );
-
         // load page-specific JS
         wp_register_script(
             'laterpay-select2',
@@ -826,14 +817,9 @@ class LaterPay_Controller_Admin_Pricing extends LaterPay_Controller_Abstract
         $defaults = LaterPay_Helper_TimePass::get_default_options();
         $args = array_merge( $defaults, $args );
 
-        if ( ! empty($args['pass_id']) ) {
-            $args['url'] = LaterPay_Helper_TimePass::get_laterpay_purchase_link( $args['pass_id'] );
-        }
-
         $this->assign( 'laterpay_pass', $args );
         $this->assign( 'laterpay',      array(
             'standard_currency'       => get_option( 'laterpay_currency' ),
-            'preview_post_as_visitor' => 1,
         ));
 
         $string = $this->get_text_view( 'backend/partials/time_pass' );
@@ -947,6 +933,18 @@ class LaterPay_Controller_Admin_Pricing extends LaterPay_Controller_Abstract
      * @return void
      */
     private function generate_voucher_code() {
+        if ( ! isset( $_POST['price'] ) ||
+             ! ( $_POST['price'] >= 0 && $_POST['price'] <= 149.99 ) ||
+             ( $_POST['price'] > 0 && $_POST['price'] < 0.05 )
+        ) {
+            wp_send_json(
+                array(
+                    'success' => false,
+                    'message' => __( 'Incorrect voucher price.', 'laterpay' ),
+                )
+            );
+        }
+
         // generate voucher code
         wp_send_json(
             array(
