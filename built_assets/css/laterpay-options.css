@@ -1,2 +1,45 @@
-@charset "UTF-8";
-h3{margin:56px 0 14px;}h3:first-of-type{margin-top:14px}.form-table{margin-top:0}.form-table th{font-weight:normal;padding-top:14px;padding-bottom:7px}.form-table td{padding-top:7px;padding-bottom:0}.regular-text.lp_numberInput{text-align:right;width:4em}.lp_appendedText{color:#ababab;padding-left:7px}p.submit{margin-top:56px}.lp_global-access:checked ~ .lp_category-access-input:not(.lp_global-access),.lp_global-access:checked ~ .lp_category-access-label:not(.lp_global-access){display:none}.lp_category-access-label{line-height:1.8;margin-right:1em}
+/* line 8, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+h3 {
+  margin: 56px 0 14px; }
+  /* line 11, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+  h3:first-of-type {
+    margin-top: 14px; }
+
+/* line 16, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.form-table {
+  margin-top: 0; }
+
+/* line 19, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.form-table th {
+  font-weight: normal;
+  padding-top: 14px;
+  padding-bottom: 7px; }
+
+/* line 24, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.form-table td {
+  padding-top: 7px;
+  padding-bottom: 0; }
+
+/* line 29, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.regular-text.lp_number-input {
+  text-align: right;
+  width: 56px; }
+
+/* line 34, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.lp_appended-text {
+  color: #ababab;
+  padding-left: 7px; }
+
+/* line 39, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+p.submit {
+  margin-top: 56px; }
+
+/* line 45, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.lp_global-access:checked ~ .lp_category-access-input:not(.lp_global-access), .lp_global-access:checked ~ .lp_category-access-label:not(.lp_global-access) {
+  display: none; }
+
+/* line 49, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.lp_category-access-label {
+  line-height: 1.8;
+  margin-right: 14px; }
+

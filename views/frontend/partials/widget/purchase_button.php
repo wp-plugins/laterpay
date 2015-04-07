@@ -2,7 +2,11 @@
 /**
  * this template is used for do_action( 'laterpay_purchase_button' );
  */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+if ( ! defined( 'ABSPATH' ) ) {
+    // prevent direct access to this file
+    exit;
+}
 
 /**
  * We can't use line-breaks in this template, otherwise wpautop() would add <br> before every attribute
@@ -16,7 +20,7 @@ endif;
 
 $args = array(
     'href'                          => '#',
-    'class'                         => 'lp_js_doPurchase lp_purchaseLink lp_button',
+    'class'                         => 'lp_js_doPurchase lp_purchase-button',
     'title'                         => __( 'Buy now with LaterPay', 'laterpay' ),
     'data-icon'                     => 'b',
     'data-laterpay'                 => $laterpay_widget['link'],
@@ -30,7 +34,7 @@ foreach ( $args as $key => $value ) {
 }
 
 $title = sprintf(
-    __( '%s<small>%s</small>', 'laterpay' ),
+    __( '%s<small class="lp_purchase-link__currency">%s</small>', 'laterpay' ),
     LaterPay_Helper_View::format_number( $laterpay_widget['price'] ),
     $laterpay_widget['currency']
 );

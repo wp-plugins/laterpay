@@ -13,6 +13,8 @@
                     'month'             : (86400 * 30),
                 },
 
+                xhrRequests             : [],
+
                 // heading with dashboard configuration selections
                 configurationSelection  : $('.lp_js_selectDashboardInterval, .lp_js_selectRevenueModel'),
                 intervalChoices         : $('.lp_js_selectDashboardInterval'),
@@ -22,9 +24,9 @@
                 nextInterval            : $('#lp_js_loadNextInterval'),
                 refreshDashboard        : $('#lp_js_refreshDashboard'),
                 // generic dropdown selectors
-                dropdown                : '.lp_dropdown',
-                dropdownList            : '.lp_dropdown_list',
-                dropdownCurrentItem     : '.lp_dropdown_currentItem',
+                dropdown                : '.lp_js_dropdown',
+                dropdownList            : '.lp_js_dropdownList',
+                dropdownCurrentItem     : '.lp_js_dropdownCurrentItem',
 
                 // diagrams
                 conversionDiagram       : $('#lp_js_conversionDiagram'),
@@ -41,8 +43,8 @@
                 avgConversionKPI        : $('#lp_js_avgConversion'),
                 newCustomersKPI         : $('#lp_js_shareOfNewCustomers'),
 
-                avgItemsSoldKPI         : $('#lp_js_avg-items-sold'),
-                totalItemsSoldKPI       : $('#lp_js_total-items-sold'),
+                avgItemsSoldKPI         : $('#lp_js_avgItemsSold'),
+                totalItemsSoldKPI       : $('#lp_js_totalItemsSold'),
 
                 avgRevenueKPI           : $('#lp_js_avgRevenue'),
                 totalRevenueKPI         : $('#lp_js_totalRevenue'),
@@ -58,17 +60,9 @@
                 // post-specific statistics
                 toggleItemDetails       : '.lp_js_toggleItemDetails',
 
-                // time passes customer lifecycle
-                viewSelector            : $('#lp_js_switchDashboardView'),
-                standardKpiTab          : $('#lp_js_standardKpiTab'),
-                timePassesKpiTab        : $('#lp_js_timePassesKpiTab'),
-                timepassDiagram         : $('.lp_js_timepassDiagram'),
-
                 // state classes
                 expanded                : 'lp_is-expanded',
                 selected                : 'lp_is-selected',
-                active                  : 'lp_is-active',
-                delayed                 : 'lp_is-delayed',
                 disabled                : 'lp_is-disabled',
             },
 
@@ -129,87 +123,85 @@
             bindEvents = function() {
                 // toggle dropdown_list on touch devices
                 $($o.dropdownCurrentItem)
-                    .click(function() {
-                        $(this).parent($o.dropdown).addClass($o.expanded);
-                    });
+                .click(function() {
+                    $(this).parent($o.dropdown).addClass($o.expanded);
+                });
 
                 // switch interval or revenue model filter
                 $o.configurationSelection
-                    .mousedown(function() {
-                        var startTimestamp  = $o.currentInterval.data('startTimestamp'),
-                            oldInterval     = getInterval(),
-                            nextStartTimestamp,
-                            nextEndTimestamp,
-                            newInterval;
-
-                        // mark clicked item as selected
-                        $(this)
-                            .parents($o.dropdown)
-                            .removeClass($o.expanded)
-                            .find($o.dropdownCurrentItem)
-                            .text($(this).text())
-                            .end()
-                            .find('.' + $o.selected)
-                            .removeClass($o.selected)
-                            .end()
-                            .end()
-                            .addClass($o.selected);
-
-                        newInterval = getInterval();
-
-                        // for the 24 hour interval it's allowed to view 'today', but when switching to another interval
-                        // we have to automatically switch back to 'yesterday'
-                        if (oldInterval === 'day' && newInterval !== 'day') {
-                            var todayDate   = new Date(),
-                                startDate   = new Date(startTimestamp * 1000);
-
-                            todayDate.setHours(0, 0, 0, 0);
-                            startDate.setHours(0, 0, 0, 0);
-
-                            if (todayDate.getTime() === startDate.getTime()) {
-                                startTimestamp = startTimestamp - getIntervalDiff(oldInterval);
-                            }
-                        }
-
-                        // check, if the 'next' button should be visible or hidden for the given interval
-                        nextStartTimestamp  = startTimestamp + getIntervalDiff(newInterval);
-                        switchNextIntervalState(nextStartTimestamp, newInterval);
-
-                        // check, if the 'previous' button should be visible or hidden for the given interval
-                        nextEndTimestamp    = startTimestamp - getIntervalDiff(newInterval);
-                        switchPreviousIntervalState(nextEndTimestamp, newInterval);
-
-                        setTimeRange(startTimestamp, newInterval);
-                        loadDashboard(false);
-                    })
-                    .click(function(e) {e.preventDefault();});
+                .mousedown(function() {
+                    applyFilterSettings($(this));
+                })
+                .click(function(e) {e.preventDefault();});
 
                 // load next interval
                 $o.nextInterval
-                    .mousedown(function() {
-                        loadNextInterval();
-                    })
-                    .click(function(e) {e.preventDefault();});
+                .mousedown(function() {
+                    loadNextInterval();
+                })
+                .click(function(e) {e.preventDefault();});
 
                 // load previous interval
                 $o.previousInterval
-                    .mousedown(function() {
-                        loadPreviousInterval();
-                    })
-                    .click(function(e) {e.preventDefault();});
+                .mousedown(function() {
+                    loadPreviousInterval();
+                })
+                .click(function(e) {e.preventDefault();});
 
                 $('body')
-                    .on('mousedown', $o.toggleItemDetails, function() {
-                        alert('Toggling post details coming soon');
-                    })
-                    .on('click', $o.toggleItemDetails, function(e) {e.preventDefault();});
+                .on('mousedown', $o.toggleItemDetails, function() {
+                    alert('Toggling post details coming soon');
+                })
+                .on('click', $o.toggleItemDetails, function(e) {e.preventDefault();});
 
-                // switch between normal and time passes view
-                $o.viewSelector
-                    .mousedown(function() {
-                        switchDashboardView($(this));
-                    })
-                    .click(function(e) {e.preventDefault();});
+            },
+
+            applyFilterSettings = function($trigger) {
+                var startTimestamp  = $o.currentInterval.data('startTimestamp'),
+                    oldInterval     = getInterval(),
+                    nextStartTimestamp,
+                    nextEndTimestamp,
+                    newInterval;
+
+                // mark clicked item as selected
+                $trigger
+                    .parents($o.dropdown)
+                    .removeClass($o.expanded)
+                        .find($o.dropdownCurrentItem)
+                        .text($trigger.text())
+                    .end()
+                        .find('.' + $o.selected)
+                        .removeClass($o.selected)
+                    .end()
+                .end()
+                .addClass($o.selected);
+
+                newInterval = getInterval();
+
+                // for the 24 hour interval it's allowed to view 'today', but when switching to another interval
+                // we have to automatically switch back to 'yesterday'
+                if (oldInterval === 'day' && newInterval !== 'day') {
+                    var todayDate   = new Date(),
+                        startDate   = new Date(startTimestamp * 1000);
+
+                    todayDate.setHours(0, 0, 0, 0);
+                    startDate.setHours(0, 0, 0, 0);
+
+                    if (todayDate.getTime() === startDate.getTime()) {
+                        startTimestamp = startTimestamp - getIntervalDiff(oldInterval);
+                    }
+                }
+
+                // check, if the 'next' button should be visible or hidden for the given interval
+                nextStartTimestamp  = startTimestamp + getIntervalDiff(newInterval);
+                switchNextIntervalState(nextStartTimestamp, newInterval);
+
+                // check, if the 'previous' button should be visible or hidden for the given interval
+                nextEndTimestamp    = startTimestamp - getIntervalDiff(newInterval);
+                switchPreviousIntervalState(nextEndTimestamp, newInterval);
+
+                setTimeRange(startTimestamp, newInterval);
+                loadDashboard(false);
             },
 
             loadPreviousInterval = function() {
@@ -223,7 +215,7 @@
 
                 // if we were able to select the previous interval, it must be possible to switch back to the current
                 // interval so make sure the next link is not disabled
-                $o.previousInterval.removeClass($o.disabled);
+                $o.nextInterval.removeClass($o.disabled);
 
                 endTimestamp = endTimestamp - intervalDiff;
 
@@ -378,6 +370,22 @@
                     .html(timeRange);
             },
 
+            abortLoadingDashboardData = function() {
+                if ($o.xhrRequests.length < 1) {
+                    // don't abort, if there is only one running request
+                    return;
+                }
+
+                // abort all older requests, so only the current one is executed
+                $.each($o.xhrRequests, function(i, jqXHR) {
+                    if (!jqXHR) {
+                        return;
+                    }
+                    jqXHR.abort();
+                });
+                $o.xhrRequests = [];
+            },
+
             loadDashboardData = function(section, refresh, pass) {
                 var interval = getInterval(),
                     revenueModel = $o.revenueModelChoices
@@ -408,6 +416,19 @@
                     },
                     jqxhr;
 
+                $.ajaxSetup({
+                    beforeSend: function(jqXHR) {
+                        // add new request to array of running requests
+                        $o.xhrRequests.push(jqXHR);
+                    },
+                    complete: function(jqXHR) {
+                        var index = $o.xhrRequests.indexOf(jqXHR);
+                        if (index > -1) {
+                            $o.xhrRequests.splice(index, 1);
+                        }
+                    }
+                });
+
                 jqxhr = $.ajax({
                     'url'       : lpVars.ajaxUrl,
                     'async'     : true,
@@ -423,28 +444,6 @@
                 });
 
                 return jqxhr;
-            },
-
-            showLoadingIndicator = function($target) {
-                // add a state class, indicating that the element will be showing a loading indicator after a delay
-                $target.addClass($o.delayed);
-
-                setTimeout(function() {
-                    if ($target.hasClass($o.delayed)) {
-                        // add the loading indicator after a delay, if the element still has that state class
-                        $target.html('<div class="lp_loadingIndicator"></div>');
-                    }
-                }, 600);
-            },
-
-            removeLoadingIndicator = function($target) {
-                if ($target.hasClass($o.delayed)) {
-                    // remove the state class, thus canceling adding the loading indicator
-                    $target.removeClass($o.delayed);
-                } else {
-                    // remove the loading indicator
-                    $target.find('.lp_loadingIndicator').remove();
-                }
             },
 
             loadConvertingItems = function(refresh) {
@@ -669,7 +668,7 @@
                         ));
                     }
                 } else {
-                    $o.list = ['<dfn class="lp_topBottomList__empty-state">' + lpVars.i18n.noData + '</dfn>'];
+                    $o.list = ['<dfn class="lp_top-bottom-list__empty-state">' + lpVars.i18n.noData + '</dfn>'];
                 }
 
                 // replace existing HTML
@@ -678,22 +677,22 @@
 
             renderListItem = function(postId, itemName, kpiValue, kpiUnit, sparklineData) {
                 var kpi         = kpiUnit ? kpiValue + '<small>' + kpiUnit + '</small>' : kpiValue,
-                    valueClass  = 'lp_value';
+                    valueClass  = 'lp_dashboard-data__value';
 
                 if (kpiUnit === '%' || kpiUnit === '') {
-                    valueClass = 'lp_value-narrow';
+                    valueClass = 'lp_dashboard-data__value lp_dashboard-data__value--narrow';
                 }
 
-                return '<li>' +
-                    '<span class="lp_sparklineBar">' + sparklineData + '</span>' +
+                return '<li class="lp_dashboard-data__item">' +
+                    '<span class="lp_js_sparkLine lp_dashboard-data__sparkline">' + sparklineData + '</span>' +
                     '<strong class="' + valueClass + '">' + kpi + '</strong>' +
-                    '<i><a href="#" class="lp_js_toggleItemDetails">' + itemName + '</a></i>' +
+                    '<i><a href="#" class="lp_js_toggleItemDetails lp_dashboard-data__link">' + itemName + '</a></i>' +
                     '</li>';
             },
 
             renderSparklines = function($context) {
-                var $sparkline = $('.lp_sparklineBar', $context),
-                // get the number of data points from the first matched sparkline
+                var $sparkline = $('.lp_js_sparkLine', $context),
+                    // get the number of data points from the first matched sparkline
                     dataPoints = $sparkline.first().text().split(',').length;
 
                 if (dataPoints > 8) {
@@ -719,219 +718,17 @@
             },
 
             loadDashboard = function(refresh) {
+                // abort all older running requests to load dashboard data
+                abortLoadingDashboardData();
 
                 refresh = refresh || false;
                 loadMostLeastConvertingItems(refresh);
                 loadMostLeastRevenueItems(refresh);
                 loadMostLeastSellingItems(refresh);
                 loadConvertingItems(refresh);
-                loadTimePassLifecycles(true);
                 loadRevenueItems(refresh);
                 loadSellingItems(refresh);
                 loadKPIs(refresh);
-            },
-
-            switchDashboardView = function($item) {
-                var data            = $.parseJSON($item.attr('data')),
-                    current_label   = $.trim($item.html());
-
-                if (data.view === lpVars.submenu.view.standard) {
-                    // standard KPI dashboard
-                    // change label
-                    $item.html(data.label);
-
-                    // set new data view
-                    data.view = lpVars.submenu.view.passes;
-
-                    // select view
-                    $o.standardKpiTab.show();
-                    $o.timePassesKpiTab.hide();
-
-                    // update data
-                    data.label = current_label;
-                    $item.attr('data', JSON.stringify(data));
-                } else if (data.view === lpVars.submenu.view.passes) {
-                    // time passes dashboard
-                    // change label
-                    $item.html(data.label);
-
-                    // set new data view
-                    data.view = lpVars.submenu.view.standard;
-
-                    // select view
-                    $o.timePassesKpiTab.show();
-                    $o.standardKpiTab.hide();
-
-                    // update data
-                    data.label = current_label;
-                    $item.attr('data', JSON.stringify(data));
-                }
-            },
-
-            loadTimePassLifecycles = function(refresh) {
-                var data = $o.timepassDiagram;
-
-                $.each($o.timepassDiagram, function(index) {
-                    var timePassId = $(data[index]).data('id');
-
-                    showLoadingIndicator($(data[index]));
-
-                    loadDashboardData('time_passes_expiry', refresh, timePassId)
-                        .done(function(response) {
-                            var max             = parseInt(lpVars.maxYValue, 10),
-                                yAxisScale      = Math.max(max, 10) + 4, // add some air to y-axis scale
-                                $placeholder    = $(data[index]),
-                                markings        = [
-                                    {
-                                        // separator 1 after first 4 weeks (1 month)
-                                        color           : $o.colorBorder,
-                                        lineWidth       : 1,
-                                        xaxis           : {
-                                            from        : 3.5,
-                                            to          : 3.5,
-                                        },
-                                    },
-                                    {
-                                        // separator 2 after first 12 weeks (3 months)
-                                        color           : $o.colorBorder,
-                                        lineWidth       : 1,
-                                        xaxis           : {
-                                            from        : 11.5,
-                                            to          : 11.5,
-                                        },
-                                    },
-                                    {
-                                        // horizontal summary line for first month
-                                        color           : $o.colorBorder,
-                                        lineWidth       : 2,
-                                        xaxis           : {
-                                            from        : 0.25,
-                                            to          : 3.25,
-                                        },
-                                        yaxis           : {
-                                            from        : yAxisScale - 2,
-                                            to          : yAxisScale - 2,
-                                        },
-                                    },
-                                    {
-                                        // horizontal summary line for month 2-3
-                                        color           : $o.colorBorder,
-                                        lineWidth       : 2,
-                                        xaxis           : {
-                                            from        : 3.75,
-                                            to          : 11.25,
-                                        },
-                                        yaxis           : {
-                                            from        : yAxisScale - 2,
-                                            to          : yAxisScale - 2,
-                                        },
-                                    },
-                                ],
-                                plotOptions     = {
-                                    xaxis               : {
-                                        ticks           : response.data.x,
-                                    },
-                                    yaxis               : {
-                                        show            : false,
-                                        max             : yAxisScale,
-                                        tickFormatter   : function(val) {
-                                            return parseInt(val, 10);
-                                        }
-                                    },
-                                    grid                : {
-                                        markings        : markings,
-                                    },
-                                },
-                                plotData        = [
-                                    {
-                                        data            : response.data.y,
-                                        bars            : {
-                                            align       : 'center',
-                                            barWidth    : 0.4,
-                                            fillColor   : $o.colorBackgroundLaterpay,
-                                            horizontal  : false,
-                                            lineWidth   : 0,
-                                            show        : true,
-                                        },
-                                    },
-                                ];
-
-                            // extend empty object to merge specific with default plotOptions without
-                            // modifying the defaults
-                            plotOptions = $.extend(true, {}, plotDefaultOptions, plotOptions);
-                            var $graph  = $.plot($placeholder, plotData, plotOptions);
-
-                            // calculate the sum of time passes that expire in 0-4 and 5-12 weeks, respectively
-                            var sum04   = 0,
-                                sum512  = 0,
-                                i;
-                            for (i = 0; i < 5; i++) {
-                                sum04 += response.data.y[i][1];
-                            }
-                            for (i = 5; i < 13; i++) {
-                                sum512 += response.data.y[i][1];
-                            }
-
-                            // add labels to the flot graph:
-                            // get the offset of separator 1 within the flot placeholder
-                            var o1      = $graph.pointOffset({x: 3.5, y: 0}),
-                                label1  = '<div class="lp_time-pass-diagram__label" ' +
-                                    'style="left:' + (o1.left - 30) + 'px; top:2px;">' +
-                                    lpVars.i18n.endingIn + '<br>' +
-                                    '< 1 ' + lpVars.i18n.month +
-                                    '</div>';
-                            // append that label to the graph
-                            $placeholder.append(label1);
-                            // get the offset of separator 2 within the flot placeholder
-                            var o2      = $graph.pointOffset({x: 11.5, y: 0}),
-                                label2  = '<div class="lp_time-pass-diagram__label" ' +
-                                    'style="left:' + (o2.left - 30) + 'px; top:2px;">' +
-                                    lpVars.i18n.endingIn + '<br>' +
-                                    '< 3 ' + lpVars.i18n.months +
-                                    '</div>';
-                            // append that label to the graph
-                            $placeholder.append(label2);
-
-                            // add arrowhead to x-axis
-                            var  o3 = $graph.pointOffset({x: 13, y: 0}),
-                                ctx = $graph.getCanvas().getContext('2d');
-                            o3.left += 8;
-                            o3.top  += 4;
-                            ctx.beginPath();
-                            ctx.moveTo(o3.left,     o3.top);
-                            ctx.lineTo(o3.left,     o3.top - 7);
-                            ctx.lineTo(o3.left + 6, o3.top - 3.5);
-                            ctx.lineTo(o3.left,     o3.top);
-                            ctx.fillStyle = $o.colorBorder;
-                            ctx.fill();
-
-                            // add x-axis label
-                            var xAxisLabel = '<div class="lp_time-pass-diagram__label" ' +
-                                'style="left:' + (o3.left + 10) + 'px; top:' + o3.top + 'px;">' +
-                                lpVars.i18n.weeksLeft +
-                                '</div>';
-                            $placeholder.append(xAxisLabel);
-
-                            // add sum to 0-4 weeks interval
-                            var o4          = $graph.pointOffset({x: 1.5, y: yAxisScale - 2}),
-                                sum04Label  = '<div class="lp_time-pass-diagram__sum" ' +
-                                    'style="left:' + (o4.left - 30) + 'px; top:' + (o4.top - 14) + 'px;">' +
-                                    sum04 +
-                                    '</div>';
-                            $placeholder.append(sum04Label);
-
-                            // add sum to 5-12 weeks interval
-                            var o5          = $graph.pointOffset({x: 7.5, y: yAxisScale - 2}),
-                                sum512Label = '<div class="lp_time-pass-diagram__sum" ' +
-                                    'style="left:' + (o5.left - 30) + 'px; top:' + (o5.top - 14) + 'px;">' +
-                                    sum512 +
-                                    '</div>';
-                            $placeholder.append(sum512Label);
-                        })
-                        .always(function() {
-                            removeLoadingIndicator($(data[index]));
-                        });
-                });
             },
 
             initializePage = function() {

@@ -22,10 +22,11 @@ class LaterPay_Helper_Post
      *
      * @param WP_Post $post
      * @param bool    $is_attachment
+     * @param null    $main_post_id
      *
      * @return boolean success
      */
-    public static function has_access_to_post( WP_Post $post, $is_attachment = false ) {
+    public static function has_access_to_post( WP_Post $post, $is_attachment = false, $main_post_id = null ) {
         $post_id = $post->ID;
 
         laterpay_get_logger()->info(
@@ -39,7 +40,7 @@ class LaterPay_Helper_Post
         }
 
         // check, if parent post has access with time passes
-        $parent_post        = $is_attachment ? get_the_ID() : $post_id;
+        $parent_post        = $is_attachment ? $main_post_id : $post_id;
         $time_passes_list   = LaterPay_Helper_TimePass::get_time_passes_list_by_post_id( $parent_post );
         $time_passes        = LaterPay_Helper_TimePass::get_tokenized_time_pass_ids( $time_passes_list );
         foreach ( $time_passes as $time_pass ) {
@@ -150,10 +151,11 @@ class LaterPay_Helper_Post
      * Get the LaterPay purchase link for a post.
      *
      * @param int $post_id
+     * @param int $current_post_id optional for attachments
      *
      * @return string url || empty string, if something went wrong
      */
-    public static function get_laterpay_purchase_link( $post_id ) {
+    public static function get_laterpay_purchase_link( $post_id, $current_post_id = null ) {
         $post = get_post( $post_id );
         if ( $post === null ) {
             return '';
@@ -178,29 +180,28 @@ class LaterPay_Helper_Post
 
         // data to register purchase after redirect from LaterPay
         $url_params = array(
-            'post_id'     => $post_id,
-            'id_currency' => $currency_model->get_currency_id_by_iso4217_code( $currency ),
-            'price'       => $price,
-            'date'        => time(),
-            'buy'         => 'true',
-            'ip'          => ip2long( $_SERVER['REMOTE_ADDR'] ),
+            'post_id'       => $post_id,
+            'id_currency'   => $currency_model->get_currency_id_by_iso4217_code( $currency ),
+            'price'         => $price,
+            'date'          => time(),
+            'buy'           => 'true',
+            'ip'            => ip2long( $_SERVER['REMOTE_ADDR'] ),
+            'revenue_model' => LaterPay_Helper_Pricing::get_post_revenue_model( $post_id ),
         );
 
         if ( $post->post_type == 'attachment' ) {
-            $url_params['post_id']           = get_the_ID();
+            $url_params['post_id']           = $current_post_id;
             $url_params['download_attached'] = $post_id;
         }
 
         $url  = self::get_after_purchase_redirect_url( $url_params );
         $hash = self::get_hash_by_url( $url );
-        $url  = $url . '&hash=' . $hash;
 
         // parameters for LaterPay purchase form
         $params = array(
             'article_id' => $post_id,
             'pricing'    => $currency . ( $price * 100 ),
-            'vat'        => laterpay_get_plugin_config()->get( 'currency.default_vat' ),
-            'url'        => $url,
+            'url'        => $url . '&hash=' . $hash,
             'title'      => $post->post_title,
         );
 
@@ -257,13 +258,14 @@ class LaterPay_Helper_Post
      *
      * @wp-hook laterpay_purchase_button
      *
-     * @param WP_Post $post
+     * @param WP_Post  $post
+     * @param null|int $current_post_id optional for attachments
      *
-     * @return void
+     * @return array
      */
-    public static function the_purchase_button_args( $post ) {
+    public static function the_purchase_button_args( WP_Post $post, $current_post_id = null ) {
         // don't render the purchase button, if the current post is not purchasable
-        if ( ! LaterPay_Helper_Pricing::is_purchasable( $post ) ) {
+        if ( ! LaterPay_Helper_Pricing::is_purchasable( $post->ID ) ) {
             return;
         };
 
@@ -283,7 +285,7 @@ class LaterPay_Helper_Post
 
         $view_args = array(
             'post_id'                   => $post->ID,
-            'link'                      => LaterPay_Helper_Post::get_laterpay_purchase_link( $post->ID ),
+            'link'                      => LaterPay_Helper_Post::get_laterpay_purchase_link( $post->ID, $current_post_id ),
             'currency'                  => get_option( 'laterpay_currency' ),
             'price'                     => LaterPay_Helper_Pricing::get_post_price( $post->ID ),
             'preview_post_as_visitor'   => $preview_mode,
@@ -296,5 +298,35 @@ class LaterPay_Helper_Post
         );
 
         return $view_args;
+    }
+
+    /**
+     * Add teaser to the post or update it.
+     *
+     * @param WP_Post $post
+     * @param null $teaser teaser data
+     * @param bool $need_update
+     *
+     * @return string $new_meta_value teaser content
+     */
+    public static function add_teaser_to_the_post( WP_Post $post, $teaser = null, $need_update = true ) {
+        if ( $teaser ) {
+            $new_meta_value = $teaser;
+        } else {
+            $new_meta_value = LaterPay_Helper_String::truncate(
+                preg_replace( '/\s+/', ' ', strip_shortcodes( $post->post_content ) ),
+                get_option( 'laterpay_teaser_content_word_count' ),
+                array (
+                    'html'  => true,
+                    'words' => true,
+                )
+            );
+        }
+
+        if ( $need_update ) {
+            update_post_meta( $post->ID, 'laterpay_post_teaser', $new_meta_value );
+        }
+
+        return $new_meta_value;
     }
 }

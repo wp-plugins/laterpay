@@ -1,2 +1,23 @@
-@charset "UTF-8";
-.container{display:inline-block;}.actionlink{color:$clickable;padding:$fs-05 $fs-1;text-decoration:none;}.actionlink:hover,.actionlink:focus,.actionlink:active{color:$clickable-highlight;text-decoration:none}
+/*
+ * 1. Make containers line up next to each other
+ */
+/* line 15, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_account_links_iframe.scss */
+.container {
+  display: inline-block;
+  /* 1 */ }
+
+/*
+ * 1. Increase size of click target
+ */
+/* line 23, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_account_links_iframe.scss */
+.actionlink {
+  color: #0075a3;
+  padding: 7px 14px;
+  /* 1 */
+  text-decoration: none; }
+  /* line 30, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_account_links_iframe.scss */
+  .actionlink:hover, .actionlink:focus, .actionlink:active {
+    color: #298cb3;
+    text-decoration: none; }
+
+

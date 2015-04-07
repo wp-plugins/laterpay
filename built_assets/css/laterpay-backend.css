@@ -1,2 +1,2185 @@
-@charset "UTF-8";
-.lp_page h2,.lp_page h3{font-weight:400;margin:1rem 0 .5rem}.lp_page h2{font-size:18px}.lp_page h3{font-size:14px;margin:0}.lp_page a{text-decoration:none;}.lp_page a:focus,.lp_page a:active,.lp_page a:visited{box-shadow:none;outline:0 none}.lp_page ul,.lp_page li{list-style:none;margin:0;padding:0}.lp_page dfn{color:#999;font-style:italic}.lp_page svg{overflow:hidden}.lp_u_b-0{border:0 none}.lp_u_b-1{border:1px solid #dedede}.lp_u_b-2{border:2px solid #dedede}.lp_u_b-r3{border-radius:3px}.lp_u_b-r4{border-radius:4px}.lp_u_b-embossed{box-shadow:1px 1px 0 #fafafa}.lp_u_block{display:block}.lp_u_inline{display:inline}.lp_u_inlineBlock{display:inline-block}.lp_u_hide{display:none !important}.lp_u_fs-1{font-size:14px}.lp_u_fs-3{font-size:42px}.lp_u_bold{font-weight:bold}.lp_u_left{float:left}.lp_u_right{float:right}.lp_u_clearfix:after{clear:both;content:' ';display:block;font-size:0;height:0;visibility:hidden}.lp_u_m-0{margin:0}.lp_u_m-1{margin:14px}.lp_u_m-1-0{margin:14px 0}.lp_u_m-1-0-0{margin:14px 0 0}.lp_u_m-0-center{margin:0 auto}.lp_u_m-1-center{margin:14px auto}.lp_u_m-t0{margin-top:0}.lp_u_m-t025{margin-top:4px}.lp_u_m-t05{margin-top:7px}.lp_u_m-t1{margin-top:14px}.lp_u_m-t125{margin-top:18px}.lp_u_m-t2{margin-top:28px}.lp_u_m-t3{margin-top:42px}.lp_u_m-r0{margin-right:0}.lp_u_m-r025{margin-right:4px}.lp_u_m-r05{margin-right:7px}.lp_u_m-r1{margin-right:14px}.lp_u_m-r2{margin-right:28px}.lp_u_m-b0{margin-bottom:0}.lp_u_m-b025{margin-bottom:4px}.lp_u_m-b05{margin-bottom:7px}.lp_u_m-b1{margin-bottom:14px}.lp_u_m-b2{margin-bottom:28px}.lp_u_m-b3{margin-bottom:42px}.lp_u_m-l0{margin-left:0}.lp_u_m-l025{margin-left:4px}.lp_u_m-l05{margin-left:7px}.lp_u_m-l1{margin-left:14px}.lp_u_m-l2{margin-left:28px}.lp_u_pd-0{padding:0}.lp_u_pd-05{padding:7px}.lp_u_pd-1{padding:14px}.lp_u_pd-0-05{padding:0 7px}.lp_u_pd-0-1{padding:0 14px}.lp_u_pd-025-05{padding:4px 7px}.lp_u_pd-t0{padding-top:0}.lp_u_pd-t05{padding-top:7px}.lp_u_pd-r2{padding-right:28px}.lp_u_pd-l0{padding-left:0}.lp_u_absolute{position:absolute}.lp_u_relative{position:relative}.lp_u_fixed{position:fixed}.lp_u_top-0{top:0}.lp_u_right-0{right:0}.lp_u_bottom-0{bottom:0}.lp_u_left-0{left:0}.lp_u_leftAlign{text-align:left}.lp_u_rightAlign{text-align:right}.lp_u_center{text-align:center}.lp_u_topAlign{vertical-align:top}.lp_u_nowrap{white-space:nowrap}.lp_u_w-1{width:100%}.lp_u_w-4-5{width:80%}.lp_u_w-3-4{width:75%}.lp_u_w-2-3{width:66.6666%}.lp_u_w-1-2{width:50%}.lp_u_w-2-5{width:40%}.lp_u_w-3-8{width:37.5%}.lp_u_w-1-3{width:33.3333%}.lp_u_w-1-4{width:25%}.lp_u_w-1-5{width:20%}.lp_u_w-1-6{width:16.6666%}input[type=text].lp_input,input[type=number].lp_input,textarea.lp_input,select.lp_input{background-color:#fff;border-radius:4px;border:2px solid #dedede;box-shadow:none;height:calc(2em + 4px);line-height:1;margin:0;padding:.5em;}input[type=text].lp_input:focus,input[type=number].lp_input:focus,textarea.lp_input:focus,select.lp_input:focus{-moz-appearance:none;-webkit-appearance:none;border-color:#2e9fcc}input[type=text].lp_input:disabled,input[type=number].lp_input:disabled,textarea.lp_input:disabled,select.lp_input:disabled{cursor:not-allowed}textarea.lp_input{resize:vertical}select.lp_input{margin-left:2px;padding:.25em;position:relative;top:-2px}input[type=text].lp_apiKeyInput,input[type=text].lp_merchantIdInput{padding-left:2.8em;width:22em}input[type=text].lp_numberInput{padding:.25em .35em;text-align:right;width:4em}.lp_iconizedInput{color:#dedede;font-size:2em;margin:.04em 0 0 .35em;position:absolute}.lp_page .select2-container{margin-left:2px;max-width:200px;width:100%;}.lp_page .select2-container .select2-choice{border:2px solid #dedede;border-radius:4px}.lp_page .select2-container-active .select2-choice{border-color:#2e9fcc;color:#ababab}.lp_page .select2-dropdown-open .select2-choice{border-bottom-color:transparent;border-bottom-right-radius:0;border-bottom-left-radius:0}.select2-drop.select2-drop-active{border-color:#2e9fcc;border-width:0 2px 2px}.select2-drop .select2-search{padding-left:0;padding-right:0;}.select2-drop .select2-search input{background:#e3e3e3;border:0 none;box-shadow:none;}.select2-drop .select2-search input:focus{border-color:#2e9fcc}.select2-drop .select2-results{margin:0;padding:0;}.select2-drop .select2-results li{margin-bottom:0;}.select2-drop .select2-results li:last-child{border-bottom-right-radius:2px;border-bottom-left-radius:2px}.select2-drop .select2-results li:hover,.select2-drop .select2-results .select2-highlighted{background:#feec86;color:#545454}.select2-drop .select2-result-label{padding:7px}.lp_input::-webkit-input-placeholder,.lp_input::-moz-placeholder,.lp_input:-ms-input-placeholder{color:#ababab;line-height:1}input[type=text][required] + label[placeholder]{display:block;line-height:1;margin-bottom:1em;margin-top:calc(-3em - 2px);pointer-events:none;}input[type=text][required] + label[placeholder]:before{background:rgba(255,255,255,0);background:-webkit-gradient(linear,left top,left bottom,color-stop(46%,rgba(255,255,255,0)),color-stop(47%,#fff));background-repeat:no-repeat;color:#ababab;content:attr(placeholder);display:inline-block;margin:1.4em 0 0 .5em;padding:0 3px;-webkit-transition:.3s ease-in-out;transition:.3s ease-in-out;white-space:nowrap}input[type=text][required]:focus + label[placeholder]:before,input[type=text][required]:valid + label[placeholder]:before{-webkit-transform:translate(-2px,-1.15em) scale(.9,.9);-ms-transform:translate(-2px,-1.15em) scale(.9,.9);transform:translate(-2px,-1.15em) scale(.9,.9);-webkit-transition-duration:.2s;transition-duration:.2s}input[type=text][required]:focus + label[placeholder]:before{color:#2e9fcc}input[type=text][required]:invalid + label[placeholder][alt]:before{content:attr(alt)}.lp_iconizedInput + input[type=text][required] + label[placeholder]:before{margin:1.4em 0 0 calc(3em - 1px)}.ez-mark{*display:inline;cursor:pointer;display:inline-block;margin-right:.1em;position:relative;width:1.5em;z-index:10;zoom:1;}.ez-mark input[type=radio],.ez-mark input[type=checkbox]{cursor:pointer;left:-.3rem;opacity:0;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);position:relative;top:-.75rem}.ez-mark svg{height:1.5em;position:absolute;}.ez-mark svg .frame{fill:#ccc}.ez-mark svg .frameBack{fill:#fff}.ez-mark svg .check{display:none}.ez-mark svg .dot{display:none}.ez-mark :hover svg .frame,label:hover .ez-mark svg .frame{fill:#2e9fcc}.ez-checked.ez-checkbox svg .check,.ez-checked.ez-radio svg .dot{display:block;fill:#666}.ez-hide{opacity:0;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0)}.lp_editLink{margin-left:1em;padding:.5em 0}.lp_revenueModelLabel{background-color:#e3e3e3;border-radius:3px;color:#0075a3;display:inline-block;font-weight:bold;padding:4px 7px;text-align:center;text-transform:uppercase;width:2em;}.lp_revenueModelLabel input[type=radio]{display:none}label.lp_revenueModelLabel:hover{background-color:#2e9fcc;color:#fff}.lp_revenueModelLabel.lp_is-disabled{visibility:hidden}.lp_revenueModelLabel.lp_is-selected{background-color:#52cb75;color:#fff;}.lp_revenueModelLabel.lp_is-selected:hover{background-color:#52cb75;cursor:default}fieldset{padding:.5em 1em .8em}legend{margin-left:-.5em}@font-face{font-family:laterpay-wordpress-icons;font-style:normal;font-weight:normal;src:url("../fonts/laterpay-wordpress-icons_v099.eot");src:url("../fonts/laterpay-wordpress-icons_v099.eot?#iefix") format('embedded-opentype'),url("../fonts/laterpay-wordpress-icons_v099.woff") format('woff'),url("../fonts/laterpay-wordpress-icons_v099.ttf") format('truetype'),url("../fonts/laterpay-wordpress-icons_v099.svg#laterpay-wordpress-icons") format('svg')}[data-icon]:before,.lp_vectorIcon{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;content:attr(data-icon);font-family:laterpay-wordpress-icons !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;line-height:1;padding-right:.25em;position:relative;speak:none;text-transform:none !important;top:.1em}.lp_tooltip{display:inline-block;position:relative;}.lp_tooltip:before,.lp_tooltip:after{opacity:0;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);pointer-events:none;position:absolute;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);-webkit-transition-delay:0;transition-delay:0;-webkit-transition:.25s ease;transition:.25s ease;visibility:hidden;z-index:100}.lp_tooltip:before{background:transparent;border:6px solid transparent;border-top-color:#545454;content:'';margin-bottom:-12px;position:absolute;z-index:110}.lp_tooltip:after{background:#545454;border-radius:3px;color:#fff;content:attr(data-tooltip);font-size:11px;font-weight:normal;line-height:1.3em;margin-left:-18px;padding:7px;text-align:left;text-transform:none;width:10em}.lp_tooltip:hover:before,.lp_tooltip:hover:after,.lp_tooltip:focus:before,.lp_tooltip:focus:after{opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);visibility:visible;-webkit-transform:translateY(-8px);-ms-transform:translateY(-8px);transform:translateY(-8px)}.lp_tooltip:hover:before,.lp_tooltip:hover:after{bottom:100%;left:50%;-webkit-transition-delay:100ms;transition-delay:100ms}.lp_loadingIndicator{background-image:url("../img/spinner.svg");background-size:contain;height:2rem;margin:20px auto;opacity:.7;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);position:relative;width:2rem;-webkit-animation:rotate 1.2s infinite steps(12);animation:rotate 1.2s infinite steps(12)}@-webkit-keyframes rotate{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotate{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.lp_dropdown{cursor:pointer;display:inline-block;position:relative;}.lp_dropdown .lp_dropdown_currentItem{color:#0075a3}.lp_dropdown:hover .lp_dropdown_list,.lp_dropdown.lp_is-expanded .lp_dropdown_list{display:block}.lp_dropdown_list{background:#fff;border:2px solid #dedede;border-radius:3px;display:none;left:50%;margin-left:-3em;padding:7px;position:absolute;top:42px;width:6em;z-index:100;}.lp_dropdown_list .lp_triangle{border:13px solid #fff;border-color:transparent transparent #fff transparent;height:0;left:-13px;position:absolute;top:-10px;width:0;z-index:11}.lp_dropdown_list .lp_outerTriangle{border-bottom-color:#dedede;border-width:14px;left:50%;margin-left:-14px;top:-28px;z-index:10}.lp_dropdown_listItem{display:block;line-height:1;padding:7px;white-space:nowrap}.lp_dropdown_listItem.lp_is-selected{color:#ababab;}.lp_dropdown_listItem.lp_is-selected:hover{color:#ababab;cursor:default}.lp_page{min-height:100%}.lp_pagewrap{max-width:1240px;padding:14px}.lp_navigation{background-color:#fff;border-bottom:1px solid #ccc;box-shadow:0 1px 0 #fff;left:-20px;padding-top:2rem;width:101.6%}.lp_page .lp_navigation_tabs{margin-left:28px}.lp_navigation_tabs__item{display:inline-block;margin-left:1.5rem;position:relative;top:2px;}.lp_navigation_tabs__item:first-child{margin-left:0}.lp_navigation_tabs__item:hover .lp_navigation_tabs__submenu{display:inline-block;position:absolute}.lp_navigation_tabs__item a{color:#ababab;font-size:14px;min-width:7.5em;padding:.5em 1em .75em;text-align:center}.lp_navigation_tabs__item:hover a{color:#0075a3;}.lp_navigation_tabs__item:hover a:hover{color:#2e9fcc}.lp_navigation_tabs__item.lp_is-current{background-color:#f2f2f2;border-radius:4px 4px 0 0;border-top:4px solid #0075a3;}.lp_navigation_tabs__item.lp_is-current:hover > a,.lp_navigation_tabs__item.lp_is-current > a{color:#545454;cursor:default;font-weight:600}.lp_navigation_tabs__item .lp_navigation_tabs__submenu{background:#fff;box-shadow:0 3px 3px rgba(0,0,0,0.21);border-radius:0 0 3px 3px;display:none;margin-top:-3px}.lp_navigation_tabs__item.lp_is-current .lp_navigation_tabs__submenu{background:#f2f2f2}.lp_pluginModeIndicator{right:7rem;top:.4rem;}.lp_pluginModeIndicator:before{float:left;font-size:4rem;left:-2.75rem;line-height:0;position:relative;top:1.8rem}.lp_pluginModeIndicator h2,.lp_pluginModeIndicator i{color:#0075a3}.lp_pluginModeIndicator:hover:before,.lp_pluginModeIndicator:active:before,.lp_pluginModeIndicator:focus:before,.lp_pluginModeIndicator:hover h2,.lp_pluginModeIndicator:active h2,.lp_pluginModeIndicator:focus h2,.lp_pluginModeIndicator:hover i,.lp_pluginModeIndicator:active i,.lp_pluginModeIndicator:focus i{color:#2e9fcc}.lp_pluginModeIndicator h2{font-size:2rem}.lp_pluginModeIndicator i{font-style:normal}.lp_pluginModeIndicator span{color:#999}.lp_flashMessage{box-shadow:0 1px 4px 0 rgba(0,0,0,0.55);margin:0;opacity:.9;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=90);position:fixed;top:2.5rem;width:96%;z-index:100}#screen-meta{position:absolute;z-index:10}#contextual-help-link-wrap{z-index:11}@media (max-width:1279px){.lp_pagewrap{padding:0}}.lp_toggle{display:inline-block;margin:0 .25em;position:relative;top:-.25em;vertical-align:middle;}.lp_toggle form{margin:0}.lp_toggle .lp_toggle_label{background:#ededed;background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#ededed),color-stop(100%,#fff));border-radius:1em;box-shadow:inset 0 -1px #fff,inset 0 1px 1px rgba(0,0,0,0.05);box-sizing:content-box;cursor:pointer;display:inline-block;height:1.75em;margin:.25em .25em 0;padding:.25em;position:relative;vertical-align:top;width:5em;}.lp_toggle .lp_toggle_label .lp_toggle_input{left:0;opacity:0;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);position:absolute;top:0}.lp_toggle .lp_toggle_label .lp_toggle_text{background:#ccc;border-radius:inherit;box-shadow:inset 0 1px 2px rgba(0,0,0,0.12),inset 0 0 2px rgba(0,0,0,0.15);display:block;font-size:10px;height:100%;position:relative;text-transform:uppercase;-webkit-transition-property:opacity background;transition-property:opacity background;-webkit-transition:.15s ease-out;transition:.15s ease-out;}.lp_toggle .lp_toggle_label .lp_toggle_text:before,.lp_toggle .lp_toggle_label .lp_toggle_text:after{color:#fff;font-size:1.25em;font-weight:600;line-height:1;margin-top:-.5em;position:absolute;top:50%;-webkit-transition:inherit;transition:inherit}.lp_toggle .lp_toggle_label .lp_toggle_text:before{content:attr(data-off);right:.75em}.lp_toggle .lp_toggle_label .lp_toggle_text:after{content:attr(data-on);left:.75em;opacity:0;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0)}.lp_toggle .lp_toggle_label .lp_toggle_handle{background:#fff;background:-webkit-gradient(linear,left top,left bottom,color-stop(40%,#fff),color-stop(100%,#f0f0f0));border-radius:1em;box-shadow:1px 1px 5px rgba(0,0,0,0.2);height:1.55em;left:.35em;position:absolute;top:.35em;-webkit-transition:left .15s ease-out;transition:left .15s ease-out;width:1.55em;}.lp_toggle .lp_toggle_label .lp_toggle_handle:before{background:#f5f5f5;background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#f5f5f5),color-stop(100%,#e6e6e6));border-radius:50%;box-shadow:inset 0 1px rgba(0,0,0,0.02);content:'';height:1.1em;left:50%;margin:-.55em 0 0 -.55em;position:absolute;top:50%;width:1.1em}.lp_toggle .lp_toggle_label .lp_toggle_input:checked ~ .lp_toggle_text{background-color:#50c371;box-shadow:inset 0 1px 2px rgba(0,0,0,0.15),inset 0 0 3px rgba(0,0,0,0.2);}.lp_toggle .lp_toggle_label .lp_toggle_input:checked ~ .lp_toggle_text:before{opacity:0;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0)}.lp_toggle .lp_toggle_label .lp_toggle_input:checked ~ .lp_toggle_text:after{opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100)}.lp_toggle .lp_toggle_label .lp_toggle_input:checked ~ .lp_toggle_handle{box-shadow:-1px 1px 5px rgba(0,0,0,0.2);left:auto;right:.4em}#lp_legalDocs_iframe{background-color:#4d4f51;display:none;position:relative;}#lp_legalDocs_iframe .lp_legalDocs_closeLink{background-color:#666;border-radius:3px;box-shadow:1px 1px 3px rgba(0,0,0,0.21);color:#4d4f51;font-size:1.5em;font-weight:600;height:1.5em;line-height:1.4em;padding:.5em;position:absolute;right:1.667em;text-align:center;top:1em;width:1.5em;}#lp_legalDocs_iframe .lp_legalDocs_closeLink:hover{background-color:#2e9fcc}.lp_purchaseLink{display:block !important;font-family:Arial,sans-serif !important;font-weight:400 !important;margin:1em 0 0 !important;position:relative !important;text-decoration:none !important;z-index:10 !important;}.lp_purchaseLink:before{font-size:2em !important;left:-.25em !important;line-height:0 !important;margin:0 -.5em 0 0 !important;position:relative !important;top:.31em !important}.lp_purchaseLink small{bottom:.45em !important;font-size:.6em !important;padding:0 1px 0 2px !important;position:relative !important}.lp_button,.lp_purchaseLink.lp_button{background:#52cb75;background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#52cb75),color-stop(100% !important,#50c371));border-color:#1c826a #209278 !important;border-radius:5px !important;border:1px solid #209278 !important;border-width:0 1px 2px 0 !important;color:#fff !important;cursor:pointer !important;float:right !important;font-size:28px !important;line-height:1.1 !important;margin:0 !important;padding:.2em .2em .1em 0 !important;text-shadow:0 -1px 0 #22a082 !important;white-space:nowrap !important;}.lp_button:before,.lp_purchaseLink.lp_button:before{font-size:49px !important;left:-3px !important;line-height:0 !important;margin:0 -.2em 0 0 !important;position:relative !important}.lp_button:hover,.lp_purchaseLink.lp_button:hover,.lp_button:focus,.lp_purchaseLink.lp_button:focus,.lp_button:active,.lp_purchaseLink.lp_button:active{background:#57d67b;background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#57d67b),color-stop(100% !important,#52cb75));color:#fff !important;text-decoration:none !important}.lp_button:focus,.lp_purchaseLink.lp_button:focus,.lp_button:active,.lp_purchaseLink.lp_button:active{border-top-color:transparent !important;border-width:2px 1px 0 0 !important}.lp_button small,.lp_purchaseLink.lp_button small{bottom:.7em !important;color:#fff !important;font-size:.5em !important;padding-left:4px !important;position:relative !important;text-decoration:none !important}@media (max-width:567px){.lp_button{margin-left:2.75em !important;margin-top:.5em !important}}.lp_timePass{color:#545454;display:inline-block;font-family:Arial,sans-serif !important;font-size:14px !important;font-weight:400 !important;margin-right:14px;margin-bottom:14px}.lp_timePass,.lp_timePass__front,.lp_timePass__back{height:154px;width:308px}.lp_timePass__front,.lp_timePass__back{box-sizing:border-box;position:relative}.lp_timePass__front{background:url("../img/time-pass-background.png") 0 0/100% no-repeat;padding:14px 56px 14px 14px}.lp_timePass__back{background:url("../img/time-pass-background-flip.png") 0 0/100% no-repeat;display:none;padding:14px 14px 14px 56px}.lp_timePass.lp_is-flipped .lp_timePass__front{display:none}.lp_timePass.lp_is-flipped .lp_timePass__back{display:block}.lp_timePass_title{color:#545454;font-size:21px;line-height:1.3;margin:0 0 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lp_timePass_description{color:#ababab;font-size:14px;height:3.9em;line-height:1.3;margin:0;overflow:hidden}.lp_timePass_actions{bottom:1em;position:absolute;width:80%;width:calc(100% - 4em);}.lp_timePass_actions .lp_purchaseLink.lp_button{display:inline-block !important;float:none !important;vertical-align:middle !important}.lp_timePass_actions .lp_timePass_termsLink{display:inline-block;padding:7px 14px;vertical-align:middle}.lp_timePass__conditions{border:0 none !important;border-collapse:collapse !important;}.lp_timePass__conditions th,.lp_timePass__conditions td{border:0 none !important;padding:0 0 4px 0 !important;vertical-align:top !important}.lp_timePass__conditions th{color:#ababab !important;font-weight:normal !important;padding-right:14px !important;text-align:left !important}.lp_timePass__conditions td{text-align:left !important}.lp_timePass_frontsideLink{background:#0075a3;border-radius:16px;color:#fff;padding:7px 14px;position:absolute;top:14px;left:-7px;}.lp_timePass_frontsideLink -webkit-transition all 0.25s{-webkit-transition:all .25s;transition:all .25s}.lp_timePass_frontsideLink:hover{background:#2e9fcc;color:#fff;left:-14px}.lp_gift-card{background:#fff url("../img/gift-card-background.png") 0 0/100% no-repeat !important;box-sizing:border-box !important;color:#ababab !important;font-size:14px !important;font-weight:normal !important;height:252px !important;line-height:1.5 !important;margin:14px !important;padding:21px 21px 21px 168px !important;width:480px !important;}.lp_gift-card .lp_gift-card__title{color:#d82b17 !important;font-size:21px !important;font-style:normal !important;margin:7px 0 14px !important;white-space:nowrap !important;overflow:hidden !important;text-overflow:ellipsis !important;}.lp_gift-card .lp_gift-card__description{margin:0 0 14px !important;max-height:42px !important;overflow:hidden !important;text-overflow:ellipsis !important;}.lp_gift-card .lp_gift-card___conditions{border-collapse:collapse !important;font-size:11px !important;margin:0 0 14px !important;width:auto !important;}.lp_gift-card .lp_gift-card___conditions,.lp_gift-card .lp_gift-card___conditions th,.lp_gift-card .lp_gift-card___conditions td{border:0 none !important}.lp_gift-card .lp_gift-card___conditions th{font-weight:normal !important;padding:0 7px 4px 0 !important;text-transform:none !important}.lp_gift-card .lp_gift-card___conditions td{padding:0 0 4px !important}.lp_gift-card .lp_purchaseLink.lp_button{float:left !important}.lp_gift-card .lp_voucherCodeLabel{margin:0 4px;padding:0 7px}.lp_voucherCodeLabel{background:#fff;border:2px solid #ffa500;color:#ffa500;display:inline-block;font-family:monospace;font-size:21px;margin-right:4px;padding:7px}.lp_voucherCodeInfos{display:inline-block}.lp_voucherList .lp_voucherCodeInfos{vertical-align:top}.lp_timePassWidget .lp_timePass{display:block !important;margin:14px !important;}.lp_timePassWidget .lp_timePass:last-child{margin-bottom:0 !important}.lp_timePass_introductoryText,.lp_timePass_callToActionText{margin:0 0 14px !important}.lp_timePassWidget_voucherCodeWrapper{margin:14px !important;max-width:308px !important;min-width:252px !important;position:relative !important}.lp_timePassWidget_voucherCodeWrapper,.lp_timePassWidget_voucherCode{height:53px !important}.lp_voucherCodeFeedbackMessage{background:#feec86 !important;border-radius:3px !important;color:#545454 !important;cursor:pointer !important;line-height:1.3 !important;padding:14px 7px !important;text-align:center !important;}.lp_voucherCodeFeedbackMessage ~ *{display:none !important}.lp_timePassWidget_voucherCode{background:transparent !important;border:2px solid transparent !important;box-shadow:none !important;bottom:0 !important;color:transparent !important;cursor:pointer !important;font-size:21px !important;padding:11px 14px 11px 3.5em !important;position:absolute !important;top:0 !important;width:100% !important;z-index:110 !important;}.lp_timePassWidget_voucherCode:hover ~ .lp_timePassWidget_voucherCodeHint{color:#2e9fcc !important}.lp_timePassWidget_voucherCode:focus{-moz-appearance:none !important;-webkit-appearance:none !important;background:#fff !important;border:2px solid #2e9fcc !important;border-radius:5px !important;box-shadow:none !important;color:#545454 !important;cursor:normal !important;}.lp_timePassWidget_voucherCode:focus ~ .lp_timePassWidget_voucherCodeHint{visibility:hidden !important}.lp_timePassWidget_voucherCode:focus ~ .lp_timePassWidget_voucherCodeInputHint{display:block !important;font-size:21px !important;position:absolute !important;z-index:110 !important}.lp_timePassWidget_voucherCode:focus ~ .lp_timePassWidget_redeemVoucherCode{background:#0075a3 !important;border-radius:4px !important;bottom:7px !important;color:#fff !important;cursor:pointer !important;display:inline-block !important;position:absolute !important;padding:7px 14px !important;right:7px !important;text-decoration:none !important;top:7px !important;z-index:120 !important;}.lp_timePassWidget_voucherCode:focus ~ .lp_timePassWidget_redeemVoucherCode:hover,.lp_timePassWidget_voucherCode:focus ~ .lp_timePassWidget_redeemVoucherCode:focus,.lp_timePassWidget_voucherCode:focus ~ .lp_timePassWidget_redeemVoucherCode:active{background:#2e9fcc !important;text-decoration:none !important}.lp_timePassWidget_voucherCode,.lp_timePassWidget_voucherCodeHint,.lp_timePassWidget_voucherCodeInputHint,.lp_timePassWidget_redeemVoucherCode,.lp_timePass_introductoryText,.lp_timePass_callToActionText{line-height:1.5 !important}.lp_timePassWidget_voucherCodeHint{color:#0075a3 !important;display:block !important;margin:0 !important;text-decoration:none !important;visibility:visible !important}.lp_timePassWidget_voucherCodeInputHint{color:#ababab !important;display:none !important;margin:0 !important;padding:11px 14px !important}.lp_timePassWidget_redeemVoucherCode{display:none !important}.lp_redeem-gift-code__wrapper,.lp_redeem-gift-code__code{height:53px !important;position:relative !important;width:300px !important}.lp_redeem-gift-code__wrapper{background:#fff;border-radius:6px;margin:1em 0}.lp_redeem-gift-code__feedback-message{background:#feec86 !important;border-radius:3px !important;color:#545454 !important;cursor:pointer !important;line-height:1.3 !important;padding:14px 7px !important;text-align:center !important;}.lp_redeem-gift-code__feedback-message ~ *{display:none !important}.lp_redeem-gift-code__code{background:transparent !important;border:2px solid #dedede !important;border-radius:5px !important;box-shadow:none !important;bottom:0 !important;color:#545454 !important;font-size:21px !important;padding:14px 14px 11px 3.5em !important;position:absolute !important;top:0 !important;z-index:10 !important;}.lp_redeem-gift-code__code:hover,.lp_redeem-gift-code__code:focus,.lp_redeem-gift-code__code:active{-moz-appearance:none !important;-webkit-appearance:none !important;border-color:#2e9fcc !important}.lp_redeem-gift-code__input-hint{color:#ababab !important;font-size:21px !important;left:21px !important;margin:0 !important;position:absolute !important;top:11px !important}.lp_redeem-gift-code__button{background:#0075a3 !important;border-radius:4px !important;bottom:7px !important;color:#fff !important;cursor:pointer !important;display:inline-block;position:absolute !important;padding:7px 14px !important;right:7px !important;text-decoration:none !important;top:7px !important;z-index:11 !important;}.lp_redeem-gift-code__button:hover,.lp_redeem-gift-code__button:focus,.lp_redeem-gift-code__button:active{background:#2e9fcc !important;text-decoration:none !important}.lp_redeem-gift-code__code,.lp_redeem-gift-code__input-hint,.lp_redeem-gift-code__button{line-height:1.5 !important}.lp_timePassWidget-small{margin-right:7px !important;margin-bottom:7px !important;}.lp_timePassWidget-small .lp_timePass,.lp_timePassWidget-small .lp_timePass__front,.lp_timePassWidget-small .lp_timePass__back{height:112px !important;width:224px !important}.lp_timePassWidget-small .lp_timePass__front{background:url("../img/time-pass-background-small.png") 0 0/100% no-repeat !important;padding:7px 42px 7px 7px !important}.lp_timePassWidget-small .lp_timePass__back{background:url("../img/time-pass-background-flip-small.png") 0 0/100% no-repeat !important;padding:7px 7px 7px 42px !important}.lp_timePassWidget-small .lp_timePass_title{font-size:14px !important;margin-top:7px !important;margin-left:4px !important}.lp_timePassWidget-small .lp_timePass_description{font-size:11px !important;height:2.9em !important;margin-left:4px !important}.lp_timePassWidget-small .lp_timePass_actions{bottom:.5em !important;width:80% !important;width:calc(100% - 2em) !important;}.lp_timePassWidget-small .lp_timePass_actions .lp_purchaseLink.lp_button{font-size:21px !important;}.lp_timePassWidget-small .lp_timePass_actions .lp_purchaseLink.lp_button:before{font-size:36px !important}.lp_timePassWidget-small .lp_timePass_actions .lp_timePass_termsLink{padding:4px 7px !important}.lp_timePassWidget-small .lp_timePass__conditions th,.lp_timePassWidget-small .lp_timePass__conditions td{font-size:11px !important;padding-bottom:0 !important}.lp_timePassWidget-small .lp_timePass__conditions th{padding-right:7px !important}.lp_timePassWidget-small .lp_timePass_frontsideLink{font-size:11px !important;padding:4px 7px !important}h1{font-weight:400;margin:28px 0 14px;position:relative;text-align:center;}h1 .lp_prevNextLink{display:inline-block;height:1.5em;padding:0 7px;position:relative;vertical-align:text-top;width:18px;}h1 .lp_prevNextLink:hover .lp_triangle--right{border-left-color:#2e9fcc}h1 .lp_prevNextLink:hover .lp_triangle--left{border-right-color:#2e9fcc}h1 .lp_prevNextLink.lp_is-disabled{display:none}h1 .lp_triangle{border:11px solid #0075a3;top:.25em}h1 .lp_triangle--right{border-color:transparent transparent transparent #0075a3;left:inherit;right:0;}h1 .lp_triangle--left{border-color:transparent #0075a3 transparent transparent;left:-3px;}.lp_u_w-1-3{float:left;}.lp_u_w-1-3 h2{margin:14px 0 .4em;text-align:center}.lp_dashboardGraph{height:210px;margin:0 14px 0 0}.flot-x-axis div{margin-left:-1px;}.lp_dashboardGraph + .lp_statisticsRow{margin:11px 14px 18px 0}.lp_statisticsRow{background:#e3e3e3;border-radius:3px;margin:14px 14px 14px 0;}.lp_statisticsRow ul{margin:0 7px 0 0;padding:0}.lp_statisticsRow li{border-right:1px solid #f2f2f2;color:#ababab;float:left;list-style-type:none;margin:4px 0;padding:7px 7px 0 11px;text-align:right;}.lp_statisticsRow li:last-child{border:0 none}.lp_statisticsRow big{color:#545454;display:block;font-size:21px}.lp_statisticsRow small,.lp_statisticsRow big small{color:#ababab;font-size:14px}.lp_statisticsRow big small{font-size:.667em;line-height:.667;padding:0 0 0 2px}.lp_topBottomList{min-height:17em;margin:0 14px 14px 0;padding:0;}.lp_topBottomList li{clear:left;list-style-type:none;padding:2px 0 2px;}.lp_topBottomList li:hover{background-color:#feec86;border-radius:3px}.lp_topBottomList i{display:block;font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lp_topBottomList a{display:block}.lp_topBottomList .lp_sparklineBar{color:transparent}.lp_topBottomList .peity{float:right;margin:0 14px}.lp_topBottomList .lp_value{color:#ababab;float:left;margin:0 .4em 0 0;text-align:right;width:63px;}.lp_topBottomList .lp_value small{color:#ccc;font-size:11px;line-height:1;padding:0 0 0 2px}.lp_topBottomList .lp_value-narrow{width:42px}.lp_topBottomList__empty-state{display:inline-block;margin-top:7em;text-align:center;width:100%}.lp_post-statistics__container.lp_is-hidden{display:none}.lp_time-pass-lifecycle{margin-bottom:28px;}.lp_time-pass-lifecycle:nth-child(n+3){border-top:1px solid #dedede}.lp_time-pass-lifecycle .lp_statisticsRow ul{margin-left:7px;}.lp_time-pass-lifecycle .lp_statisticsRow ul + ul{border-top:1px solid #f2f2f2}.lp_time-pass-diagram__label{background:#f2f2f2;color:#ababab;font-size:10px;line-height:1.4;padding:.5em;position:absolute;text-align:center;white-space:nowrap}.lp_time-pass-diagram__sum{background:#f2f2f2;color:#545454;font-size:21px;line-height:1.4;padding:0 5px;position:absolute;text-align:center;white-space:nowrap;width:40px}.lp_enabled-revenue-models{background:#e3e3e3;border-radius:3px;margin-top:14px;margin-bottom:14px;padding:14px}ul.lp_row h2 + hr{height:2px}ul.lp_row li:nth-child(1) h2 + hr{background-color:#d4d4d4}ul.lp_row li:nth-child(2) h2 + hr{background-color:#a6a6a6}ul.lp_row li:nth-child(3) h2 + hr{background-color:#757575}.lp_spacer{height:2.4em}.lp_revenueModel{width:3.5em}span.lp_revenueModelLabel{background-color:#d4d4d4;color:#fff;padding:1px 4px}.select2-container,.select2-drop,.select2-search,.select2-search input{margin-bottom:32px;width:10rem}.lp_categoryTitle{min-width:8.75em}.lp_addTimePass.button{margin-bottom:14px}.lp_timePassWrapper{background:#e3e3e3;border-radius:3px;margin-bottom:14px;margin-left:35px;padding:14px;position:relative;}.lp_timePassWrapper .lp_timePass__idWrapper{background:#e3e3e3;border-radius:4px 0 0 4px;left:-49px;line-height:1.2;padding:7px 4px;position:absolute;text-align:center;width:42px}.lp_timePassWrapper .lp_timePass__id{font-size:28px}.lp_timePassWrapper .lp_timePass{margin-bottom:0}.lp_timePass_editorContainer{display:inline-block;vertical-align:top;}.lp_timePass_editorContainer .lp_timePass_formColumn{display:inline-block;margin-right:28px;vertical-align:top;}.lp_timePass_editorContainer .lp_timePass_formColumn td{padding:0;vertical-align:middle}.lp_timePass_editorContainer .lp_timePass_formColumn .lp_rowspan-label{padding-top:7px;vertical-align:top}.lp_timePass_editorContainer .lp_timePass_descriptionInput{height:4.75em}.lp_timePass_editorContainer .lp_saveLink{margin-top:1em;margin-left:.5em}.lp_timePass_editorContainer .lp_toggle_label_pass{width:3.5em;}.lp_timePass_editorContainer .lp_toggle_label_pass .lp_toggle_input:checked ~ .lp_toggle_text{background:#ccc}.lp_voucherRow{margin-top:7px;margin-right:14px}.lp_voucherList .lp_voucherRow{float:left}.button.button-primary.lp_u_m-l2{margin-left:28px}select.lp_is-disabled{appearance:none;background-color:transparent;border-color:transparent;color:#333;}select.lp_is-disabled::-ms-expand{display:none;}.lp_bulkOperation{width:600px;}.lp_bulkOperation span{line-height:2.25em}.lp_bulkOperation a{float:right}@media (max-width:1279px){.lp_editLink{margin-left:7px}ul.lp_row li:nth-child(3) br{display:none}}.lp_previewMode-1,.lp_previewMode-2{background-repeat:no-repeat;height:208px;margin:.5em 4em .25em 1.75em;width:300px}.lp_previewMode-1{background-image:url("../img/preview-mode-1.png");background-size:100%}.lp_previewMode-2{background-image:url("../img/preview-mode-2.png");background-size:100%}.lp_uiElementPreview{width:110px}.lp_uiElementPreview.lp--large{width:300px}.lp_codeSnippet{background-color:#fff;border:1px solid #ccc;border-radius:3px;margin:11px 0 0 125px;max-width:700px;padding:11px 14px 7px;position:relative;}.lp_codeSnippet.lp--large{margin-left:325px}.lp_codeSnippet.lp--shownAbove{margin:11px 0 7px;max-width:540px;}.lp_codeSnippet.lp--shownAbove .lp_triangle{border-color:#fff transparent transparent transparent;bottom:-8px;left:-9px;top:auto}.lp_codeSnippet.lp--shownAbove .lp_outerTriangle{border-right-color:transparent;border-top-color:#c4c4c4;bottom:-20px;left:70px;top:auto}.lp_triangle{border:9px solid #fff;border-color:transparent #fff transparent transparent;height:0;left:-8px;position:absolute;top:-9px;width:0;z-index:11}.lp_outerTriangle{border-right-color:#c4c4c4;border-width:10px;left:-20px;top:7px;z-index:10}table td{padding:7px;vertical-align:top}table pre{margin:0}.lp_u_w-1-2 ul.lp_u_clearfix{margin:1.25em 0 -.8em;}.lp_u_w-1-2 ul.lp_u_clearfix .lp_backgroundIconSpacer{width:84px}.lp_u_w-1-2 fieldset{min-height:165px;}.lp_u_w-1-2 fieldset form:first-of-type{margin-top:2em}.lp_u_w-1-2 fieldset form:first-of-type:not(*:root){display:inline}.lp_u_w-1-2.lp_sandboxCredentials[data-icon]:before,.lp_u_w-1-2.lp_liveCredentials[data-icon]:before{color:#dedede;position:absolute;z-index:-1}.lp_u_w-1-2.lp_sandboxCredentials[data-icon]:before{font-size:90px;left:26px;top:57px}.lp_u_w-1-2.lp_liveCredentials[data-icon]:before{font-size:75px;left:15px;top:72px}.lp_u_w-1-2.lp_liveCredentials[data-icon].lp_is-live:before{color:#52cb75}.lp_requestLiveCredentials{margin:.1em 0 0 1px}@media (max-width:1050px){.lp_u_w-1-2 .lp_sandboxCredentials[data-icon]:before{font-size:75px;left:24px;top:61px}.lp_u_w-1-2 .lp_liveCredentials[data-icon]:before{font-size:60px;left:14px;top:79px}.lp_u_w-1-2 .lp_backgroundIconSpacer{width:70px}.lp_u_w-1-2 input.lp_apiKeyInput[type=text],.lp_u_w-1-2 input.lp_merchantIdInput[type=text]{width:290px}}.lp_is-beta{color:#f00;font-weight:400}
+/* line 3, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_layout.scss */
+.lp_layout {
+  box-sizing: border-box; }
+
+/* line 9, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_layout.scss */
+.lp_layout__item {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top; }
+
+/**
+ * Box off e.g. a label to make it stand out, but be displayed inline.
+ *
+ */
+/* line 6, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_badge.scss */
+.lp_badge {
+  background: #d1d1d1;
+  border-radius: 3px;
+  color: white;
+  display: inline-block;
+  min-width: 11px;
+  padding: 1px 4px;
+  text-align: center;
+  text-transform: uppercase; }
+
+/* line 3, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tags.scss */
+h2, h3 {
+  font-weight: normal;
+  margin: 14px 0 7px; }
+
+/* line 12, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tags.scss */
+h3 {
+  font-size: 14px;
+  margin: 0; }
+
+/* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tags.scss */
+a {
+  text-decoration: none; }
+  /* line 24, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tags.scss */
+  a:active, a:focus, a:visited {
+    box-shadow: none;
+    outline: 0 none; }
+
+/* line 31, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tags.scss */
+dfn, .lp_api-credentials .lp_api-credentials__hint, .lp_top-bottom-list__empty-state {
+  color: #ababab;
+  font-style: italic; }
+
+/* line 2, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_lists.scss */
+.lp_navigation-tabs, .lp_navigation-tabs__item, .lp_statistics-row, .lp_statistics-row ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+/* line 2, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_border--0 {
+  border: 0 none; }
+
+/* line 6, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_border {
+  border: 1px solid #dbdbdb; }
+
+/* line 10, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_border-radius {
+  border-radius: 3px; }
+
+/* line 14, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_embossed {
+  box-shadow: 1px 1px 0 #f7f7f7; }
+
+/* line 20, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_block {
+  display: block; }
+
+/* line 24, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_inline {
+  display: inline; }
+
+/* line 28, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_inline-block {
+  display: inline-block; }
+
+/* line 32, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_hidden {
+  display: none !important; }
+
+/* line 38, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_fs {
+  font-size: 14px; }
+
+/* line 42, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_bold {
+  font-weight: bold; }
+
+/* line 48, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_left {
+  float: left; }
+
+/* line 52, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_right {
+  float: right; }
+
+/*
+ * Clearfix for modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the 'contenteditable' attribute is included
+ *    anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements that receive the 'clearfix' class.
+ * 2. The use of 'table' rather than 'block' is only necessary if using ':before' to contain the top-margins
+ *    of child elements.
+ */
+/* line 65, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_layout:before, .lp_clearfix:before, .lp_time-pass-lifecycle:before, .lp_layout:after, .lp_clearfix:after, .lp_time-pass-lifecycle:after {
+  content: ' ';
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+/* line 69, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_layout:after, .lp_clearfix:after, .lp_time-pass-lifecycle:after {
+  clear: both; }
+
+/* line 85, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_m0 {
+  margin: 0; }
+
+/* line 89, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_m {
+  margin: 14px; }
+
+/* line 95, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_m-0 {
+  margin: 14px 0; }
+
+/* line 99, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_m-0-0 {
+  margin: 14px 0 0; }
+
+/* line 103, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_m--0-center {
+  margin: 0 auto; }
+
+/* line 107, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_m-center {
+  margin: 14px auto; }
+
+/* line 113, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mt0 {
+  margin-top: 0; }
+
+/* line 117, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mt-- {
+  margin-top: 4px; }
+
+/* line 121, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mt- {
+  margin-top: 7px; }
+
+/* line 125, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mt {
+  margin-top: 14px; }
+
+/* line 129, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mt\+ {
+  margin-top: 28px; }
+
+/* line 133, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mt\+\+ {
+  margin-top: 42px; }
+
+/* line 139, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mr-- {
+  margin-right: 4px; }
+
+/* line 143, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mr- {
+  margin-right: 7px; }
+
+/* line 147, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mr {
+  margin-right: 14px; }
+
+/* line 151, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mr\+ {
+  margin-right: 28px; }
+
+/* line 157, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mb0 {
+  margin-bottom: 0; }
+
+/* line 161, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mb-- {
+  margin-bottom: 4px; }
+
+/* line 165, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mb- {
+  margin-bottom: 7px; }
+
+/* line 169, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mb {
+  margin-bottom: 14px; }
+
+/* line 173, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mb\+ {
+  margin-bottom: 28px; }
+
+/* line 179, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_ml- {
+  margin-left: 7px; }
+
+/* line 183, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_ml {
+  margin-left: 14px; }
+
+/* line 187, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_ml\+ {
+  margin-left: 28px; }
+
+/* line 193, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_pd- {
+  padding: 7px; }
+
+/* line 199, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_pd--0-05 {
+  padding: 0 7px; }
+
+/* line 205, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_pdt0 {
+  padding-top: 0; }
+
+/* line 209, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_pdt- {
+  padding-top: 7px; }
+
+/* line 215, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_pdr {
+  padding-right: 14px; }
+
+/* line 221, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_pdl0 {
+  padding-left: 0; }
+
+/* line 227, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_absolute {
+  position: absolute; }
+
+/* line 231, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_relative {
+  position: relative; }
+
+/* line 235, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_top--0 {
+  top: 0; }
+
+/* line 239, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_right--0 {
+  right: 0; }
+
+/* line 243, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_bottom--0 {
+  bottom: 0; }
+
+/* line 247, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_left--0 {
+  left: 0; }
+
+/* line 253, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_text-align--center {
+  text-align: center; }
+
+/* line 259, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_1 {
+  width: 100%; }
+
+/* line 263, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_4\/5 {
+  width: 80%; }
+
+/* line 267, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_3\/4 {
+  width: 75%; }
+
+/* line 271, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_2\/3 {
+  width: 66.6666%; }
+
+/* line 275, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_1\/2 {
+  width: 50%; }
+
+/* line 279, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_2\/5 {
+  width: 40%; }
+
+/* line 283, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_3\/8 {
+  width: 37.5%; }
+
+/* line 287, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_1\/3 {
+  width: 33.3333%; }
+
+/* line 291, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_1\/4 {
+  width: 25%; }
+
+/* line 295, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_1\/5 {
+  width: 20%; }
+
+/* line 299, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_1\/6 {
+  width: 16.6666%; }
+
+/* line 6, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+input[type=number].lp_input, input[type=text].lp_input, textarea.lp_input, select.lp_input, .lp_api-credentials .lp_api-credentials__input {
+  background: white;
+  border-radius: 4px;
+  border: 2px solid #dbdbdb;
+  box-shadow: none;
+  height: calc(2em + 4px);
+  line-height: 1;
+  margin: 0;
+  padding: 0.5em; }
+  /* line 16, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  input[type=number].lp_input:focus, input[type=text].lp_input:focus, textarea.lp_input:focus, select.lp_input:focus, .lp_api-credentials .lp_api-credentials__input:focus {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-color: #298cb3;
+    box-shadow: none; }
+  /* line 24, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  input[type=number].lp_input:hover, input[type=number].lp_input:active, input[type=text].lp_input:hover, input[type=text].lp_input:active, textarea.lp_input:hover, textarea.lp_input:active, select.lp_input:hover, select.lp_input:active, .lp_api-credentials .lp_api-credentials__input:hover, .lp_api-credentials .lp_api-credentials__input:active {
+    border-color: #298cb3;
+    box-shadow: none; }
+  /* line 29, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  input[type=number].lp_input:disabled, input[type=text].lp_input:disabled, textarea.lp_input:disabled, select.lp_input:disabled, .lp_api-credentials .lp_api-credentials__input:disabled {
+    border-color: transparent;
+    cursor: not-allowed; }
+
+/* line 35, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+textarea.lp_input {
+  height: auto;
+  resize: vertical; }
+
+/* line 40, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+select.lp_input {
+  margin-left: 2px;
+  padding: 0.25em;
+  position: relative;
+  top: -2px; }
+
+/* line 50, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+input[type=text].lp_number-input {
+  padding: 0.25em 0.35em;
+  text-align: right;
+  width: 4em; }
+
+/* line 57, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.lp_iconized-input {
+  color: #dbdbdb;
+  font-size: 2em;
+  margin: 0.04em 0 0 0.35em;
+  position: absolute; }
+
+/* line 65, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.select2-container {
+  margin-left: 2px;
+  width: 100%; }
+  /* line 69, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .select2-container .select2-choice {
+    border-color: #dbdbdb;
+    border-radius: 4px;
+    border-width: 2px; }
+  /* line 75, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .select2-container.select2-container-active .select2-choice {
+    border-color: #298cb3;
+    box-shadow: none;
+    color: #ababab; }
+
+/* line 82, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.select2-dropdown-open .select2-choice {
+  border-bottom-color: transparent;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
+
+/* line 90, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.select2-drop.select2-drop-active {
+  border-color: #298cb3;
+  border-width: 0 2px 2px; }
+/* line 95, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.select2-drop .select2-search {
+  padding-left: 0;
+  padding-right: 0; }
+  /* line 99, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .select2-drop .select2-search input {
+    background: #e3e3e3;
+    border: 0 none;
+    box-shadow: none; }
+    /* line 104, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+    .select2-drop .select2-search input:focus {
+      border-color: #298cb3; }
+/* line 110, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.select2-drop .select2-results {
+  margin: 0;
+  padding: 0; }
+  /* line 114, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .select2-drop .select2-results li {
+    margin-bottom: 0; }
+    /* line 119, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+    .select2-drop .select2-results li:last-child {
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px; }
+  /* line 126, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .select2-drop .select2-results li:hover, .select2-drop .select2-results .select2-highlighted {
+    background: #feec86;
+    color: #545454; }
+/* line 132, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.select2-drop .select2-result-label {
+  padding: 7px; }
+
+/* line 141, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.lp_input::-webkit-input-placeholder, .lp_input::-moz-placeholder, .lp_input:-ms-input-placeholder {
+  color: #ababab;
+  line-height: 1; }
+
+/* line 148, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+input[type=text][required] + label[placeholder] {
+  display: block;
+  line-height: 1;
+  margin-bottom: 1em;
+  margin-top: calc(-3em - 2px);
+  pointer-events: none; }
+  /* line 155, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  input[type=text][required] + label[placeholder]:before {
+    background: rgba(255, 255, 255, 0);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 46%, #ffffff 47%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(46%, rgba(255, 255, 255, 0)), color-stop(47%, #ffffff));
+    background-repeat: no-repeat;
+    color: #ababab;
+    content: attr(placeholder);
+    display: inline-block;
+    margin: 1.4em 0 0 3em;
+    padding: 0 3px;
+    -webkit-transition: 0.3s ease-in-out;
+            transition: 0.3s ease-in-out;
+    white-space: nowrap; }
+
+/* line 171, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+input[type=text][required]:focus + label[placeholder]:before, input[type=text][required]:valid + label[placeholder]:before {
+  -webkit-transform: translate(-2px, -1.15em) scale(0.9, 0.9);
+      -ms-transform: translate(-2px, -1.15em) scale(0.9, 0.9);
+          transform: translate(-2px, -1.15em) scale(0.9, 0.9);
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s; }
+/* line 176, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+input[type=text][required]:focus + label[placeholder]:before {
+  color: #298cb3; }
+/* line 180, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+input[type=text][required]:invalid + label[placeholder][alt]:before {
+  content: attr(alt); }
+
+/* line 185, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.lp_iconized-input + input[type=text][required] + label[placeholder]:before {
+  margin: 1.4em 0 0 calc(3em - 1px); }
+
+/* line 191, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.ez-mark {
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.1em;
+  position: relative;
+  width: 1.5em;
+  z-index: 10;
+  zoom: 1; }
+  /* line 201, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .ez-mark input[type=radio], .ez-mark input[type=checkbox] {
+    cursor: pointer;
+    left: -0.3rem;
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    position: relative;
+    top: -0.75rem; }
+  /* line 209, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .ez-mark svg {
+    height: 1.5em;
+    position: absolute; }
+    /* line 213, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+    .ez-mark svg .frame {
+      fill: #c9c9c9; }
+    /* line 217, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+    .ez-mark svg .frameBack {
+      fill: white; }
+    /* line 221, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+    .ez-mark svg .check {
+      display: none; }
+    /* line 225, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+    .ez-mark svg .dot {
+      display: none; }
+
+/* line 234, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.ez-mark :hover svg .frame, label:hover .ez-mark svg .frame {
+  fill: #298cb3; }
+
+/* line 240, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.ez-checked.ez-checkbox svg .check, .ez-checked.ez-radio svg .dot {
+  display: block;
+  fill: #636363; }
+
+/* line 245, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.ez-hide {
+  opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); }
+
+/* line 251, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.lp_edit-link {
+  margin-left: 14px;
+  padding: 7px 0; }
+
+/* line 258, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.lp_badge--revenue-model {
+  color: #0075a3;
+  width: 28px; }
+  /* line 262, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .lp_badge--revenue-model input[type=radio] {
+    display: none; }
+  /* line 266, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .lp_badge--revenue-model:hover {
+    background: #298cb3;
+    color: white; }
+  /* line 271, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .lp_badge--revenue-model.lp_is-disabled {
+    visibility: hidden; }
+  /* line 275, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+  .lp_badge--revenue-model.lp_is-selected {
+    background: #52cb75;
+    color: white; }
+    /* line 279, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+    .lp_badge--revenue-model.lp_is-selected:hover {
+      background: #52cb75;
+      cursor: default; }
+
+/* line 289, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.lp_fieldset, .lp_api-credentials .lp_api-credentials__fieldset {
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  box-shadow: 1px 1px 0 #f7f7f7;
+  margin: 14px 14px 14px 0;
+  padding: 7px 14px 14px; }
+
+/* line 298, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.lp_legend, .lp_api-credentials .lp_api-credentials__legend {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: -7px;
+  padding: 0 7px; }
+
+/* line 305, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_forms.scss */
+.lp_form-group-separator {
+  border-top: 1px solid #dbdbdb;
+  border-right: 0 none;
+  border-bottom: 1px solid #f7f7f7;
+  border-left: 0 none;
+  margin: 14px 0 42px; }
+
+/* line 2, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_greybox.scss */
+.lp_greybox, .lp_greybox--outline {
+  background: #e3e3e3;
+  border-radius: 3px;
+  padding: 14px; }
+
+/* line 8, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_greybox.scss */
+.lp_greybox--outline {
+  background: transparent;
+  border: 2px solid #e3e3e3; }
+
+@font-face {
+  font-family: laterpay-wordpress-icons;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/laterpay-wordpress-icons_v099.eot');
+  src: url('../fonts/laterpay-wordpress-icons_v099.eot?#iefix') format('embedded-opentype'), url('../fonts/laterpay-wordpress-icons_v099.woff') format('woff'), url('../fonts/laterpay-wordpress-icons_v099.ttf') format('truetype'), url('../fonts/laterpay-wordpress-icons_v099.svg#laterpay-wordpress-icons') format('svg'); }
+
+/* line 17, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_vector_icons.scss */
+[data-icon]:before, .lp_vectorIcon {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  content: attr(data-icon);
+  font-family: laterpay-wordpress-icons !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+  padding-right: 0.25em;
+  position: relative;
+  speak: none;
+  text-transform: none !important;
+  top: 0.1em; }
+
+/* line 33, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_vector_icons.scss */
+.icon {
+  height: 42px;
+  width: 42px;
+  display: inline-block;
+  fill: currentColor; }
+
+/* line 3, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tooltips.scss */
+.lp_tooltip {
+  display: inline-block;
+  position: relative; }
+  /* line 8, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tooltips.scss */
+  .lp_tooltip:before, .lp_tooltip:after {
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    pointer-events: none;
+    position: absolute;
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    -webkit-transition-delay: 0;
+            transition-delay: 0;
+    -webkit-transition: 0.25s ease;
+            transition: 0.25s ease;
+    visibility: hidden;
+    z-index: 100; }
+  /* line 20, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tooltips.scss */
+  .lp_tooltip:before {
+    background: transparent;
+    border: 6px solid transparent;
+    border-top-color: #545454;
+    content: '';
+    margin-bottom: -12px;
+    position: absolute;
+    z-index: 110; }
+  /* line 31, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tooltips.scss */
+  .lp_tooltip:after {
+    background: #545454;
+    border-radius: 3px;
+    color: white;
+    content: attr(data-tooltip);
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 1.3em;
+    margin-left: -18px;
+    padding: 7px;
+    text-align: left;
+    text-transform: none;
+    width: 10em; }
+  /* line 49, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tooltips.scss */
+  .lp_tooltip:hover:before, .lp_tooltip:hover:after, .lp_tooltip:focus:before, .lp_tooltip:focus:after {
+    opacity: 1;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    visibility: visible;
+    -webkit-transform: translateY(-8px);
+        -ms-transform: translateY(-8px);
+            transform: translateY(-8px); }
+  /* line 56, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_tooltips.scss */
+  .lp_tooltip:hover:before, .lp_tooltip:hover:after {
+    bottom: 100%;
+    left: 50%;
+    -webkit-transition-delay: 100ms;
+            transition-delay: 100ms; }
+
+/* SVG loading indicator */
+/* line 2, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+.lp_loading-indicator {
+  background-image: url(../img/spinner.svg);
+  background-size: contain;
+  height: 28px;
+  margin: 28px auto;
+  opacity: 0.7;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  position: relative;
+  width: 28px;
+  -webkit-animation: rotate 1.2s infinite steps(12);
+          animation: rotate 1.2s infinite steps(12); }
+
+@-webkit-keyframes rotate {
+  /* line 14, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+
+  /* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes rotate {
+  /* line 14, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+
+  /* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+/**
+ * Dropdown component
+ */
+/* line 5, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+.lp_dropdown {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  /* upward-pointing arrow */ }
+  /* line 11, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+  .lp_dropdown .lp_triangle {
+    border-color: transparent;
+    border-style: solid;
+    border-width: 13px;
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+    z-index: 11;
+    border-bottom-color: white;
+    border-top-width: 0;
+    left: -13px;
+    top: 3px;
+    /* border for upward-pointing arrow */ }
+    /* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+    .lp_dropdown .lp_triangle.lp_triangle--outer-triangle {
+      border-color: transparent;
+      border-style: solid;
+      border-width: 14px;
+      display: block;
+      height: 0;
+      position: absolute;
+      width: 0;
+      z-index: 11;
+      border-bottom-color: #dbdbdb;
+      border-top-width: 0;
+      left: 50%;
+      margin-left: -14px;
+      top: -15px; }
+
+/* line 27, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+.lp_dropdown__current-item {
+  color: #0075a3; }
+
+/* Reveal dropdown_list on hover or when state class 'is-expanded' is added */
+/* line 33, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+.lp_dropdown__list {
+  background: white;
+  border: 2px solid #dbdbdb;
+  border-radius: 3px;
+  display: none;
+  left: 50%;
+  margin-left: -3em;
+  padding: 7px;
+  position: absolute;
+  top: 42px;
+  width: 6em;
+  z-index: 100; }
+
+/* line 48, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+.lp_dropdown:hover .lp_dropdown__list, .lp_dropdown.lp_is-expanded .lp_dropdown__list {
+  display: block; }
+
+/* line 52, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+.lp_dropdown__item {
+  display: block;
+  line-height: 1;
+  padding: 7px;
+  white-space: nowrap;
+  /**
+     * Highlight the selected item and remove all styling that makes it look as if you could interact with it
+     */ }
+  /* line 61, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+  .lp_dropdown__item.lp_is-selected {
+    color: #ababab; }
+    /* line 64, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_dropdown.scss */
+    .lp_dropdown__item.lp_is-selected:hover {
+      color: #ababab;
+      cursor: default; }
+
+/* line 2, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_page {
+  min-height: 100%; }
+
+/* line 6, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_pagewrap {
+  max-width: 1232px;
+  overflow-x: hidden;
+  padding: 14px; }
+
+/* line 14, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_navigation {
+  background-color: white;
+  border-bottom: 1px solid #c9c9c9;
+  box-shadow: 0 1px 0 white;
+  left: -20px;
+  padding-right: 20px;
+  padding-top: 28px;
+  position: relative;
+  width: 100%; }
+
+/* line 25, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_navigation-tabs {
+  margin-left: 21px; }
+
+/* line 31, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_navigation-tabs__item {
+  display: inline-block;
+  margin-left: 14px;
+  position: relative;
+  top: 2px; }
+  /* line 39, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_navigation-tabs__item:first-child {
+    margin-left: 0; }
+  /* line 43, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_navigation-tabs__item:hover .lp_navigation-tabs__submenu {
+    display: inline-block;
+    position: absolute; }
+  /* line 48, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_navigation-tabs__item:hover .lp_navigation-tabs__link {
+    color: #0075a3; }
+    /* line 51, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+    .lp_navigation-tabs__item:hover .lp_navigation-tabs__link:hover {
+      color: #298cb3; }
+  /* line 56, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_navigation-tabs__item.lp_is-current {
+    background-color: #f2f2f2;
+    border-radius: 4px 4px 0 0;
+    border-top: 4px solid #52cb75; }
+    /* line 62, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+    .lp_navigation-tabs__item.lp_is-current:hover > .lp_navigation-tabs__link, .lp_navigation-tabs__item.lp_is-current > .lp_navigation-tabs__link {
+      color: #545454;
+      cursor: default;
+      font-weight: bold; }
+
+/* line 70, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_navigation-tabs__link {
+  color: #ababab;
+  display: block;
+  font-size: 14px;
+  min-width: 105px;
+  padding: 7px 14px 11px;
+  text-align: center; }
+
+/* line 79, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_navigation-tabs__submenu {
+  background: white;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.21);
+  border-radius: 0 0 3px 3px;
+  display: none;
+  margin-top: -3px !important; }
+
+/* line 87, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_navigation-tabs__item.lp_is-current .lp_navigation-tabs__submenu {
+  background: #f2f2f2; }
+
+/* line 93, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_plugin-mode-indicator {
+  position: absolute;
+  right: 98px;
+  top: 4px; }
+  /* line 99, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_plugin-mode-indicator:before {
+    float: left;
+    font-size: 56px;
+    left: -2.75rem;
+    line-height: 0;
+    position: relative;
+    top: 1.8rem; }
+  /* line 108, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_plugin-mode-indicator .lp_plugin-mode-indicator__title {
+    color: #0075a3;
+    font-size: 28px; }
+  /* line 119, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_plugin-mode-indicator:active:before, .lp_plugin-mode-indicator:active .lp_plugin-mode-indicator__title, .lp_plugin-mode-indicator:active i, .lp_plugin-mode-indicator:focus:before, .lp_plugin-mode-indicator:focus .lp_plugin-mode-indicator__title, .lp_plugin-mode-indicator:focus i, .lp_plugin-mode-indicator:hover:before, .lp_plugin-mode-indicator:hover .lp_plugin-mode-indicator__title, .lp_plugin-mode-indicator:hover i {
+    color: #298cb3; }
+  /* line 124, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_plugin-mode-indicator i {
+    color: #0075a3;
+    font-style: normal; }
+  /* line 129, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_plugin-mode-indicator .lp_plugin-mode-indicator__text {
+    color: #ababab; }
+
+/* line 136, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+.lp_flash-message {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.55);
+  margin: 0;
+  opacity: 0.9;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+  position: fixed;
+  top: 2.5rem;
+  width: 96%;
+  z-index: 100; }
+
+/* line 148, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+#screen-meta {
+  position: absolute;
+  z-index: 10; }
+
+/* line 153, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+#contextual-help-link-wrap {
+  z-index: 11; }
+
+@media (max-width: 1279px) {
+  /* line 160, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_backend_layout.scss */
+  .lp_pagewrap {
+    padding: 0; } }
+
+/* line 3, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+.lp_toggle {
+  display: inline-block;
+  margin: 0 0.25em;
+  position: relative;
+  top: -0.25em;
+  vertical-align: middle; }
+  /* line 10, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+  .lp_toggle form {
+    margin: 0; }
+
+/* line 16, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+.lp_toggle__label {
+  background: #f2f2f2;
+  background: -moz-linear-gradient(top, #f2f2f2 0%, #ffffff 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f2f2), color-stop(100%, #ffffff));
+  border-radius: 1em;
+  box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-sizing: content-box;
+  cursor: pointer;
+  display: inline-block;
+  height: 1.75em;
+  margin: 0.25em 0.25em 0;
+  padding: 0.25em;
+  position: relative;
+  vertical-align: top;
+  width: 5em; }
+
+/* line 34, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+.lp_toggle__handle {
+  border-radius: 1em;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  height: 1.55em;
+  left: 0.35em;
+  background: white;
+  background: -moz-linear-gradient(top, #ffffff 40%, #f2f2f2 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(40%, #ffffff), color-stop(100%, #f2f2f2));
+  position: absolute;
+  top: 0.35em;
+  -webkit-transition: left 0.15s ease-out;
+          transition: left 0.15s ease-out;
+  width: 1.55em; }
+  /* line 45, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+  .lp_toggle__handle:before {
+    border-radius: 50%;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+    content: '';
+    height: 1.1em;
+    left: 50%;
+    background: #f2f2f2;
+    background: -moz-linear-gradient(top, #f2f2f2 0%, #e3e3e3 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f2f2), color-stop(100%, #e3e3e3));
+    margin: -0.55em 0 0 -0.55em;
+    position: absolute;
+    top: 50%;
+    width: 1.1em; }
+
+/* line 59, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+.lp_toggle__input {
+  left: 0;
+  opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  position: absolute;
+  top: 0; }
+  /* line 65, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+  .lp_toggle__input:checked ~ .lp_toggle__text {
+    background-color: #50c371;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2); }
+    /* line 69, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+    .lp_toggle__input:checked ~ .lp_toggle__text:before {
+      opacity: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); }
+    /* line 73, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+    .lp_toggle__input:checked ~ .lp_toggle__text:after {
+      opacity: 1;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); }
+  /* line 78, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+  .lp_toggle__input:checked ~ .lp_toggle__handle {
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+    left: auto;
+    right: 0.4em; }
+
+/* line 87, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+.lp_toggle__text {
+  background: #c9c9c9;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+  display: block;
+  font-size: 10px;
+  height: 100%;
+  position: relative;
+  text-transform: uppercase;
+  -webkit-transition-property: opacity background;
+          transition-property: opacity background;
+  -webkit-transition: 0.15s ease-out;
+          transition: 0.15s ease-out; }
+  /* line 100, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+  .lp_toggle__text:before, .lp_toggle__text:after {
+    color: white;
+    font-size: 1.25em;
+    font-weight: 600;
+    line-height: 1;
+    margin-top: -0.5em;
+    position: absolute;
+    top: 50%;
+    -webkit-transition: inherit;
+            transition: inherit; }
+  /* line 112, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+  .lp_toggle__text:before {
+    content: attr(data-off);
+    right: 0.75em; }
+  /* line 118, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_toggle.scss */
+  .lp_toggle__text:after {
+    content: attr(data-on);
+    left: 0.75em;
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); }
+
+/* line 3, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_legal_docs_viewer.scss */
+.lp_legal-docs-iframe {
+  background: #525457;
+  display: none;
+  margin-top: 14px;
+  position: relative; }
+
+/* line 10, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_legal_docs_viewer.scss */
+.lp_legal-docs-iframe__close-link {
+  background-color: #636363;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.21);
+  color: #525457;
+  font-size: 21px;
+  font-weight: bold;
+  height: 21px;
+  line-height: 19.6px;
+  padding: 7px;
+  position: absolute;
+  right: 23.338px;
+  text-align: center;
+  top: 14px;
+  width: 21px; }
+  /* line 26, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_legal_docs_viewer.scss */
+  .lp_legal-docs-iframe__close-link:hover {
+    background-color: #298cb3; }
+
+/* line 4, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_purchase_button.scss */
+.lp_purchase-link {
+  border: none !important;
+  display: block !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1.3 !important;
+  margin: 14px 0 0 !important;
+  position: relative !important;
+  text-decoration: none !important;
+  z-index: 10 !important;
+  /**
+     * LaterPay logo (rendered in pseudo element from icon font)
+     *
+     * 1. Nullify line-height to avoid icon overlapping other elements
+     */ }
+  /* line 22, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_purchase_button.scss */
+  .lp_purchase-link:before {
+    font-size: 28px !important;
+    line-height: 0 !important;
+    /* 1 */
+    margin: 0 -4px 0 0 !important;
+    position: relative !important;
+    top: 9px !important; }
+
+/* line 32, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_purchase_button.scss */
+.lp_purchase-link__currency {
+  font-size: 0.5em !important;
+  padding: 0 0 0 1ch !important;
+  position: relative !important;
+  text-decoration: none !important;
+  vertical-align: text-top !important; }
+
+/* line 43, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_purchase_button.scss */
+.lp_button, .lp_purchase-button {
+  background: #52cb75;
+  background: -moz-linear-gradient(top, #52cb75 0%, #50c371 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #52cb75), color-stop(100%, #50c371));
+  border: 1px solid #50c371 !important;
+  border-color: #359c52 #40ba62 !important;
+  border-radius: 4px !important;
+  border-width: 0 1px 2px 0 !important;
+  color: white !important;
+  cursor: pointer !important;
+  float: right !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 28px !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+  padding: 4px 4px 0 0 !important;
+  text-decoration: none !important;
+  text-shadow: 0 -1px 0 #359c52 !important;
+  white-space: nowrap !important;
+  /**
+     * LaterPay logo (rendered in pseudo element from icon font)
+     *
+     * 1. Set font-size in pixels, because IE gets confused with em here
+     * 2. Nullify line-height to avoid icon overlapping other elements
+     */ }
+  /* line 69, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_purchase_button.scss */
+  .lp_button:before, .lp_purchase-button:before {
+    font-size: 49px !important;
+    /* 1 */
+    left: -4px !important;
+    line-height: 0 !important;
+    /* 2 */
+    margin: 0 -7px 0 0 !important;
+    position: relative !important;
+    top: 15.4px !important; }
+  /* line 80, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_purchase_button.scss */
+  .lp_button:hover, .lp_button:focus, .lp_button:active, .lp_purchase-button:hover, .lp_purchase-button:focus, .lp_purchase-button:active {
+    background: #57d67b;
+    background: -moz-linear-gradient(top, #57d67b 0%, #52cb75 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #57d67b), color-stop(100%, #52cb75));
+    color: white !important;
+    text-decoration: none !important; }
+  /* line 87, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_purchase_button.scss */
+  .lp_button:focus, .lp_button:active, .lp_purchase-button:focus, .lp_purchase-button:active {
+    border-top-color: transparent !important;
+    border-width: 2px 1px 0 0 !important; }
+
+@media (max-width: 567px) {
+  /* line 96, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_purchase_button.scss */
+  .lp_button {
+    margin-left: 38.5px !important;
+    margin-top: 7px !important; } }
+
+/* line 2, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass {
+  color: #545454;
+  /* make sure, the text is not white by default */
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  margin-bottom: 14px;
+  margin-right: 14px; }
+
+/* line 14, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass, .lp_time-pass__front, .lp_time-pass__back {
+  height: 154px;
+  width: 308px; }
+
+/**
+ * Time pass preview, rendered like a real-world ticket
+ *
+ * 1. Allow child elements (e.g. the purchase button) to be positioned at the bottom of the pass
+ * 2. Avoid padding to be added to height and width
+ */
+/* line 26, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__front, .lp_time-pass__back {
+  box-sizing: border-box;
+  /* 2 */
+  position: absolute;
+  /* 1 */ }
+
+/* line 31, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__front {
+  background: url('../img/time-pass-background.png') 0 0/100% no-repeat;
+  padding: 14px 56px 14px 14px; }
+
+/* line 36, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__back {
+  background: url('../img/time-pass-background-flip.png') 0 0/100% no-repeat;
+  display: none;
+  padding: 14px 14px 14px 56px; }
+
+/* line 44, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass.lp_is-flipped .lp_time-pass__front {
+  display: none; }
+/* line 48, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass.lp_is-flipped .lp_time-pass__back {
+  display: block; }
+
+/**
+ * Time pass title, usually something descriptive like "24h News Pass"
+ *
+ * 1. Restrict title to one line
+ * 2. Cut off excess text, if supported by browser, with an ellipsis
+ */
+/* line 61, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__title {
+  color: #545454;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 21px !important;
+  line-height: 1.3 !important;
+  margin: 0 0 7px !important;
+  overflow: hidden;
+  /* 2 */
+  text-overflow: ellipsis;
+  /* 2 */
+  white-space: nowrap;
+  /* 1 */ }
+
+/**
+ * Time pass description
+ *
+ * 1. Normalize appearance
+ * 2. Restrict description to three lines
+ */
+/* line 79, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__description {
+  color: #ababab;
+  font-size: 14px !important;
+  /* 1 */
+  height: 3.9em !important;
+  /* 2 */
+  line-height: 1.3 !important;
+  /* 1 */
+  margin: 0 !important;
+  /* 1 */
+  overflow: hidden;
+  /* 2 */ }
+
+/**
+ * Wrapper for purchase button and terms link
+ *
+ * 1. Take up full available width, i.e. 100% - padding of .lp_timePass
+ */
+/* line 94, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__actions {
+  bottom: 1em;
+  position: absolute;
+  width: 80%;
+  /* 1 - fallback for browsers that don't support calc */
+  width: calc(100% - 4em);
+  /* 1 */ }
+  /* line 100, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass__actions .lp_purchase-button {
+    display: inline-block !important;
+    float: none !important;
+    vertical-align: middle !important; }
+  /* line 106, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass__actions .lp_time-pass__terms {
+    border: none !important;
+    color: #0075a3 !important;
+    display: inline-block;
+    padding: 7px 14px;
+    text-decoration: none;
+    vertical-align: middle; }
+    /* line 114, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_time-pass__actions .lp_time-pass__terms:hover {
+      color: #298cb3 !important; }
+
+/* line 122, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__back .lp_time-pass__conditions {
+  border: none !important;
+  border-collapse: collapse !important;
+  font-size: 14px;
+  line-height: 1.3;
+  margin: 0 !important; }
+  /* line 130, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass__back .lp_time-pass__conditions .lp_time-pass__condition-title, .lp_time-pass__back .lp_time-pass__conditions .lp_time-pass__condition-value {
+    border: 0 none !important;
+    padding: 0 0 4px 0 !important;
+    vertical-align: top !important;
+    line-height: 1.3 !important;
+    font-size: 14px !important;
+    text-transform: none; }
+  /* line 139, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass__back .lp_time-pass__conditions .lp_time-pass__condition-title {
+    color: #ababab !important;
+    font-weight: normal !important;
+    padding-right: 14px !important;
+    text-align: left !important; }
+  /* line 146, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass__back .lp_time-pass__conditions .lp_time-pass__condition-value {
+    text-align: left !important; }
+
+/* line 151, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass-widget .lp_time-pass__conditions {
+  margin-top: -25px !important; }
+
+/* line 155, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__front-side-link {
+  background: #0075a3;
+  border: none !important;
+  border-radius: 999em;
+  color: white !important;
+  left: -7px;
+  line-height: 1.3 !important;
+  padding: 7px 14px;
+  position: absolute;
+  text-decoration: none !important;
+  top: 14px;
+  -webkit-transition: all 0.25s;
+          transition: all 0.25s; }
+  /* line 168, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass__front-side-link:hover {
+    background: #298cb3;
+    color: white;
+    left: -14px; }
+
+/* line 177, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_gift-card {
+  background: white url('../img/gift-card-background.png') 0 0/100% no-repeat !important;
+  box-sizing: border-box !important;
+  color: #ababab !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  height: 252px !important;
+  line-height: 1.5 !important;
+  margin: 14px !important;
+  padding: 21px 21px 21px 168px !important;
+  width: 480px !important;
+  /**
+     * 1. Cut off too long texts
+     */
+  /**
+     * 1. Cut off too long texts
+     */ }
+  /* line 193, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_gift-card .lp_gift-card__title {
+    color: #d82b17 !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-size: 21px !important;
+    font-style: normal !important;
+    margin: 7px 0 14px !important;
+    overflow: hidden !important;
+    /* 1 */
+    text-overflow: ellipsis !important;
+    /* 1 */
+    white-space: nowrap !important;
+    /* 1 */ }
+  /* line 207, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_gift-card .lp_gift-card__description {
+    margin: 0 0 14px !important;
+    max-height: 42px !important;
+    /* 1 */
+    overflow: hidden !important;
+    /* 1 */
+    text-overflow: ellipsis !important;
+    /* 1 */ }
+  /* line 214, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_gift-card .lp_gift-card___conditions {
+    border-collapse: collapse !important;
+    font-size: 11px !important;
+    margin: 0 0 14px !important;
+    width: auto !important; }
+    /* line 222, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_gift-card .lp_gift-card___conditions, .lp_gift-card .lp_gift-card___conditions .lp_gift-card___conditions-title, .lp_gift-card .lp_gift-card___conditions .lp_gift-card___conditions-value {
+      border: 0 none !important;
+      color: #ababab !important;
+      font-weight: normal !important;
+      letter-spacing: normal !important;
+      line-height: 1.5 !important; }
+    /* line 230, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_gift-card .lp_gift-card___conditions .lp_gift-card___conditions-title {
+      font-weight: normal !important;
+      padding: 0 7px 4px 0 !important;
+      text-transform: none !important; }
+    /* line 236, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_gift-card .lp_gift-card___conditions .lp_gift-card___conditions-value {
+      padding: 0 0 4px !important; }
+  /* line 241, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_gift-card .lp_purchase-button {
+    float: left !important; }
+  /* line 245, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_gift-card .lp_voucher__code {
+    margin: 0 4px;
+    padding: 0 7px; }
+
+/* line 251, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_gift-card__buy-another {
+  margin-left: 168px;
+  padding: 14px; }
+
+/* the six-character voucher code */
+/* line 259, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_voucher__code {
+  background: white;
+  border: 2px solid orange;
+  color: orange;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 21px;
+  margin-right: 4px;
+  padding: 7px; }
+
+/* price and number of times redeemed */
+/* line 271, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_voucher__code-infos {
+  display: inline-block; }
+
+/* line 275, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_vouchers .lp_voucher__code-infos {
+  vertical-align: top; }
+
+/**
+ * time pass widget
+*/
+/* line 287, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass-widget .lp_time-pass {
+  display: block !important;
+  margin: 14px !important; }
+  /* line 291, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget .lp_time-pass:last-child {
+    margin-bottom: 0 !important; }
+
+/* line 298, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass__introductory-text, .lp_time-pass__call-to-action-text {
+  margin: 0 0 14px !important; }
+
+/**
+ * voucher code section
+ *
+ * 1. By default, only a hint text is visible
+ * 2. The input is transparent and overlayed over the hint text
+ * 3. When the input is focused, it is rendered like an input, the hint text is hidden, and the button is shown
+ * 4. Make sure the input is wide enough for the six character voucher code
+ * 5. Prevent the input to be wider than the time pass and look weird
+ * 6. Give a reasonable height to the wrapper to allow positioning the elements with top, bottom, left, right
+ */
+/* line 313, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_voucher__feedback-message {
+  background: #feec86 !important;
+  border-radius: 3px !important;
+  color: #545454 !important;
+  cursor: pointer !important;
+  line-height: 1.3 !important;
+  padding: 14px 7px !important;
+  text-align: center !important; }
+  /* line 322, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_voucher__feedback-message ~ * {
+    display: none !important; }
+
+/* line 330, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__wrapper, .lp_redeem-code__value {
+  height: 53px !important;
+  /* 6 - TODO: this is a magic number that should not be required */
+  position: relative !important;
+  width: 300px !important; }
+
+/* line 337, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__wrapper {
+  background: white;
+  border-radius: 6px;
+  margin: 1em 0; }
+
+/* line 343, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__feedback-message {
+  background: #feec86 !important;
+  border-radius: 3px !important;
+  color: #545454 !important;
+  cursor: pointer !important;
+  line-height: 1.3 !important;
+  padding: 14px 7px !important;
+  text-align: center !important; }
+  /* line 352, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_redeem-code__feedback-message ~ * {
+    display: none !important; }
+
+/**
+ * input for gift code
+ */
+/* line 360, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__value {
+  background: transparent !important;
+  border: 2px solid #dbdbdb !important;
+  border-radius: 5px !important;
+  box-sizing: border-box;
+  box-shadow: none !important;
+  /* 1 */
+  bottom: 0 !important;
+  color: #545454 !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 21px !important;
+  height: 53px !important;
+  outline: none !important;
+  padding: 14px 14px 11px 3.5em !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 300px !important;
+  z-index: 10 !important; }
+  /* line 380, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_redeem-code__value:hover, .lp_redeem-code__value:focus, .lp_redeem-code__value:active {
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    border-color: #298cb3 !important; }
+
+/* line 387, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__input-hint {
+  color: #ababab !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 21px !important;
+  left: 21px !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  position: absolute !important;
+  top: 11px !important; }
+
+/* line 398, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__button {
+  background: #0075a3 !important;
+  border-radius: 4px !important;
+  bottom: 7px !important;
+  color: white !important;
+  cursor: pointer !important;
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 18px !important;
+  padding: 7px 14px !important;
+  position: absolute !important;
+  right: 7px !important;
+  text-decoration: none !important;
+  top: 7px !important;
+  z-index: 11 !important; }
+  /* line 416, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_redeem-code__button:hover, .lp_redeem-code__button:focus, .lp_redeem-code__button:active {
+    background: #298cb3 !important;
+    text-decoration: none !important; }
+
+/* line 424, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__value, .lp_redeem-code__button {
+  line-height: 1.5 !important; }
+
+/**
+ * input for voucher code
+ *
+ * 1. Remove ugly browser default styles
+ */
+/* line 433, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__value.lp_is-hidden {
+  /* 1 */
+  background: transparent !important;
+  border: 2px solid transparent !important;
+  color: transparent !important;
+  /**
+     * button for redeeming voucher code
+     */ }
+  /* line 439, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_redeem-code__value.lp_is-hidden:hover {
+    border-color: transparent !important; }
+    /* line 442, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_redeem-code__value.lp_is-hidden:hover ~ .lp_redeem-code__hint {
+      color: #298cb3 !important; }
+  /* line 447, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_redeem-code__value.lp_is-hidden:focus {
+    background: transparent !important;
+    border: 2px solid #298cb3 !important;
+    /* 3 */
+    color: #545454 !important;
+    /* 3 */
+    /* hide / show siblings, when the voucher input is focused */ }
+    /* line 453, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_redeem-code__value.lp_is-hidden:focus ~ .lp_redeem-code__hint {
+      visibility: hidden !important;
+      /* 3 */ }
+    /* line 457, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_redeem-code__value.lp_is-hidden:focus ~ .lp_redeem-code__input-hint {
+      display: block !important;
+      /* 3 */ }
+    /* line 461, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_redeem-code__value.lp_is-hidden:focus ~ .lp_redeem-code__button {
+      display: block !important;
+      /* 3 */ }
+    /* line 465, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_redeem-code__value.lp_is-hidden:focus ~ .lp_redeem-code__value {
+      background: transparent !important;
+      display: inline-block !important;
+      /* 3 */ }
+      /* line 471, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+      .lp_redeem-code__value.lp_is-hidden:focus ~ .lp_redeem-code__value:hover, .lp_redeem-code__value.lp_is-hidden:focus ~ .lp_redeem-code__value:focus, .lp_redeem-code__value.lp_is-hidden:focus ~ .lp_redeem-code__value:active {
+        background: #298cb3 !important;
+        text-decoration: none !important; }
+  /* line 478, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_redeem-code__value.lp_is-hidden ~ .lp_redeem-code__input-hint {
+    display: none !important; }
+  /* line 485, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_redeem-code__value.lp_is-hidden ~ .lp_redeem-code__button {
+    display: none !important; }
+
+/* line 490, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_redeem-code__hint {
+  color: #0075a3 !important;
+  display: block !important;
+  /* 1 */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 18px !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+  visibility: visible !important;
+  /* 1 */ }
+
+/**
+ * time pass widget variant 'small'
+ * reduced height, width, font-size, margins, and paddings
+ */
+/* line 504, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+.lp_time-pass-widget--small {
+  margin-bottom: 7px !important;
+  margin-right: 7px !important; }
+  /* line 510, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget--small .lp_time-pass, .lp_time-pass-widget--small .lp_time-pass__front, .lp_time-pass-widget--small .lp_time-pass__back {
+    height: 112px !important;
+    width: 224px !important; }
+  /* line 515, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget--small .lp_time-pass__front {
+    background: url(../img/time-pass-background-small.png) 0 0/100% no-repeat !important;
+    padding: 7px 42px 7px 7px !important; }
+  /* line 520, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget--small .lp_time-pass__back {
+    background: url(../img/time-pass-background-flip-small.png) 0 0/100% no-repeat !important;
+    padding: 7px 7px 7px 42px !important; }
+  /* line 525, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget--small .lp_time-pass__title {
+    font-size: 14px !important;
+    margin-left: 4px !important;
+    margin-top: 7px !important; }
+  /* line 531, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget--small .lp_time-pass__description {
+    font-size: 11px !important;
+    height: 2.9em !important;
+    margin-left: 4px !important; }
+  /* line 537, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget--small .lp_time-pass__actions {
+    bottom: 0.5em !important;
+    width: 80% !important;
+    /* 1 - fallback for browsers that don't support calc */
+    width: calc(100% - 2em) !important;
+    /* 1 */ }
+    /* line 542, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_time-pass-widget--small .lp_time-pass__actions .lp_purchase-button {
+      font-size: 21px !important; }
+      /* line 545, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+      .lp_time-pass-widget--small .lp_time-pass__actions .lp_purchase-button:before {
+        font-size: 36px !important; }
+    /* line 550, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_time-pass-widget--small .lp_time-pass__actions .lp_time-pass__terms {
+      padding: 4px 7px !important; }
+  /* line 555, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget--small .lp_time-pass__conditions {
+    margin: 0 !important; }
+    /* line 559, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_time-pass-widget--small .lp_time-pass__conditions .lp_time-pass__condition-title, .lp_time-pass-widget--small .lp_time-pass__conditions .lp_time-pass__condition-value {
+      font-size: 11px !important;
+      padding-bottom: 0 !important; }
+    /* line 564, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+    .lp_time-pass-widget--small .lp_time-pass__conditions .lp_time-pass__condition-title {
+      padding-right: 7px !important; }
+  /* line 569, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_time_pass.scss */
+  .lp_time-pass-widget--small .lp_time-pass__front-side-link {
+    font-size: 11px !important;
+    padding: 4px 7px !important; }
+
+/* line 5, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+.lp_api-credentials {
+  float: left;
+  position: relative;
+  width: 50%; }
+  /* line 11, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials:before {
+    color: #dbdbdb;
+    position: absolute;
+    z-index: -1; }
+  /* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials.lp_api-credentials--sandbox:before {
+    font-size: 90px;
+    left: 28px;
+    top: 76px; }
+  /* line 27, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials.lp_api-credentials--live:before {
+    font-size: 75px;
+    left: 14px;
+    top: 90px; }
+  /* line 34, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials.lp_api-credentials--live.lp_is-live:before {
+    color: #52cb75; }
+  /* line 39, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials .lp_api-credentials__fieldset {
+    min-height: 196px; }
+  /* line 54, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials .lp_api-credentials__list {
+    list-style: none;
+    margin: 28px 0 0 84px;
+    padding: 0; }
+  /* line 60, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials .lp_api-credentials__list-item {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0; }
+  /* line 66, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials .lp_api-credentials__list-item:last-child {
+    margin-bottom: 0; }
+  /* line 70, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials .lp_api-credentials__input {
+    padding-left: 39px;
+    width: 308px; }
+
+@media (max-width: 1050px) {
+  /* line 83, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials.lp_api-credentials--sandbox:before {
+    font-size: 75px;
+    top: 80px; }
+  /* line 88, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials.lp_api-credentials--live:before {
+    font-size: 60px;
+    left: 21px;
+    top: 94px; }
+  /* line 94, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/components/_api-credentials-form.scss */
+  .lp_api-credentials .lp_api-credentials__input {
+    width: 290px; } }
+
+/* line 4, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_dashboard-title {
+  font-weight: normal;
+  margin: 42px 0 28px;
+  position: relative;
+  text-align: center; }
+
+/* line 11, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_dashboard-title__arrow-link {
+  margin-left: 7px;
+  vertical-align: top;
+  width: 18px; }
+  /* line 16, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-title__arrow-link.lp_is-disabled {
+    display: none; }
+  /* line 20, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-title__arrow-link:hover .lp_triangle {
+    border-right-color: #298cb3; }
+  /* line 24, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-title__arrow-link .lp_triangle {
+    color: inherit;
+    top: 0; }
+    /* line 28, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+    .lp_dashboard-title__arrow-link .lp_triangle.lp_triangle--right {
+      border-color: transparent;
+      border-style: solid;
+      border-width: 11px;
+      display: block;
+      height: 0;
+      position: absolute;
+      width: 0;
+      z-index: 11;
+      border-left-color: inherit;
+      border-right-width: 0;
+      position: relative;
+      right: 0;
+      /* correct visual weight of triangle */ }
+    /* line 34, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+    .lp_dashboard-title__arrow-link .lp_triangle.lp_triangle--left {
+      border-color: transparent;
+      border-style: solid;
+      border-width: 11px;
+      display: block;
+      height: 0;
+      position: absolute;
+      width: 0;
+      z-index: 11;
+      border-right-color: inherit;
+      border-left-width: 0;
+      left: -3px;
+      /* correct visual weight of triangle */
+      position: relative; }
+
+/* line 44, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_1\/3 {
+  float: left; }
+  /* line 47, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_1\/3 h2 {
+    margin: 14px 0 0.4em;
+    text-align: center; }
+
+/* line 53, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_dashboard-graph {
+  height: 210px;
+  margin: 0 14px 0 0; }
+  /* line 57, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-graph.lp_dashboard-graph--time-pass-lifeycle {
+    margin-top: 35px;
+    width: 600px; }
+
+/* line 63, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_dashboard-graph + .lp_statistics-row {
+  margin: 14px 14px 14px 0; }
+
+/* statistics rows */
+/* line 69, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_statistics-row {
+  background: #e3e3e3;
+  border-radius: 3px;
+  margin: 14px 14px 14px 0; }
+  /* line 75, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_statistics-row .lp_statistics-row__item {
+    border-right: 1px solid #f2f2f2;
+    color: #ababab;
+    float: left;
+    list-style-type: none;
+    margin: 4px 0;
+    padding: 7px 7px 0 11px;
+    text-align: right; }
+    /* line 84, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+    .lp_statistics-row .lp_statistics-row__item:last-child {
+      border: 0 none; }
+
+/* line 90, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_statistics-row__link {
+  margin: 0 7px 0 0;
+  padding: 0; }
+
+/* line 96, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_statistics-row__value {
+  color: #545454;
+  display: block;
+  font-size: 21px; }
+
+/* line 103, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_statistics-row__text-small, .lp_statistics-row__value .lp_statistics-row__text-small {
+  color: #ababab;
+  font-size: 14px; }
+
+/* line 108, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_statistics-row__value .lp_statistics-row__text-small {
+  font-size: 0.667em;
+  line-height: 0.667;
+  padding: 0 0 0 2px; }
+
+/**
+ * 1. Render lists with a default min-height that accommodates 10 items
+ */
+/* line 119, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_dashboard-data {
+  min-height: 17em;
+  /* 1 */
+  margin: 0 14px 14px 0;
+  padding: 0; }
+  /* line 124, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-data .lp_dashboard-data__item {
+    clear: left;
+    list-style-type: none;
+    padding: 2px 0 2px; }
+    /* line 129, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+    .lp_dashboard-data .lp_dashboard-data__item:hover {
+      background-color: #feec86;
+      border-radius: 3px; }
+  /* line 135, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-data i {
+    display: block;
+    font-style: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  /* line 143, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-data a {
+    display: block; }
+  /* line 147, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-data .lp_dashboard-data__sparkline {
+    color: transparent; }
+  /* line 151, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-data .peity {
+    float: right;
+    margin: 0 14px; }
+  /* line 156, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_dashboard-data .lp_dashboard-data__value {
+    color: #ababab;
+    float: left;
+    margin: 0 0.4em 0 0;
+    text-align: right;
+    width: 63px; }
+    /* line 163, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+    .lp_dashboard-data .lp_dashboard-data__value small {
+      color: #cccccc;
+      font-size: 11px;
+      line-height: 1;
+      padding: 0 0 0 2px; }
+    /* line 170, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+    .lp_dashboard-data .lp_dashboard-data__value.lp_dashboard-data__value--narrow {
+      width: 42px; }
+
+/* line 176, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_top-bottom-list__empty-state {
+  display: inline-block;
+  margin-top: 98px;
+  text-align: center;
+  width: 100%; }
+
+/* line 187, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_time-pass-lifecycle {
+  margin-bottom: 28px;
+  /* separate the different graphs with a border */ }
+  /* line 193, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_time-pass-lifecycle:nth-child(n+3) {
+    border-top: 1px solid #dbdbdb; }
+
+/* line 199, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_statistics-row ul {
+  margin: 0 7px;
+  border-top: 1px solid #f2f2f2; }
+  /* line 205, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+  .lp_statistics-row ul:first-child {
+    border: none; }
+
+/* line 210, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_time-pass-diagram__label {
+  background: #f2f2f2;
+  color: #ababab;
+  font-size: 10px;
+  line-height: 1.4;
+  padding: 7px;
+  position: absolute;
+  text-align: center;
+  white-space: nowrap; }
+
+/* line 221, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_dashboard.scss */
+.lp_time-pass-diagram__sum {
+  background: #f2f2f2;
+  color: #545454;
+  font-size: 21px;
+  line-height: 1.4;
+  padding: 0 5px;
+  position: absolute;
+  text-align: center;
+  white-space: nowrap;
+  width: 40px; }
+
+/* line 4, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_enabled-revenue-models {
+  background: #e3e3e3;
+  border-radius: 3px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  padding: 14px; }
+
+/* line 16, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_price-section hr {
+  border: 0 none;
+  height: 2px;
+  margin: 7px 0; }
+/* line 22, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_price-section:nth-child(1) hr {
+  background: #d1d1d1; }
+/* line 26, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_price-section:nth-child(2) hr {
+  background: #9c9c9c; }
+/* line 30, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_price-section:nth-child(3) hr {
+  background: #666666; }
+/* line 34, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_price-section .lp_spacer {
+  height: 2.4em; }
+
+/* line 39, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_revenue-model-list {
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px; }
+
+/* line 52, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_category-price-form .select2-container, .lp_category-price-form .select2-drop, .lp_category-price-form .select2-search, .lp_category-price-form .select2-search input {
+  width: 168px; }
+
+/* line 57, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_price-settings__category-title {
+  min-width: 8.75em; }
+
+/* line 63, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_time-passes__add-link.button {
+  margin-bottom: 14px; }
+
+/* line 67, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_time-passes__item {
+  background: #e3e3e3;
+  border-radius: 3px;
+  margin-bottom: 14px;
+  margin-left: 35px;
+  padding: 14px;
+  position: relative; }
+  /* line 75, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_time-passes__item .lp_time-pass__id-wrapper {
+    background: #e3e3e3;
+    border-radius: 4px 0 0 4px;
+    left: -49px;
+    line-height: 1.2;
+    padding: 7px 4px;
+    position: absolute;
+    text-align: center;
+    width: 42px; }
+  /* line 86, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_time-passes__item .lp_time-pass__id {
+    font-size: 28px; }
+  /* line 90, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_time-passes__item .lp_time-pass {
+    margin-bottom: 0; }
+  /* line 94, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_time-passes__item .lp_save-link {
+    margin-top: 4px;
+    margin-bottom: 4px; }
+
+/* line 100, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_time-pass-editor {
+  display: inline-block;
+  float: left;
+  vertical-align: top; }
+  /* line 105, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_time-pass-editor .lp_time-pass-editor__column {
+    display: inline-block;
+    margin-right: 28px;
+    vertical-align: top; }
+    /* line 110, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+    .lp_time-pass-editor .lp_time-pass-editor__column td {
+      padding: 0;
+      vertical-align: middle; }
+    /* line 115, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+    .lp_time-pass-editor .lp_time-pass-editor__column .lp_rowspan-label {
+      padding-top: 7px;
+      vertical-align: top; }
+  /* line 121, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_time-pass-editor .lp_timePass_descriptionInput {
+    height: 67px; }
+  /* line 125, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_time-pass-editor .lp_toggle__label-pass {
+    width: 49px; }
+    /* line 128, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+    .lp_time-pass-editor .lp_toggle__label-pass .lp_toggle__input:checked ~ .lp_toggle__text {
+      background: #c9c9c9; }
+
+/* line 135, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_voucher {
+  margin-top: 7px;
+  margin-right: 14px; }
+
+/* line 140, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_vouchers .lp_voucher {
+  float: left; }
+
+/**
+ * 1. Remove arrows from select
+ */
+/* line 149, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+select.lp_is-disabled {
+  appearance: none;
+  /* 1 */
+  background-color: transparent;
+  border-color: transparent;
+  color: #333333; }
+  /* line 155, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  select.lp_is-disabled::-ms-expand {
+    display: none;
+    /* 1 - IE */ }
+
+/* line 160, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.lp_saved-bulk-operation {
+  width: 600px; }
+  /* line 163, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_saved-bulk-operation .lp_saved-bulk-operation__message {
+    line-height: 2.25; }
+  /* line 167, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_saved-bulk-operation a {
+    float: right; }
+
+/* line 172, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+.button.button-primary.lp_ml\+ {
+  margin-left: 28px; }
+
+@media (max-width: 1279px) {
+  /* line 179, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  .lp_edit-link {
+    margin-left: 7px; }
+  /* line 183, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_pricing.scss */
+  ul.lp_row li:nth-child(3) br {
+    display: none; } }
+
+/* line 4, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+.lp_preview-mode__image {
+  background-repeat: no-repeat;
+  height: 208px;
+  margin: 0.5em 4em 0.25em 1.75em;
+  width: 300px; }
+  /* line 10, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+  .lp_preview-mode__image.lp_preview-mode__image--teaser-only {
+    background-image: url('../img/preview-mode-1.png');
+    background-size: 100%; }
+  /* line 15, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+  .lp_preview-mode__image.lp_preview-mode__image--teaser-and-content {
+    background-image: url('../img/preview-mode-2.png');
+    background-size: 100%; }
+
+/* line 23, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+.lp_ui-element-preview {
+  width: 110px; }
+  /* line 26, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+  .lp_ui-element-preview.lp_ui-element-preview--large {
+    width: 300px; }
+
+/* line 31, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+.lp_code-snippet {
+  background: white;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+  margin: 11px 0 0 125px;
+  max-width: 700px;
+  padding: 11px 14px 7px;
+  position: relative; }
+  /* line 40, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+  .lp_code-snippet.lp_code-snippet--large {
+    margin-left: 325px; }
+  /* line 44, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+  .lp_code-snippet.lp_code-snippet--shown-above {
+    margin: 11px 0 7px;
+    max-width: 540px; }
+    /* line 48, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+    .lp_code-snippet.lp_code-snippet--shown-above .lp_triangle {
+      border-color: transparent;
+      border-style: solid;
+      border-width: 9px;
+      display: block;
+      height: 0;
+      position: absolute;
+      width: 0;
+      z-index: 11;
+      border-top-color: white;
+      border-bottom-width: 0;
+      bottom: 2px;
+      left: -9px;
+      top: auto; }
+    /* line 55, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+    .lp_code-snippet.lp_code-snippet--shown-above .lp_triangle--outer-triangle {
+      border-color: transparent;
+      border-style: solid;
+      border-width: 9px;
+      display: block;
+      height: 0;
+      position: absolute;
+      width: 0;
+      z-index: 11;
+      border-top-color: #c4c4c4;
+      border-bottom-width: 0;
+      bottom: -10px;
+      left: 70px;
+      top: auto; }
+
+/* line 64, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+.lp_triangle {
+  border-color: transparent;
+  border-style: solid;
+  border-width: 10px;
+  display: block;
+  height: 0;
+  position: absolute;
+  width: 0;
+  z-index: 11;
+  border-right-color: white;
+  border-left-width: 0;
+  left: 2px;
+  top: -10px; }
+
+/* line 70, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+.lp_triangle--outer-triangle {
+  border-color: transparent;
+  border-style: solid;
+  border-width: 10px;
+  display: block;
+  height: 0;
+  position: absolute;
+  width: 0;
+  z-index: 11;
+  border-right-color: #c4c4c4;
+  border-left-width: 0;
+  left: -10px;
+  top: 7px; }
+
+/* line 78, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+table td {
+  padding: 7px;
+  vertical-align: top; }
+/* line 83, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/pages/_appearance.scss */
+table pre {
+  margin: 0; }
+

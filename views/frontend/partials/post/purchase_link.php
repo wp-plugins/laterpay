@@ -1,5 +1,9 @@
-<?php if ( ! defined( 'ABSPATH' ) ) { exit; }
+<?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    // prevent direct access to this file
+    exit;
+}
 
 if ( $laterpay['purchase_link_is_hidden'] ) {
     return;
@@ -9,7 +13,7 @@ if ( $laterpay['purchase_link_is_hidden'] ) {
  */
 $args = array(
     'href'                          => '#',
-    'class'                         => 'lp_js_doPurchase lp_purchaseLink',
+    'class'                         => 'lp_js_doPurchase lp_js_purchaseLink lp_purchase-link',
     'title'                         => __( 'Buy now with LaterPay', 'laterpay' ),
     'data-icon'                     => 'b',
     'data-laterpay'                 => $laterpay['link'],
@@ -22,15 +26,15 @@ foreach ( $args as $key => $value ) {
     $arg_str .= ' ' . $key . '="' . esc_attr( $value ) . '" ';
 }
 
-if ( $laterpay['revenue_model'] == 'sis' ) :
+if ( $laterpay['revenue_model'] == 'sis' ):
     $title = sprintf(
-        __( 'Buy now for %s<small>%s</small>', 'laterpay' ),
+        __( 'Buy now for %s<small class="lp_purchase-link__currency">%s</small>', 'laterpay' ),
         LaterPay_Helper_View::format_number( $laterpay['price'] ),
         $laterpay['currency']
     );
-else :
+else:
     $title = sprintf(
-        __( 'Buy now for %s<small>%s</small> and pay later', 'laterpay' ),
+        __( 'Buy now for %s<small class="lp_purchase-link__currency">%s</small> and pay later', 'laterpay' ),
         LaterPay_Helper_View::format_number( $laterpay['price'] ),
         $laterpay['currency']
     );
