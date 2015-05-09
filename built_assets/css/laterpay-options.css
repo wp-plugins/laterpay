@@ -1,45 +1,100 @@
-/* line 8, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* SVG loading indicator */
+/* line 2, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+.lp_loading-indicator {
+  background-image: url(../img/spinner.svg);
+  background-size: contain;
+  height: 28px;
+  margin: 28px auto;
+  opacity: 0.7;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  position: relative;
+  width: 28px;
+  -webkit-animation: rotate 1.2s infinite steps(12);
+          animation: rotate 1.2s infinite steps(12); }
+
+@-webkit-keyframes rotate {
+  /* line 14, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+
+  /* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes rotate {
+  /* line 14, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+
+  /* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_spinner.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+/* line 10, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 h3 {
   margin: 56px 0 14px; }
-  /* line 11, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+  /* line 13, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
   h3:first-of-type {
     margin-top: 14px; }
 
-/* line 16, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 .form-table {
   margin-top: 0; }
 
-/* line 19, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* line 21, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 .form-table th {
   font-weight: normal;
   padding-top: 14px;
   padding-bottom: 7px; }
 
-/* line 24, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* line 26, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 .form-table td {
   padding-top: 7px;
   padding-bottom: 0; }
 
-/* line 29, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* line 31, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 .regular-text.lp_number-input {
   text-align: right;
   width: 56px; }
 
-/* line 34, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* line 36, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 .lp_appended-text {
   color: #ababab;
   padding-left: 7px; }
 
-/* line 39, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* line 41, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 p.submit {
   margin-top: 56px; }
 
-/* line 45, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* line 47, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 .lp_global-access:checked ~ .lp_category-access-input:not(.lp_global-access), .lp_global-access:checked ~ .lp_category-access-label:not(.lp_global-access) {
   display: none; }
 
-/* line 49, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+/* line 51, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
 .lp_category-access-label {
   line-height: 1.8;
   margin-right: 14px; }
+
+/* line 57, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.lp_loading-indicator {
+  display: inline-block;
+  margin: 0 0 0 7px;
+  vertical-align: middle; }
+
+/*
+ * Browscap update cache button
+ *
+ * 1. Make sure the lp_appended-text after the button is vertically centered
+ * 2. Don't display the button at all, if it is disabled
+ */
+/* line 69, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+.button.button-primary {
+  vertical-align: middle; }
+  /* line 72, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-options.scss */
+  .button.button-primary:disabled {
+    display: none; }
 

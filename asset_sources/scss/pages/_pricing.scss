@@ -1,45 +1,42 @@
 // 'Pricing' tab in plugin backend
 
-// enabled revenue models ----------------------------------------------------------------------------------------------
-.lp_enabled-revenue-models {
-    background: $background--darker;
-    border-radius: $border-radius;
-    margin-top: $fs;
-    margin-bottom: $fs;
-    padding: $fs;
+// global / category default prices ------------------------------------------------------------------------------------
+.lp_table--form {
+    margin: 0;
+
+    th,
+    td {
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    th {
+        color: $text--lighter;
+        font-weight: normal;
+        padding-left: 0;
+    }
+
+    td {
+        padding-right: 0;
+    }
+
+    thead th {
+        color: $text;
+        font-size: $fs--125;
+        padding: $fs--05 0 $fs;
+    }
+
+    tfoot td {
+        padding-top: $fs;
+        padding-bottom: 0;
+    }
 }
 
-
-// price type sections -------------------------------------------------------------------------------------------------
 .lp_price-section {
-
-    hr {
-        border: 0 none;
-        height: 2px;
-        margin: $fs--05 0;
+    .lp_badge {
+        margin-left: $fs--025;
+        width: $fs--2;
     }
-
-    &:nth-child(1) hr {
-        background: darken($background, 13%);
-    }
-
-    &:nth-child(2) hr {
-        background: darken($background, 34%);
-    }
-
-    &:nth-child(3) hr {
-        background: darken($background, 55%);
-    }
-
-    .lp_spacer {
-        height: 2.4em;
-    }
-}
-
-.lp_revenue-model-list {
-    display: inline-block;
-    vertical-align: middle;
-    width: ($fs * 3);
 }
 
 
@@ -50,32 +47,24 @@
     .select2-drop,
     .select2-search,
     .select2-search input {
-        width: ($fs * 12);
+        width: round($fs * 12.75);
     }
-}
-
-.lp_price-settings__category-title {
-    min-width: 8.75em;
 }
 
 
 // time passes ---------------------------------------------------------------------------------------------------------
-.lp_time-passes__add-link.button {
-    margin-bottom: $fs;
-}
-
 .lp_time-passes__item {
-    background: $background--darker;
-    border-radius: $border-radius;
-    margin-bottom: $fs;
-    margin-left: round(2.5 * $fs);
-    padding: $fs;
+    @extend %lp_greybox;
+
+    margin: 0 ($fs * 4) $fs round($fs * 3.5);
+    padding-bottom: $fs--05;
     position: relative;
+    width: round($fs * 27.5);
 
     .lp_time-pass__id-wrapper {
         background: $background--darker;
         border-radius: 4px 0 0 4px;
-        left: - round(3.5 * $fs);
+        left: - round($fs * 3.5);
         line-height: 1.2;
         padding: $fs--05 $fs--025;
         position: absolute;
@@ -88,12 +77,8 @@
     }
 
     .lp_time-pass {
+        margin-right: 0;
         margin-bottom: 0;
-    }
-
-    .lp_save-link {
-        margin-top: $fs--025;
-        margin-bottom: $fs--025;
     }
 }
 
@@ -103,9 +88,7 @@
     vertical-align: top;
 
     .lp_time-pass-editor__column {
-        display: inline-block;
-        margin-right: $fs--2;
-        vertical-align: top;
+        margin-top: $fs;
 
         td {
             padding: 0;
@@ -114,11 +97,12 @@
 
         .lp_rowspan-label {
             padding-top: $fs--05;
+            padding-right: $fs--05;
             vertical-align: top;
         }
     }
 
-    .lp_timePass_descriptionInput {
+    .lp_timePass_description-input {
         height: round($fs * 4.75);
     }
 
@@ -134,7 +118,7 @@
 // voucher editor
 .lp_voucher {
     margin-top: $fs--05;
-    margin-right: $fs;
+    margin-bottom: $fs--025;
 }
 
 .lp_vouchers .lp_voucher {
@@ -171,16 +155,4 @@ select.lp_is-disabled {
 
 .button.button-primary.lp_ml\+ {
     margin-left: $fs--2;
-}
-
-
-// responsiveness ------------------------------------------------------------------------------------------------------
-@media (max-width:1279px) {
-    .lp_edit-link {
-        margin-left: $fs--05;
-    }
-
-    ul.lp_row li:nth-child(3) br {
-        display: none;
-    }
 }

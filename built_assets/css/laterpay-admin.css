@@ -21,13 +21,6 @@
   text-transform: none !important;
   top: 0.1em; }
 
-/* line 33, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_vector_icons.scss */
-.icon {
-  height: 42px;
-  width: 42px;
-  display: inline-block;
-  fill: currentColor; }
-
 /* line 10, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/laterpay-admin.scss */
 #adminmenu div.wp-menu-image.dashicons-laterpay-logo:before {
   content: 'b' !important;

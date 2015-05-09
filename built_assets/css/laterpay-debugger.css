@@ -17,38 +17,46 @@
   border-radius: 3px; }
 
 /* line 14, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_rounded--right {
+  border-radius: 0 3px 3px 0; }
+
+/* line 18, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_rounded--topright {
+  border-radius: 0 3px 0 0; }
+
+/* line 22, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_embossed {
   box-shadow: 1px 1px 0 #f7f7f7; }
 
-/* line 20, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 28, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_block {
   display: block; }
 
-/* line 24, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 32, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_inline {
   display: inline; }
 
-/* line 28, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 36, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_inline-block {
   display: inline-block; }
 
-/* line 32, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 40, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_hidden {
   display: none !important; }
 
-/* line 38, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 46, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_fs {
   font-size: 14px; }
 
-/* line 42, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 50, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_bold {
   font-weight: bold; }
 
-/* line 48, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 56, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_left {
   float: left; }
 
-/* line 52, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 60, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_right {
   float: right; }
 
@@ -60,206 +68,218 @@
  * 2. The use of 'table' rather than 'block' is only necessary if using ':before' to contain the top-margins
  *    of child elements.
  */
-/* line 65, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 73, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_clearfix:before, .lp_clearfix:after {
-  content: ' ';
+  content: ' ' !important;
   /* 1 */
-  display: table;
+  display: table !important;
   /* 2 */ }
 
-/* line 69, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 77, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_clearfix:after {
-  clear: both; }
+  clear: both !important; }
 
-/* line 85, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 93, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_m0 {
   margin: 0; }
 
-/* line 89, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 97, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_m {
   margin: 14px; }
 
-/* line 95, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 103, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_m-0 {
   margin: 14px 0; }
 
-/* line 99, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 107, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_m-0-0 {
   margin: 14px 0 0; }
 
-/* line 103, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 111, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_m--0-center {
   margin: 0 auto; }
 
-/* line 107, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 115, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_m-center {
   margin: 14px auto; }
 
-/* line 113, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 121, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mt0 {
   margin-top: 0; }
 
-/* line 117, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 125, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mt-- {
   margin-top: 4px; }
 
-/* line 121, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 129, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mt- {
   margin-top: 7px; }
 
-/* line 125, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 133, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mt {
   margin-top: 14px; }
 
-/* line 129, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 137, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mt\+ {
   margin-top: 28px; }
 
-/* line 133, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 141, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mt\+\+ {
   margin-top: 42px; }
 
-/* line 139, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 147, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mr-- {
   margin-right: 4px; }
 
-/* line 143, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 151, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mr- {
   margin-right: 7px; }
 
-/* line 147, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 155, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mr {
   margin-right: 14px; }
 
-/* line 151, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 159, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mr\+ {
   margin-right: 28px; }
 
-/* line 157, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 165, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mb0 {
   margin-bottom: 0; }
 
-/* line 161, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 169, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mb-- {
   margin-bottom: 4px; }
 
-/* line 165, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 173, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mb- {
   margin-bottom: 7px; }
 
-/* line 169, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 177, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mb {
   margin-bottom: 14px; }
 
-/* line 173, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 181, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_mb\+ {
   margin-bottom: 28px; }
 
-/* line 179, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 185, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_mb\+\+ {
+  margin-bottom: 42px; }
+
+/* line 191, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_ml- {
   margin-left: 7px; }
 
-/* line 183, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 195, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_ml {
   margin-left: 14px; }
 
-/* line 187, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 199, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_ml\+ {
   margin-left: 28px; }
 
-/* line 193, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 205, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_pd {
+  padding: 14px; }
+
+/* line 209, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_pd- {
   padding: 7px; }
 
-/* line 199, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 215, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_pd--0-05 {
   padding: 0 7px; }
 
-/* line 205, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 219, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+.lp_pd--05-1 {
+  padding: 7px 14px; }
+
+/* line 225, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_pdt0 {
   padding-top: 0; }
 
-/* line 209, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 229, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_pdt- {
   padding-top: 7px; }
 
-/* line 215, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 235, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_pdr {
   padding-right: 14px; }
 
-/* line 221, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 241, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_pdl0 {
   padding-left: 0; }
 
-/* line 227, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 247, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_absolute {
   position: absolute; }
 
-/* line 231, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 251, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_relative {
   position: relative; }
 
-/* line 235, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 255, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_top--0 {
   top: 0; }
 
-/* line 239, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 259, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_right--0 {
   right: 0; }
 
-/* line 243, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 263, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_bottom--0 {
   bottom: 0; }
 
-/* line 247, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 267, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_left--0 {
   left: 0; }
 
-/* line 253, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 273, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_text-align--center {
   text-align: center; }
 
-/* line 259, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 279, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_1 {
   width: 100%; }
 
-/* line 263, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 283, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_4\/5 {
   width: 80%; }
 
-/* line 267, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 287, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_3\/4 {
   width: 75%; }
 
-/* line 271, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 291, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_2\/3 {
   width: 66.6666%; }
 
-/* line 275, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 295, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_1\/2 {
   width: 50%; }
 
-/* line 279, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 299, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_2\/5 {
   width: 40%; }
 
-/* line 283, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 303, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_3\/8 {
   width: 37.5%; }
 
-/* line 287, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 307, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_1\/3 {
   width: 33.3333%; }
 
-/* line 291, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 311, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_1\/4 {
   width: 25%; }
 
-/* line 295, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 315, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_1\/5 {
   width: 20%; }
 
-/* line 299, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
+/* line 319, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_utilities.scss */
 .lp_1\/6 {
   width: 16.6666%; }
 
@@ -285,13 +305,6 @@
   speak: none;
   text-transform: none !important;
   top: 0.1em; }
-
-/* line 33, /Users/dominikrodler/github/laterpay-wordpress-plugin/laterpay/asset_sources/scss/objects/_vector_icons.scss */
-.icon {
-  height: 42px;
-  width: 42px;
-  display: inline-block;
-  fill: currentColor; }
 
 /**
  * Box off e.g. a label to make it stand out, but be displayed inline.

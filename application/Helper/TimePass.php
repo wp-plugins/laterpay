@@ -36,8 +36,8 @@ class LaterPay_Helper_TimePass
         );
 
         if ( isset ( $key ) ) {
-            if ( isset( $defaults[$key] ) ) {
-                return $defaults[$key];
+            if ( isset( $defaults[ $key ] ) ) {
+                return $defaults[ $key ];
             }
         }
 
@@ -60,8 +60,8 @@ class LaterPay_Helper_TimePass
         );
 
         if ( isset ( $key ) ) {
-            if ( isset( $durations[$key] ) ) {
-                return $durations[$key];
+            if ( isset( $durations[ $key ] ) ) {
+                return $durations[ $key ];
             }
         }
 
@@ -98,8 +98,8 @@ class LaterPay_Helper_TimePass
         $selected_array = $pluralized ? $periods_pluralized : $periods;
 
         if ( isset ( $key ) ) {
-            if ( isset( $selected_array[$key] ) ) {
-                return $selected_array[$key];
+            if ( isset( $selected_array[ $key ] ) ) {
+                return $selected_array[ $key ];
             }
         }
 
@@ -120,8 +120,8 @@ class LaterPay_Helper_TimePass
         );
 
         if ( isset ( $key ) ) {
-            if ( isset( $revenues[$key] ) ) {
-                return $revenues[$key];
+            if ( isset( $revenues[ $key ] ) ) {
+                return $revenues[ $key ];
             }
         }
 
@@ -143,8 +143,8 @@ class LaterPay_Helper_TimePass
         );
 
         if ( isset ( $key ) ) {
-            if ( isset( $access_to[$key] ) ) {
-                return $access_to[$key];
+            if ( isset( $access_to[ $key ] ) ) {
+                return $access_to[ $key ];
             }
         }
 
@@ -175,12 +175,11 @@ class LaterPay_Helper_TimePass
         $details['access']   = __( 'access to', 'laterpay' ) . ' ' .
                                 LaterPay_Helper_TimePass::get_access_options( $time_pass['access_to'] );
 
-
         // also display category, price, and revenue model, if full_info flag is used
         if ( $full_info ) {
             if ( $time_pass['access_to'] > 0 ) {
                 $category_id = $time_pass['access_category'];
-                $details['category'] = '"' . get_the_category_by_ID( $category_id) . '"';
+                $details['category'] = '"' . get_the_category_by_ID( $category_id ) . '"';
             }
 
             $details['price']    = __( 'for', 'laterpay' ) . ' ' .
@@ -226,9 +225,9 @@ class LaterPay_Helper_TimePass
         if ( $elements && is_array( $elements ) ) {
             foreach ( $elements as $id => $name ) {
                 if ( $id == $default_value ) {
-                    $options_html .= '<option selected="selected" value="' . $id . '">' . $name. '</option>';
+                    $options_html .= '<option selected="selected" value="' . esc_attr( $id ) . '">' . laterpay_sanitize_output( $name ) . '</option>';
                 } else {
-                    $options_html .= '<option value="' . $id . '">' . $name . '</option>';
+                    $options_html .= '<option value="' . esc_attr( $id ) . '">' . laterpay_sanitize_output( $name ) . '</option>';
                 }
             }
         }
@@ -272,12 +271,13 @@ class LaterPay_Helper_TimePass
      */
     public static function get_tokenized_time_pass_ids( $time_passes = null ) {
         if ( ! isset( $time_passes ) ) {
-            $time_passes = self::get_all_time_passes();
+            $model       = new LaterPay_Model_TimePass();
+            $time_passes = $model->get_all_time_passes();
         }
 
         $result = array();
         foreach ( $time_passes as $time_pass ) {
-            $result[] = self::get_tokenized_time_pass_id( $time_pass->pass_id );
+            $result[] = self::get_tokenized_time_pass_id( $time_pass['pass_id'] );
         }
 
         return $result;
@@ -288,10 +288,11 @@ class LaterPay_Helper_TimePass
      *
      * @param int    $post_id                   post id
      * @param null   $time_passes_with_access   ids of time passes with access
+     * @param bool   $ignore_deleted            ignore deleted time passes
      *
      * @return array $time_passes
      */
-    public static function get_time_passes_list_by_post_id( $post_id, $time_passes_with_access = null ) {
+    public static function get_time_passes_list_by_post_id( $post_id, $time_passes_with_access = null, $ignore_deleted = false ) {
         $model = new LaterPay_Model_TimePass();
 
         if ( $post_id !== null ) {
@@ -311,9 +312,9 @@ class LaterPay_Helper_TimePass
             }
 
             // get list of time passes that cover this post
-            $time_passes = (array) $model->get_time_passes_by_category_ids( $post_category_ids );
+            $time_passes = $model->get_time_passes_by_category_ids( $post_category_ids );
         } else {
-            $time_passes = (array) $model->get_time_passes_by_category_ids();
+            $time_passes = $model->get_time_passes_by_category_ids();
         }
 
         // correct result, if we have purchased time passes
@@ -321,7 +322,7 @@ class LaterPay_Helper_TimePass
             // check, if user has access to the current post with time pass
             $has_access = false;
             foreach ( $time_passes as $time_pass ) {
-                if ( in_array( $time_pass->pass_id, $time_passes_with_access ) ) {
+                if ( in_array( $time_pass['pass_id'], $time_passes_with_access ) ) {
                     $has_access = true;
                     break;
                 }
@@ -338,12 +339,12 @@ class LaterPay_Helper_TimePass
 
                 // go through time passes with access and find covered and excluded categories
                 foreach ( $time_passes_with_access as $time_pass_with_access_id ) {
-                    $time_pass_with_access_data = (array) $model->get_pass_data( $time_pass_with_access_id );
+                    $time_pass_with_access_data = $model->get_pass_data( $time_pass_with_access_id );
                     $access_category            = $time_pass_with_access_data['access_category'];
                     $access_type                = $time_pass_with_access_data['access_to'];
-                    if ( $access_type == 2 ) {
+                    if ( $access_type === 2 ) {
                         $covered_categories['included'][] = $access_category;
-                    } else if ( $access_type == 1 ) {
+                    } else if ( $access_type === 1 ) {
                         $excluded_categories[] = $access_category;
                     } else {
                         return array();
@@ -378,32 +379,41 @@ class LaterPay_Helper_TimePass
             }
         }
 
-        return (array) $time_passes;
+        if ( $ignore_deleted ) {
+            // filter deleted time passes
+            foreach ( $time_passes as $key => $time_pass ) {
+                if ( $time_pass['is_deleted'] ) {
+                    unset( $time_passes[ $key ] );
+                }
+            }
+        }
+
+        return $time_passes;
     }
 
     /**
-     * Get all time passes.
+     * Get all active time passes.
      *
      * @return array of time passes
      */
-    public static function get_all_time_passes() {
+    public static function get_active_time_passes() {
         $model = new LaterPay_Model_TimePass();
-
-        return $model->get_all_time_passes();
+        return $model->get_active_time_passes();
     }
 
     /**
      * Get time pass data by id.
      *
-     * @param $time_pass_id
+     * @param  int  $time_pass_id
+     * @param  bool $ignore_deleted ignore deleted time passes
      *
      * @return array
      */
-    public static function get_time_pass_by_id( $time_pass_id = null ) {
+    public static function get_time_pass_by_id( $time_pass_id = null, $ignore_deleted = false ) {
         $model = new LaterPay_Model_TimePass();
 
         if ( $time_pass_id ) {
-            return (array) $model->get_pass_data( (int) $time_pass_id );
+            return $model->get_pass_data( (int) $time_pass_id, $ignore_deleted );
         }
 
         return array();
@@ -420,7 +430,7 @@ class LaterPay_Helper_TimePass
     public static function get_laterpay_purchase_link( $time_pass_id, $data = null ) {
         $time_pass_model = new LaterPay_Model_TimePass();
 
-        $time_pass = (array) $time_pass_model->get_pass_data( $time_pass_id );
+        $time_pass = $time_pass_model->get_pass_data( $time_pass_id );
         if ( empty( $time_pass ) ) {
             return '';
         }
@@ -446,12 +456,13 @@ class LaterPay_Helper_TimePass
         $link = isset( $data['link'] ) ? $data['link'] : get_permalink();
 
         // prepare URL
+        $remote_addr = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( $_SERVER['REMOTE_ADDR'] ) : '';
         $url_params = array(
             'pass_id'       => self::get_tokenized_time_pass_id( $time_pass_id ),
             'id_currency'   => $currency_model->get_currency_id_by_iso4217_code( $currency ),
             'price'         => $price,
             'date'          => time(),
-            'ip'            => ip2long( $_SERVER['REMOTE_ADDR'] ),
+            'ip'            => ip2long( $remote_addr ),
             'revenue_model' => $revenue_model,
             'link'          => $link,
         );
@@ -526,7 +537,7 @@ class LaterPay_Helper_TimePass
      */
     public static function get_time_passes_statistic() {
         $history_model      = new LaterPay_Model_Payment_History();
-        $time_passes        = LaterPay_Helper_TimePass::get_all_time_passes();
+        $time_passes        = LaterPay_Helper_TimePass::get_active_time_passes();
         $summary_active     = 0;
         $summary_unredeemed = 0;
         $summary_revenue    = 0;
@@ -534,7 +545,6 @@ class LaterPay_Helper_TimePass
 
         if ( $time_passes ) {
             foreach ( $time_passes as $time_pass ) {
-                $time_pass          = (array) $time_pass;
                 $time_pass_history  = $history_model->get_time_pass_history( $time_pass['pass_id'] );
                 $duration           = self::get_time_pass_expiry_time( $time_pass ); // in seconds
 
@@ -544,7 +554,7 @@ class LaterPay_Helper_TimePass
                 $active             = 0; // number of active time passes
                 $sold               = 0; // number of sold time passes
 
-                if  ( $time_pass_history && is_array( $time_pass_history ) ) {
+                if ( $time_pass_history && is_array( $time_pass_history ) ) {
                     foreach ( $time_pass_history as $hist ) {
                         $has_unredeemed     = false;
                         $committed_revenue += $hist->price;
@@ -585,7 +595,7 @@ class LaterPay_Helper_TimePass
                     'committed_revenue' => number_format_i18n( $committed_revenue, 2 ),
                 );
 
-                $statistic['individual'][$time_pass['pass_id']] = $time_pass_statistics;
+                $statistic['individual'][ $time_pass['pass_id'] ] = $time_pass_statistics;
             }
         }
 
@@ -646,7 +656,7 @@ class LaterPay_Helper_TimePass
                 if ( ! $duration ) {
                     $time_pass_id = $hist->pass_id;
                     $time_pass    = self::get_time_pass_by_id( $time_pass_id );
-                    if ( ! $time_pass ) continue;
+                    if ( ! $time_pass ) { continue; }
                     $expiry_date  = $start_date + self::get_time_pass_expiry_time( $time_pass );
                 } else {
                     $expiry_date  = $start_date + $duration;
@@ -656,13 +666,13 @@ class LaterPay_Helper_TimePass
                 if ( $expiry_date > $current_date ) {
                     $week_number = 1;
 
-                    while( ( $start_date + $week_number * $week_duration ) < $expiry_date ) {
+                    while ( ( $start_date + $week_number * $week_duration ) < $expiry_date ) {
                         $week_number++;
                         $key++;
                     }
 
                     if ( ! $hist->code ) {
-                        $data[$key]++;
+                        $data[ $key ]++;
                     }
                 }
             }
@@ -703,11 +713,11 @@ class LaterPay_Helper_TimePass
         while ( $key <= self::TIME_PASSES_WEEKS ) {
             $data['x'][] = array(
                 $key,
-                (string) $key
+                (string) $key,
             );
             $data['y'][] = array(
                 $key,
-                $expiry[$key]
+                $expiry[ $key ],
             );
 
             $key++;

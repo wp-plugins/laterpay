@@ -11,6 +11,14 @@
     border-radius: $border-radius;
 }
 
+.lp_rounded--right {
+    border-radius: 0 $border-radius $border-radius 0;
+}
+
+.lp_rounded--topright {
+    border-radius: 0 $border-radius 0 0;
+}
+
 .lp_embossed {
     box-shadow: 1px 1px 0 $border--lightest;
 }
@@ -63,11 +71,11 @@
  */
 %clearfix:before,
 %clearfix:after {
-    content: ' '; /* 1 */
-    display: table; /* 2 */
+    content: ' ' !important; /* 1 */
+    display: table !important; /* 2 */
 }
 %clearfix:after {
-    clear: both;
+    clear: both !important;
 }
 
 // helper class for clearfix
@@ -174,6 +182,10 @@
     margin-bottom: $fs--2;
 }
 
+.lp_mb\+\+ {
+    margin-bottom: $fs--3;
+}
+
 
 // left margins
 .lp_ml- {
@@ -190,6 +202,10 @@
 
 
 // paddings ------------------------------------------------------------------------------------------------------------
+.lp_pd {
+    padding: $fs;
+}
+
 .lp_pd- {
     padding: $fs--05;
 }
@@ -198,6 +214,10 @@
 // combinations
 .lp_pd--0-05 {
     padding: 0 $fs--05;
+}
+
+.lp_pd--05-1 {
+    padding: $fs--05 $fs;
 }
 
 
