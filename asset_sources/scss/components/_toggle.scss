@@ -1,10 +1,13 @@
 // iOS-style toggle rendered from a checkbox
 
+/*
+ * 1. Fix vertical position
+ */
 .lp_toggle {
     display: inline-block;
-    margin: 0 0.25em;
+    margin: 0 0.25em -1.25em; /* 1 */
     position: relative;
-    top: -0.25em;
+    top: -0.9em; /* 1 */
     vertical-align: middle;
 
     form {
@@ -61,6 +64,15 @@
     @include opacity(0);
     position: absolute;
     top: 0;
+
+    /*
+     * Also hide the input in case it is disabled
+     * 1. set opacity without the polyfill, so !important can be applied to it
+     */
+    &:disabled {
+        opacity: 0 !important;
+        filter: unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + 0 + ')') !important;
+    }
 
     &:checked ~ .lp_toggle__text {
         background-color: $laterpay-brand--darker;

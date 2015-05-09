@@ -76,8 +76,6 @@ delete_option( 'laterpay_preview_excerpt_percentage_of_content' );
 delete_option( 'laterpay_preview_excerpt_word_count_min' );
 delete_option( 'laterpay_preview_excerpt_word_count_max' );
 
-delete_option( 'laterpay_show_purchase_button' );
-
 delete_option( 'laterpay_unlimited_access' );
 
 delete_option( 'laterpay_bulk_operations' );
@@ -89,6 +87,7 @@ delete_option( 'laterpay_gift_codes' );
 delete_option( 'laterpay_voucher_statistic' );
 delete_option( 'laterpay_gift_statistic' );
 delete_option( 'laterpay_gift_codes_usages' );
+delete_option( 'laterpay_debugger_enabled' );
 
 delete_option( 'laterpay_purchase_button_positioned_manually' );
 delete_option( 'laterpay_time_passes_positioned_manually' );
@@ -100,11 +99,13 @@ delete_option( 'laterpay_only_time_pass_purchases_allowed' );
 
 delete_option( 'laterpay_maximum_redemptions_per_gift_code' );
 
+delete_option( 'laterpay_api_fallback_behavior' );
+
 // register LaterPay autoloader
 $dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 if ( ! class_exists( 'LaterPay_Autoloader' ) ) {
-    require_once( $dir . 'laterpay_load.php' );
+    require_once( $dir . 'laterpay-load.php' );
 }
 
 LaterPay_AutoLoader::register_namespace( $dir . 'application', 'LaterPay' );

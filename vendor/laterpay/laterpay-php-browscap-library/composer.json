@@ -1,0 +1,9 @@
+{
+    "name" : "laterpay/laterpay-php-browscap-library",
+    "type": "library",
+    "license": "MIT",
+    "description": "Fork of the Browscap library used for detecting crawlers.",
+    "autoload": {
+        "classmap": [""]
+    }
+}
