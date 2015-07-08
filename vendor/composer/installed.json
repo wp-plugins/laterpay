@@ -32,18 +32,52 @@
         }
     },
     {
-        "name": "squizlabs/php_codesniffer",
-        "version": "2.3.2",
-        "version_normalized": "2.3.2.0",
+        "name": "laterpay/laterpay-client-php",
+        "version": "dev-develop",
+        "version_normalized": "dev-develop",
         "source": {
             "type": "git",
-            "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-            "reference": "e96d8579fbed0c95ecf2a0501ec4f307a4aa6404"
+            "url": "https://github.com/laterpay/laterpay-client-php.git",
+            "reference": "b466dec4ad4f10ab3dc296f4ce8e647446fac85e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e96d8579fbed0c95ecf2a0501ec4f307a4aa6404",
-            "reference": "e96d8579fbed0c95ecf2a0501ec4f307a4aa6404",
+            "url": "https://api.github.com/repos/laterpay/laterpay-client-php/zipball/b466dec4ad4f10ab3dc296f4ce8e647446fac85e",
+            "reference": "b466dec4ad4f10ab3dc296f4ce8e647446fac85e",
+            "shasum": ""
+        },
+        "time": "2015-07-02 07:22:03",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "LaterPay_": "",
+                "Crypt_": "",
+                "Math_": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "LaterPay PHP Client",
+        "support": {
+            "source": "https://github.com/laterpay/laterpay-client-php/tree/develop",
+            "issues": "https://github.com/laterpay/laterpay-client-php/issues"
+        }
+    },
+    {
+        "name": "squizlabs/php_codesniffer",
+        "version": "2.3.3",
+        "version_normalized": "2.3.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+            "reference": "c1a26c729508f73560c1a4f767f60b8ab6b4a666"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/c1a26c729508f73560c1a4f767f60b8ab6b4a666",
+            "reference": "c1a26c729508f73560c1a4f767f60b8ab6b4a666",
             "shasum": ""
         },
         "require": {
@@ -51,7 +85,7 @@
             "ext-xmlwriter": "*",
             "php": ">=5.1.2"
         },
-        "time": "2015-04-28 23:28:20",
+        "time": "2015-06-24 03:16:23",
         "bin": [
             "scripts/phpcs",
             "scripts/phpcbf"
@@ -108,40 +142,6 @@
         ]
     },
     {
-        "name": "laterpay/laterpay-client-php",
-        "version": "dev-develop",
-        "version_normalized": "dev-develop",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/laterpay/laterpay-client-php.git",
-            "reference": "b9d0436990bbe26c0aee18385a15b5b1c02660ed"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/laterpay/laterpay-client-php/zipball/b9d0436990bbe26c0aee18385a15b5b1c02660ed",
-            "reference": "b9d0436990bbe26c0aee18385a15b5b1c02660ed",
-            "shasum": ""
-        },
-        "time": "2015-05-08 14:47:01",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "LaterPay_": "",
-                "Crypt_": "",
-                "Math_": ""
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "LaterPay PHP Client",
-        "support": {
-            "source": "https://github.com/laterpay/laterpay-client-php/tree/develop",
-            "issues": "https://github.com/laterpay/laterpay-client-php/issues"
-        }
-    },
-    {
         "name": "wp-coding-standards/wpcs",
         "version": "dev-develop",
         "version_normalized": "dev-develop",
@@ -152,14 +152,14 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/WordPress-Coding-Standards/WordPress-Coding-Standards/zipball/8e07f73b6727893ccccc002a7839aedecd7e801e",
+            "url": "https://api.github.com/repos/WordPress-Coding-Standards/WordPress-Coding-Standards/zipball/a9a032ef2ce775bd5c45b52db98fda45efa87148",
             "reference": "9c4de8175ce1f82813f8c9c8f11809ee6c794efc",
             "shasum": ""
         },
         "require": {
-            "squizlabs/php_codesniffer": "~2.0"
+            "squizlabs/php_codesniffer": "~2.2"
         },
-        "time": "2015-05-07 19:05:21",
+        "time": "2015-06-30 21:30:08",
         "type": "library",
         "installation-source": "source",
         "notification-url": "https://packagist.org/downloads/",

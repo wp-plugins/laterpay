@@ -19,11 +19,10 @@
                 pluginVisibilityToggle          : $('#lp_js_toggleVisibilityInTestMode'),
                 hasInvalidSandboxCredentials    : $('#lp_js_hasInvalidSandboxCredentials'),
                 isLive                          : 'lp_is-live',
+                navigation                      : $('.lp_navigation'),
 
                 showMerchantContractsButton     : $('#lp_js_showMerchantContracts'),
-
-                throttledFlashMessage           : undefined,
-                flashMessageTimeout             : 800,
+                apiCredentials                  : $('#lp_js_apiCredentialsSection'),
                 requestSent                     : false,
             },
 
@@ -118,8 +117,8 @@
             },
 
             togglePluginMode = function() {
-                var $toggle                 = $o.pluginModeToggle,
-                    hasSwitchedToLiveMode   = $toggle.prop('checked');
+                var $toggle               = $o.pluginModeToggle,
+                    hasSwitchedToLiveMode = $toggle.prop('checked');
 
                 if (hasNoValidCredentials()) {
                     // restore test mode
@@ -157,7 +156,7 @@
                         ajaxurl,
                         $('#' + form_id).serializeArray(),
                         function(data) {
-                            setMessage(data.message, data.success);
+                            $o.navigation.showMessage(data);
                             togglePluginModeIndicators(data.mode);
                         },
                         'json'
@@ -174,9 +173,6 @@
                     value           = $input.val().trim(),
                     apiKeyLength    = 32;
 
-                // clear flash message timeout
-                window.clearTimeout($o.throttledFlashMessage);
-
                 // trim spaces from input
                 if (value.length !== $input.val().length) {
                     $input.val(value);
@@ -186,10 +182,7 @@
                     // save the value, because it's valid (empty input or string of correct length)
                     makeAjaxRequest($form.attr('id'));
                 } else {
-                    // set timeout to throttle flash message
-                    $o.throttledFlashMessage = window.setTimeout(function() {
-                        setMessage(lpVars.i18nApiKeyInvalid, false);
-                    }, $o.flashMessageTimeout);
+                    $o.navigation.showMessage(lpVars.i18nApiKeyInvalid, false);
 
                     // switch to invisible test mode to make sure visitors don't see a broken site,
                     // if we are in test mode;
@@ -213,9 +206,6 @@
                     value               = $input.val().trim(),
                     merchantIdLength    = 22;
 
-                // clear flash message timeout
-                window.clearTimeout($o.throttledFlashMessage);
-
                 // trim spaces from input
                 if (value.length !== $input.val().length) {
                     $input.val(value);
@@ -225,10 +215,7 @@
                     // save the value, because it's valid (empty input or string of correct length)
                     makeAjaxRequest($form.attr('id'));
                 } else {
-                    // set timeout to throttle flash message
-                    $o.throttledFlashMessage = window.setTimeout(function() {
-                        setMessage(lpVars.i18nMerchantIdInvalid, false);
-                    }, $o.flashMessageTimeout);
+                    $o.navigation.showMessage(lpVars.i18nMerchantIdInvalid, false);
 
                     // switch to invisible test mode to make sure visitors don't see a broken site,
                     // if we are in test mode;
@@ -247,27 +234,9 @@
             },
 
             hasNoValidCredentials = function() {
-                if (
-                    (
-                        // plugin is in test mode, but there are no valid Sandbox API credentials
-                        !$o.pluginModeToggle.prop('checked') &&
-                        (
-                            $o.testApiKey.val().length     !== 32 ||
-                            $o.testMerchantId.val().length !== 22
-                        )
-                    ) || (
-                        // plugin is in live mode, but there are no valid Live API credentials
-                        $o.pluginModeToggle.prop('checked') &&
-                        (
-                            $o.liveApiKey.val().length        !== 32 ||
-                            $o.liveMerchantId.val().length    !== 22
-                        )
-                    )
-                ) {
-                    return true;
-                } else {
-                    return false;
-                }
+                var invalidCreds = $o.liveApiKey.val().length !== 32 || $o.liveMerchantId.val().length !== 22;
+                // plugin is in live mode, but there are no valid Live API credentials
+                return $o.pluginModeToggle.prop('checked') && invalidCreds;
             },
 
             showMerchantContracts = function() {
@@ -289,20 +258,19 @@
                     $('iframe', $iframeWrapper).remove();
                 }
                 if ($iframeWrapper.length === 0) {
-                    $('#lp_js_apiCredentialsSection')
+                    $o.apiCredentials
                     .after(
                         $iframeWrapperObject
                         .velocity('slideDown', {
                             duration: 400,
+                            easing: 'ease-out',
                             complete: function() {
                                 // scroll document so that iframe fills viewport
                                 iframeOffset = $('#lp_js_legalDocsIframe').offset();
                                 scrollPosition = iframeOffset.top - topMargin;
 
-
-
                                 $('BODY, HTML')
-                                .velocity('scroll', { duration: 400, offset: scrollPosition });
+                                .velocity('scroll', { duration: 400, easing: 'ease-out', offset: scrollPosition });
                              }
                         })
                     );
@@ -324,12 +292,14 @@
                 );
 
                 // close merchant contracts
-                $('#lp_js_hideMerchantContracts', $iframeWrapper).bind('mousedown', function(e) {
+                $('#lp_js_hideMerchantContracts', $iframeWrapper)
+                .bind('mousedown', function() {
                     $(this)
                     .velocity('fadeOut', { duration: 200 })
                         .parent('#lp_js_legalDocsIframe')
                         .velocity('slideUp', {
                             duration: 400,
+                            easing: 'ease-out',
                             complete: function() {
                                 $(this).remove();
                             }
@@ -341,9 +311,8 @@
                         delay       : 250,
                         display     : 'inline-block'
                     });
-
-                    e.preventDefault();
-                });
+                })
+                .bind('click', function(e) {e.preventDefault();});
             },
 
             preventLeavingWithoutValidCredentials = function() {
