@@ -121,6 +121,7 @@
                 selected                                : 'lp_is-selected',
                 disabled                                : 'lp_is-disabled',
                 hidden                                  : 'lp_hidden',
+                navigation                              : $('.lp_navigation'),
             },
 
             bindEvents = function() {
@@ -133,7 +134,7 @@
 
                 // validate price and revenue model when entering a price
                 // (function is only triggered 800ms after the keyup)
-                $('body').on('keyup', $o.priceInput, debounce(function() {
+                $('body').on('keyup', $o.priceInput, (function() {
                         validatePrice($(this).parents('form'));
                     }, 800)
                 );
@@ -233,6 +234,7 @@
                 // change period
                 $o.timePassEditor
                 .on('change', $o.timePassPeriod, function() {
+                    changeDurationOptions($(this), $(this).parents($o.timePassWrapper));
                     updateTimePassPreview($(this).parents($o.timePassWrapper), $(this));
                 });
 
@@ -477,9 +479,10 @@
             },
 
             enterEditModeGlobalDefaultPrice = function() {
-                $o.globalDefaultPriceShowElements.velocity('slideUp', { duration: 250 });
+                $o.globalDefaultPriceShowElements.velocity('slideUp', { duration: 250, easing: 'ease-out' });
                 $o.globalDefaultPriceEditElements.velocity('slideDown', {
                     duration: 250,
+                    easing: 'ease-out',
                     complete: function() {
                         setTimeout(function() {
                             $o.globalDefaultPriceInput.val($.trim($o.globalDefaultPriceDisplay.text())).focus();
@@ -490,8 +493,8 @@
             },
 
             exitEditModeGlobalDefaultPrice = function() {
-                $o.globalDefaultPriceShowElements.velocity('slideDown', { duration: 250 });
-                $o.globalDefaultPriceEditElements.velocity('slideUp', { duration: 250 });
+                $o.globalDefaultPriceShowElements.velocity('slideDown', { duration: 250, easing: 'ease-out' });
+                $o.globalDefaultPriceEditElements.velocity('slideUp', { duration: 250, easing: 'ease-out' });
                 $o.globalDefaultPriceForm.removeClass($o.editing);
                 // reset value of price input to current global default price
                 $o.globalDefaultPriceInput.val($o.globalDefaultPriceDisplay.text());
@@ -517,7 +520,7 @@
                             $o.globalDefaultPriceDisplay.text(r.price);
                             $o.globalDefaultPriceRevenueModelDisplay.text(r.revenue_model);
                         }
-                        setMessage(r.message, r.success);
+                        $o.navigation.showMessage(r);
                         exitEditModeGlobalDefaultPrice();
                     },
                     'json'
@@ -537,7 +540,7 @@
                             .clone()
                             .removeAttr('id')
                             .insertBefore('#lp_js_categoryDefaultPriceList')
-                            .velocity('slideDown', { duration: 250 });
+                            .velocity('slideDown', { duration: 250, easing: 'ease-out' });
 
                 editCategoryDefaultPrice($form);
             },
@@ -550,10 +553,12 @@
 
                 // initialize edit mode
                 $form.addClass($o.editing);
-                $($o.categoryDefaultPriceShowElements, $form).velocity('slideUp', { duration: 250 });
+                $($o.categoryDefaultPriceShowElements, $form)
+                .velocity('slideUp', { duration: 250, easing: 'ease-out' });
                 $o.addCategory.velocity('fadeOut', { duration: 250 });
                 $($o.categoryDefaultPriceEditElements, $form).velocity('slideDown', {
                     duration: 250,
+                    easing: 'ease-out',
                     complete: function() {
                         $($o.categoryDefaultPriceInput, $form).focus();
                     }
@@ -587,7 +592,7 @@
                             $form.removeClass($o.unsaved);
                         }
                         exitEditModeCategoryDefaultPrice($form);
-                        setMessage(r.message, r.success);
+                        $o.navigation.showMessage(r);
                     },
                     'json'
                 );
@@ -601,6 +606,7 @@
                     // remove form, if creating a new category default price has been canceled
                     $form.velocity('slideUp', {
                         duration: 250,
+                        easing: 'ease-out',
                         complete: function() {
                             $(this).remove();
 
@@ -613,7 +619,8 @@
                 } else {
                     // hide form, if a new category default price has been saved
                     // or editing an existing category default price has been canceled
-                    $($o.categoryDefaultPriceEditElements, $form).velocity('slideUp', { duration: 250 });
+                    $($o.categoryDefaultPriceEditElements, $form)
+                    .velocity('slideUp', { duration: 250, easing: 'ease-out' });
                     $($o.selectCategory, $form).select2('destroy');
                     // reset value of price input to current category default price
                     $($o.categoryDefaultPriceInput, $form).val($($o.categoryDefaultPriceDisplay, $form).text().trim());
@@ -625,7 +632,8 @@
                         .parent('label')
                         .addClass($o.selected);
                     // show elements for displaying defined price again
-                    $($o.categoryDefaultPriceShowElements, $form).velocity('slideDown', { duration: 250 });
+                    $($o.categoryDefaultPriceShowElements, $form)
+                    .velocity('slideDown', { duration: 250, easing: 'ease-out' });
                 }
 
                 // show 'Add' button again
@@ -644,6 +652,7 @@
                         if (r.success) {
                             $form.velocity('slideUp', {
                                 duration: 250,
+                                easing: 'ease-out',
                                 complete: function() {
                                     $(this).remove();
 
@@ -655,7 +664,7 @@
                                 }
                             });
                         }
-                        setMessage(r.message, r.success);
+                        $o.navigation.showMessage(r);
                     },
                     'json'
                 );
@@ -757,6 +766,7 @@
                 $timePass
                 .velocity('slideDown', {
                     duration: 250,
+                    easing: 'ease-out',
                     complete: function() {
                         $(this).removeClass($o.hidden);
                     }
@@ -764,6 +774,7 @@
                     .find($o.timePassForm)
                     .velocity('slideDown', {
                         duration: 250,
+                        easing: 'ease-out',
                         complete: function() {
                             $(this).removeClass($o.hidden);
                         }
@@ -1024,7 +1035,7 @@
                             $o.addTimePass.velocity('fadeIn', { duration: 250, display: 'inline-block' });
                         }
 
-                        setMessage(r.message, r.success);
+                        $o.navigation.showMessage(r);
                     },
                     'json'
                 );
@@ -1037,6 +1048,7 @@
                     $timePass
                     .velocity('slideUp', {
                         duration: 250,
+                        easing: 'ease-out',
                         begin: function() {
                             $.post(
                                 ajaxurl,
@@ -1066,7 +1078,7 @@
                                         $(this).stop().show();
                                     }
 
-                                    setMessage(r.message, r.success);
+                                    $o.navigation.showMessage(r);
                                 },
                                 'json'
                             );
@@ -1095,6 +1107,32 @@
                 validatePrice($form, false, $($o.timePassPrice, $form));
             },
 
+            changeDurationOptions = function($period, $form) {
+                var i, options = '',
+                    limit = 24,
+                    period = $period.val(),
+                    duration = $($o.timePassDuration, $form).val();
+
+
+                // change duration options
+                if (period === '4') {
+                    limit = 1;
+                } else if (period === '3') {
+                    limit = 12;
+                }
+
+                for(i = 1; i <= limit; i++) {
+                    options += '<option value="' + i +'">' + i + '</option>';
+                }
+
+                $($o.timePassDuration, $form)
+                    .find('option')
+                    .remove()
+                    .end()
+                .append(options)
+                .val(duration && duration <= limit ? duration : 1);
+            },
+
             generateVoucherCode = function($timePass) {
                 $.post(
                     ajaxurl,
@@ -1107,7 +1145,7 @@
                         if (r.success) {
                             addVoucher(r.code, $timePass.find($o.voucherPriceInput).val(), $timePass);
                         } else {
-                            setMessage(r.message, r.success);
+                            $o.navigation.showMessage(r);
                         }
                     }
                 );
@@ -1129,7 +1167,7 @@
                     .prepend(voucher)
                         .find('div')
                             .first()
-                            .velocity('slideDown', { duration: 250 });
+                            .velocity('slideDown', { duration: 250, easing: 'ease-out' });
             },
 
             addVoucherToList = function(code, priceValue, $timePass) {
@@ -1158,6 +1196,7 @@
                 $voucher
                 .velocity('slideUp', {
                     duration: 250,
+                    easing: 'ease-out',
                     complete: function() {
                         $(this).remove();
                     }
@@ -1169,7 +1208,7 @@
                     ajaxurl,
                     $form.serializeArray(),
                     function(data) {
-                        setMessage(data);
+                        $o.navigation.showMessage(data);
                     }
                 );
             },
@@ -1179,7 +1218,7 @@
                     ajaxurl,
                     data || $o.bulkPriceForm.serializeArray(),
                     function(r) {
-                        setMessage(r.message, r.success);
+                        $o.navigation.showMessage(r);
                     },
                     'json'
                 );
@@ -1312,7 +1351,7 @@
                             // create new saved bulk operation
                             createSavedBulkOperation(r.data.id, r.data.message);
                         }
-                        setMessage(r.message, r.success);
+                        $o.navigation.showMessage(r);
                     },
                     'json'
                 );
@@ -1355,41 +1394,31 @@
                         } else {
                             $item.velocity('fadeIn', { duration: 250 });
                         }
-                        setMessage(r.message, r.success);
+                        $o.navigation.showMessage(r);
                     },
                     'json'
                 );
             },
 
             changePurchaseMode = function($form) {
-                // toggle visibility of form elements
-                var onlyTimePassModeChecked = $o.purchaseModeInput.is(':checked');
-                if (onlyTimePassModeChecked) {
-                    $o.timePassOnlyHideElements.velocity('slideUp', { duration: 250 });
-                } else {
-                    $o.timePassOnlyHideElements.velocity('slideDown', { duration: 250 });
-                }
-
+                var serializedForm = $form.serialize();
                 // disable button during Ajax request
                 $o.purchaseModeInput.prop('disabled', true);
 
                 $.post(
                     ajaxurl,
-                    $form.serialize(),
+                    serializedForm,
                     function(data) {
                         if (!data.success) {
-                            setMessage(data.message, data.success);
-
-                            // restore standard mode (individual and time pass purchases)
-                            $o.purchaseModeInput.attr('checked', false);
-                            $o.timePassOnlyHideElements.velocity('slideDown', { duration: 250 });
+                            $o.navigation.showMessage(data);
+                            $o.purchaseModeInput.prop('checked', false);
                         }
-
-                        // re-enable button after Ajax request
-                        $o.purchaseModeInput.prop('disabled', false);
                     },
                     'json'
                 );
+
+                // re-enable button after Ajax request
+                $o.purchaseModeInput.prop('disabled', false);
             },
 
             // throttle the execution of a function by a given delay
